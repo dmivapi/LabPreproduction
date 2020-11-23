@@ -8,9 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.epam.dmivapi</groupId>
-    <artifactId>homework_1</artifactId>
+    <artifactId>homework_4</artifactId>
+    <name>homework_4 Spring Integration and Spring Batch</name>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
@@ -26,8 +26,10 @@
             <artifactId>spring-integration-core</artifactId>
             <version>5.4.1</version>
         </dependency>
-
     </dependencies>
 
+    <build>
+    <finalName>homework_4</finalName>
+    </build>
 
 </project>
