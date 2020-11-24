@@ -23,8 +23,7 @@ class SpringIntegrationConfigTest {
     private static final SpringIntegrationConfig.InputOrderGateway gateway =
             ctx.getBean(SpringIntegrationConfig.InputOrderGateway.class);
 
-    private static final OrderResultList orderResultList =
-            ctx.getBean(OrderResultList.class);
+    private static final List<Order> orderResultList = ctx.getBean(List.class);
 
     @BeforeAll
     static void beforeAll() {
@@ -53,8 +52,8 @@ class SpringIntegrationConfigTest {
 
     @Test
     void shouldFilterCancelledOrders() {
+        //GIVEN
         List<List<String>> csvData = new ArrayList<>();
-
         csvData.add(Arrays.asList("5","CANCELLED", "Hello"));
         csvData.add(Arrays.asList("8","PAYMENT_COMPLETED","Goodbye"));
         csvData.add(Arrays.asList("9","WAITING_FOR_PAYMENT", "Pay now"));
@@ -64,18 +63,17 @@ class SpringIntegrationConfigTest {
         csvData.add(Arrays.asList("211","CANCELLED", "Hello 1"));
         csvData.add(Arrays.asList("218", "PAYMENT_COMPLETED", "Goodbye 1"));
         csvData.add(Arrays.asList("219","WAITING_FOR_PAYMENT", "Pay now 1"));
-
-        for (List<String> fields : csvData) {
-            gateway.placeOrder(fields);
-        }
-
-        List<Order> filteredOrders = new ArrayList<>();
+        List<Order> expectedFilteredOrderList = new ArrayList<>();
         for (List<String> fields : csvData) {
             Order order = Order.createOrder(fields);
             if (order.isNotCancelled())
-                filteredOrders.add(order);
+                expectedFilteredOrderList.add(order);
         }
-
-        assertIterableEquals(filteredOrders, orderResultList);
+        //WHEN
+        for (List<String> fields : csvData) {
+            gateway.placeOrder(fields);
+        }
+        //THEN
+        assertIterableEquals(expectedFilteredOrderList, orderResultList);
     }
 }

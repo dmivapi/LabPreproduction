@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 public class SpringIntegrationApp {
     private static final Logger LOGGER = Logger.getLogger(SpringIntegrationApp.class);
@@ -23,8 +24,7 @@ public class SpringIntegrationApp {
         SpringIntegrationConfig.InputOrderGateway gateway =
                 ctx.getBean(SpringIntegrationConfig.InputOrderGateway.class);
 
-        OrderResultList orderResultList =
-                ctx.getBean(OrderResultList.class);
+        List<Order> orderResultList = ctx.getBean(List.class);
 
         try (CSVReader csvReader = new CSVReader(new FileReader(ORDER_FILE));) {
             String[] values = null;
