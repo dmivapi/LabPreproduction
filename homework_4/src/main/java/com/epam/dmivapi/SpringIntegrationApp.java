@@ -2,20 +2,25 @@ package com.epam.dmivapi;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
 public class SpringIntegrationApp {
-    public static final String ORDER_FILE = "orders.csv";
+    private static final Logger LOGGER = Logger.getLogger(SpringIntegrationApp.class);
+    private static final String ORDER_FILE = "orders.csv";
 
     public static void main(String[] args) throws FileNotFoundException {
+        PropertyConfigurator.configure("log4j.properties");
         AnnotationConfigApplicationContext ctx =
                 new AnnotationConfigApplicationContext(SpringIntegrationConfig.class);
 
@@ -28,6 +33,7 @@ public class SpringIntegrationApp {
         try (CSVReader csvReader = new CSVReader(new FileReader(ORDER_FILE));) {
             String[] values = null;
             while ((values = csvReader.readNext()) != null) {
+                LOGGER.trace("Placing Order fields into messaging gateway: " + Arrays.toString(values));
                 gateway.placeOrder(Arrays.asList(values));
             }
             System.out.println(orderResultList);

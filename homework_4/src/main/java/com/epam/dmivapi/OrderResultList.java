@@ -1,5 +1,7 @@
 package com.epam.dmivapi;
 
-public interface OrderResultList {
+import java.util.List;
+
+public interface OrderResultList extends List<Order> {
     void addOrder(Order order);
 }
