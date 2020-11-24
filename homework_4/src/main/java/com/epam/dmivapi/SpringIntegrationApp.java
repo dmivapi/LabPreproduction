@@ -4,15 +4,13 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.integration.channel.DirectChannel;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 
 public class SpringIntegrationApp {
     public static final String ORDER_FILE = "orders.csv";
@@ -24,17 +22,19 @@ public class SpringIntegrationApp {
         SpringIntegrationConfig.InputOrderGateway gateway =
                 ctx.getBean(SpringIntegrationConfig.InputOrderGateway.class);
 
-        DirectChannel outputChannel = ctx.getBean("outputChannel", DirectChannel.class);
-        outputChannel.subscribe(x -> System.out.println(x.getPayload()));
+        OrderResultList orderResultList =
+                ctx.getBean(OrderResultList.class);
 
-        List<List<String>> records = new ArrayList<List<String>>();
         try (CSVReader csvReader = new CSVReader(new FileReader(ORDER_FILE));) {
             String[] values = null;
             while ((values = csvReader.readNext()) != null) {
                 gateway.placeOrder(Arrays.asList(values));
             }
+            System.out.println(orderResultList);
+
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
+        ctx.close();
     }
 }
