@@ -10,17 +10,17 @@
 
 <h3 id="hw1">homework #1: Spring framework</h3>
 Rework your pet project with Spring framework, using java configuration, DAO layer leave as is, without usage of ORM frameworks.
-<p><a href="#contents">Назад к оглавлению</a></p>
+<p><a href="#contents">Back to contents</a></p>
 <hr>
 
 <h3 id="hw2">homework #2: Spring BPP</h3>
 Логгировать время выполнения интерфейсных методов классa помеченного аннотацией <strong>@Timed</strong>
-<p><a href="#contents">Назад к оглавлению</a></p> 
+<p><a href="#contents">Back to contents</a></p> 
 <hr>
 
 <h3 id="hw3">homework #3: Spring MVC Exceptions handling</h3>
 Implement exception handling in your pet project using <strong>@ContollerAdvice</strong>
-<p><a href="#contents">Назад к оглавлению</a></p>
+<p><a href="#contents">Back to contents</a></p>
 <hr>
 
 <h3 id="hw4">homework #4: Spring Integration &amp; Spring Batch</h3>
@@ -48,7 +48,7 @@ Please use the <strong>MessagingGateway</strong> annotation to create an endpoin
 </ol>
 
 <strong>Tests and logs are required! Use Spring, not Spring Boot!</strong>
-<p><a href="#contents">Назад к оглавлению</a></p>
+<p><a href="#contents">Back to contents</a></p>
 <hr>
 
 <h3 id="hw5">homework #5: Spring Boot &amp; Microservices</h3>
@@ -65,4 +65,4 @@ Please use the <strong>MessagingGateway</strong> annotation to create an endpoin
 <li>Опционально: использовать lombok</li>
 </ul>
 
-<p><a href="#contents">Назад к оглавлению</a></p>
+<p><a href="#contents">Back to contents</a></p>
