@@ -17,10 +17,10 @@ import java.util.Arrays;
 
 public class SpringIntegrationApp {
     private static final Logger LOGGER = Logger.getLogger(SpringIntegrationApp.class);
-    private static final String ORDER_FILE = "orders.csv";
+    private static final String ORDER_FILE = "homework_4/orders.csv";
 
     public static void main(String[] args) throws FileNotFoundException {
-        PropertyConfigurator.configure("log4j.properties");
+        PropertyConfigurator.configure("homework_4/src/main/resources/log4j.properties");
         AnnotationConfigApplicationContext ctx =
                 new AnnotationConfigApplicationContext(SpringIntegrationConfig.class);
 
