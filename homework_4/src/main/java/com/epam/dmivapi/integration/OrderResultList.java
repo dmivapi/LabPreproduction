@@ -1,4 +1,4 @@
-package com.epam.dmivapi;
+package com.epam.dmivapi.integration;
 
 import java.util.List;
 

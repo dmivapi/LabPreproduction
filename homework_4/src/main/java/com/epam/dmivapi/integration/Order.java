@@ -1,4 +1,4 @@
-package com.epam.dmivapi;
+package com.epam.dmivapi.integration;
 
 import org.apache.log4j.Logger;
 import java.util.List;
