@@ -2,6 +2,7 @@ package com.epam.dmivapi.integration;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class SpringIntegrationConfigTest {
     private static final SpringIntegrationConfig.InputOrderGateway gateway =
             ctx.getBean(SpringIntegrationConfig.InputOrderGateway.class);
 
-    private static final OrderResultList orderResultList = ctx.getBean(OrderResultList.class);
+    private static final List<Order> orderResultList = (List<Order>) ctx.getBean("orderResultList");
 
     @BeforeAll
     static void beforeAll() {
@@ -33,21 +34,6 @@ class SpringIntegrationConfigTest {
     @BeforeEach
     void setUp() {
         orderResultList.clear();
-    }
-
-    @Test
-    void shouldInitializeContext() {
-        assertNotNull(ctx);
-    }
-
-    @Test
-    void shouldInitializeMessagingGateWay() {
-        assertNotNull(gateway);
-    }
-
-    @Test
-    void shouldInitializeOrderResultList() {
-        assertNotNull(orderResultList);
     }
 
     @Test
@@ -74,6 +60,11 @@ class SpringIntegrationConfigTest {
             gateway.placeOrder(fields);
         }
         //THEN
-        assertIterableEquals(expectedFilteredOrderList, orderResultList.getOrders());
+        assertIterableEquals(expectedFilteredOrderList, orderResultList);
+    }
+
+    @AfterAll
+    static void afterAll() {
+        ctx.close();
     }
 }
