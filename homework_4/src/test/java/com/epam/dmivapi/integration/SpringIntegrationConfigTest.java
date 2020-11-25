@@ -23,7 +23,7 @@ class SpringIntegrationConfigTest {
     private static final SpringIntegrationConfig.InputOrderGateway gateway =
             ctx.getBean(SpringIntegrationConfig.InputOrderGateway.class);
 
-    private static final List<Order> orderResultList = ctx.getBean(List.class);
+    private static final OrderResultList orderResultList = ctx.getBean(OrderResultList.class);
 
     @BeforeAll
     static void beforeAll() {
@@ -74,6 +74,6 @@ class SpringIntegrationConfigTest {
             gateway.placeOrder(fields);
         }
         //THEN
-        assertIterableEquals(expectedFilteredOrderList, orderResultList);
+        assertIterableEquals(expectedFilteredOrderList, orderResultList.getOrders());
     }
 }

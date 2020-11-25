@@ -18,4 +18,13 @@ public class OrderResultList {
     public void clear() {
         orders.clear();
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    @Override
+    public String toString() {
+        return orders.toString();
+    }
 }

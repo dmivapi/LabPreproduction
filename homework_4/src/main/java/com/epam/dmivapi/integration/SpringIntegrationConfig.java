@@ -20,9 +20,9 @@ public class SpringIntegrationConfig {
     private static final Logger LOGGER = Logger.getLogger(SpringIntegrationConfig.class);
 
     @Bean
-    public List<Order> orderResultList() {
+    public OrderResultList orderResultList() {
         LOGGER.trace("Entering orderResultList()");
-        return new ArrayList<>();
+        return new OrderResultList();
     }
 
     @MessagingGateway
@@ -43,7 +43,7 @@ public class SpringIntegrationConfig {
     @ServiceActivator(inputChannel = "filteredOrders")
     public void addToInMemoryList(Order order) {
         LOGGER.trace("Entering addToInMemoryList()");
-        List<Order> orderResultList = orderResultList();
-        orderResultList.add(order);
+        OrderResultList orderResultList = orderResultList();
+        orderResultList.addOrder(order);
     }
 }

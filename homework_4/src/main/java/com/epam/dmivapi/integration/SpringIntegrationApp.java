@@ -24,7 +24,7 @@ public class SpringIntegrationApp {
         SpringIntegrationConfig.InputOrderGateway gateway =
                 ctx.getBean(SpringIntegrationConfig.InputOrderGateway.class);
 
-        List<Order> orderResultList = ctx.getBean(List.class);
+        OrderResultList orderResultList = ctx.getBean(OrderResultList.class);
 
         try (CSVReader csvReader = new CSVReader(new FileReader(ORDER_FILE));) {
             String[] values = null;
