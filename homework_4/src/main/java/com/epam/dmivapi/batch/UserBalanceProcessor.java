@@ -1,5 +1,6 @@
 package com.epam.dmivapi.batch;
 
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.mail.SimpleMailMessage;
 

@@ -28,4 +28,13 @@ public class UserBalance {
     public void setBalance(Integer balance) {
         this.balance = balance;
     }
+
+    @Override
+    public String toString() {
+        return "UserBalance{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }
