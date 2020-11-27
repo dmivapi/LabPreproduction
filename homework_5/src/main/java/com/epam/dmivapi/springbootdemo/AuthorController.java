@@ -15,12 +15,12 @@ public class AuthorController {
     }
 
     @GetMapping("/authors")
-    List<Author> all() {
+    List<Author> getAll() {
         return repository.findAll();
     }
 
     @GetMapping("/authors/{id}")
-    Author one(@PathVariable Integer id) {
+    Author getOne(@PathVariable Integer id) {
         return repository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id));
     }

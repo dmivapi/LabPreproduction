@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @EqualsAndHashCode(of={"id"}) @ToString
+@Data @EqualsAndHashCode(of={"id"})
 public class Author {
     private @Id @GeneratedValue Integer id;
     private String firstName;
