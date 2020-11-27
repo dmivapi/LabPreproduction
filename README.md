@@ -5,6 +5,7 @@
 <li><a href="#hw3">homework_3</a></li>
 <li><a href="#hw4">homework_4</a></li>
 <li><a href="#hw5">homework_5</a></li>
+<li><a href="#hw6">homework_6</a></li>
 </ol>
 
 
@@ -19,7 +20,7 @@ Rework your pet project with Spring framework, using java configuration, DAO lay
 <hr>
 
 <h3 id="hw3">homework #3: Spring MVC Exceptions handling</h3>
-Implement exception handling in your pet project using <strong>@ContollerAdvice</strong>
+Implement exception handling in your pet project using <strong>@ControllerAdvice</strong>
 <p><a href="#contents">Back to contents</a></p>
 <hr>
 
@@ -65,4 +66,15 @@ Please use the <strong>MessagingGateway</strong> annotation to create an endpoin
 <li>Опционально: использовать lombok</li>
 </ul>
 
+<p><a href="#contents">Back to contents</a></p>
+
+<h3 id="hw6">homework #6: Spring AOP</h3>
+
+<div>Создать проект с двумя модулями.<br> 
+В каждом из них должно быть по одному аспекту разного типа для логирования работы (например, сервисного метода):
+<ul>
+<li>Первый модуль должен иметь XML-конфигурацию и аспект с использованием aop namespace.</li> 
+<li>Второй - конфигурацию на аннотациях и аспект в aspect-j стиле.</li>
+</ul>
+</div>
 <p><a href="#contents">Back to contents</a></p>
