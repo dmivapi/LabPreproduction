@@ -9,6 +9,6 @@ public class BController {
     }
 
     public void getByName(String name) {
-        System.out.println("BController::getById invoked");
+        System.out.println("BController::getByName invoked");
     }
 }
