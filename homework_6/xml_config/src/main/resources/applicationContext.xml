@@ -12,7 +12,7 @@
 
     <bean id="serviceA" class="com.epam.dmivapi.ServiceA" />
     <bean id="logAfterReturningAspect" class="com.epam.dmivapi.LoggingAfterReturnAspect" />
-<!--    <aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy/>
     <aop:config>
         <aop:aspect id="myFirstAspect" ref="logAfterReturningAspect">
             <aop:pointcut id="pointCutAfterReturning" expression="execution(* com.epam.dmivapi.ServiceA.*(..))"/>
