@@ -1,13 +1,13 @@
-package com.epam.dmviapi.dao;
+package com.epam.dmivapi.dao;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ADao {
-    void findAll() {
+    public void findAll() {
         System.out.println("ADao::findAll invoked");
     }
-    void findOne() {
+    public void findOne() {
         System.out.println("ADao::findOne invoked");
     }
 }

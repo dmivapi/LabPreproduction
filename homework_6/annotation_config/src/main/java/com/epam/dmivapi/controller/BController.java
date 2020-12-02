@@ -1,8 +1,8 @@
-package com.epam.dmviapi.controller;
+package com.epam.dmivapi.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-@Controller
+@Component
 public class BController {
     public void getById(Long id) {
         System.out.println("BController::getById invoked");

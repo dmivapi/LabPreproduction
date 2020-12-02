@@ -1,9 +1,11 @@
-package com.epam.dmviapi;
+package com.epam.dmivapi;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class SystemArchitectureAspect {
     @Pointcut("within(com.epam.dmivapi.controller..*)")
     public void inControllerLayer() {}

@@ -1,4 +1,4 @@
-package com.epam.dmviapi.dao;
+package com.epam.dmivapi.dao;
 
 import org.springframework.stereotype.Repository;
 
