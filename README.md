@@ -6,6 +6,7 @@
 <li><a href="#hw4">homework_4</a></li>
 <li><a href="#hw5">homework_5</a></li>
 <li><a href="#hw6">homework_6</a></li>
+<li><a href="#hw7">homework_7</a></li>
 </ol>
 
 
@@ -76,5 +77,18 @@ Please use the <strong>MessagingGateway</strong> annotation to create an endpoin
 <li>Первый модуль должен иметь XML-конфигурацию и аспект с использованием aop namespace.</li> 
 <li>Второй - конфигурацию на аннотациях и аспект в aspect-j стиле.</li>
 </ul>
+</div>
+<p><a href="#contents">Back to contents</a></p>
+
+<h3 id="hw7">homework #7: Spring Security</h3>
+
+<div>
+Rework your pet project using Spring Security.  
+<ol>
+<li>Add authorization for users with different roles (use at least two roles - ROLE_USER, ROLE_ADMIN).</li>
+<li>Project should contain pages with restricted access (“only for admins” and “only for users”).</li>
+<li>If you don’t have such segregation in your project right now - add some new pages and restrict access to them.</li>
+<li>In your SecurityConfiguration use jdbc as a datasource for users and roles.</li>
+</ol>
 </div>
 <p><a href="#contents">Back to contents</a></p>
