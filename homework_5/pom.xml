@@ -11,7 +11,7 @@
 	<groupId>com.epam.dmivapi</groupId>
 	<artifactId>Spring-Boot-Homework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Spring-Boot-Homework</name>
+	<name>homework_5 Spring-Boot-Homework</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
