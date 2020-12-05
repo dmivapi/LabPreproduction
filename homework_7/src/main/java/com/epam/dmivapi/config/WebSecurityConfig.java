@@ -40,14 +40,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/book/list").permitAll()
-                .antMatchers("/book/**").hasRole("ADMIN")
                 .antMatchers("/loan").hasRole("LIBRARIAN")
                 .antMatchers("/loan/**").hasAnyRole("READER", "LIBRARIAN")
-                .antMatchers("/user").hasAnyRole("LIBRARIAN", "ADMIN")
+                .antMatchers("/user/librarian/**").hasAnyRole("LIBRARIAN")
+                .antMatchers("/user/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/login").permitAll()
-                .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .permitAll();
+                .formLogin().permitAll()
+                .and()
+                .logout().permitAll().logoutSuccessUrl("/login");
     }
 }

@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.jsp.jstl.core.Config;
 
 @Log4j
-@ComponentScan(basePackages="com.epam.dmivapi")
 public class LibraryApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
