@@ -1,27 +1,25 @@
 package com.epam.dmivapi.service.impl;
 
-import com.epam.dmivapi.model.CurrentUser;
 import com.epam.dmivapi.model.User;
-import com.epam.dmivapi.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
+import com.epam.dmivapi.repository.impl.UserRepositoryImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Service
+import static java.util.Objects.isNull;
+import static org.springframework.security.core.userdetails.User.*;
+
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
-    UserRepository repository;
-
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = repository.findUserByEmail(s);
-        return new CurrentUser(
-                user.getEmail(),
-                user.getPassword(),
-                AuthorityUtils.createAuthorityList("ROLE_" + user.getUserRole())
-        );
+        User user = UserRepositoryImpl.findUserByLogin(s);
+        if (isNull(user))
+            throw new UsernameNotFoundException("User: " + s + " was not found");
+
+        return withUsername(user.getEmail())
+                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
+                .roles(user.getUserRole().toString())
+                .build();
     }
 }
