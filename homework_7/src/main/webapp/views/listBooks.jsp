@@ -24,9 +24,9 @@
                         <th scope="col"><fmt:message key="list_books_jsp.book.genre"/></th>
                         <th scope="col"><fmt:message key="list_books_jsp.book.publisher"/></th>
                         <th scope="col"><fmt:message key="list_books_jsp.book.year"/></th>
-                        <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) != Role.GUEST %>">
+                        <sec:authorize access="isAuthenticated()">
                            <th scope="col"><fmt:message key="list_books_jsp.select"/></th>
-                        </c:if>
+                        </sec:authorize>
                     </tr>
                     </thead>
 
@@ -38,21 +38,21 @@
                             <td>${book.genre}</td>
                             <td>${book.publisher}</td>
                             <td>${book.year}</td>
-                            <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) != Role.GUEST %>">
+                            <sec:authorize access="isAuthenticated()">
                                <td><input type="checkbox" name="${ContextParam.PUBLICATIONS_IDS_TO_PROCESS}" value="${book.id}"/></td>
-                            </c:if>
+                            </sec:authorize>
                         </tr>
                     </c:forEach>
                 </table>
                 <h:pagination-status-actions baseLink="${Command.LIST_BOOKS.path}" message="" />
-                <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) == Role.READER %>">
+                <sec:authorize access="hasRole('READER')">
                      <h:button-submit buttonKey="list_books_jsp.button.loan" buttonAction="${Command.LOAN_NEW.systemName}" />
-                </c:if>
+                </sec:authorize>
               </c:if>
-            <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) == Role.ADMIN %>">
+            <sec:authorize access="hasRole('ADMIN')">
                 <h:button-submit buttonKey="list_books_jsp.button.create" buttonAction="${Command.ENTER_BOOK_INFO.systemName}" />
                 <h:button-submit buttonKey="list_books_jsp.button.remove" buttonAction="${Command.BOOK_REMOVE.systemName}" />
-            </c:if>
+            </sec:authorize>
         </div>
     </div>
 <%@ include file="../WEB-INF/jspf/footer.jspf"%>

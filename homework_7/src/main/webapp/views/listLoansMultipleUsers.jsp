@@ -12,9 +12,9 @@
                    value="${Command.LIST_LOANS_OF_ALL.systemName}"
                    id="${ContextParam.SELF_COMMAND}">
 
-                <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) == Role.READER %>">
+                <sec:authorize access="hasRole('READER')">
                     <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.LOAN_REMOVE}"/>
-                </c:if>
+                </sec:authorize>
 
                 <table class="table table-striped" id="list_books_table">
                     <thead>

@@ -9,17 +9,17 @@
             --%>
             <input type="hidden"
                    name="${ContextParam.SELF_COMMAND}"
-                   <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) == Role.READER %>">
-                       value="${Command.LIST_LOANS_OF_SELF.systemName}"
-                   </c:if>
-                   <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) == Role.LIBRARIAN %>">
-                       value="${Command.LIST_LOANS_OF_USER.systemName}"
-                   </c:if>
+                <sec:authorize access="hasRole('READER')">
+                   value="${Command.LIST_LOANS_OF_SELF.systemName}"
+                </sec:authorize>
+                <sec:authorize access="hasRole('LIBRARIAN')">
+                   value="${Command.LIST_LOANS_OF_USER.systemName}"
+                </sec:authorize>
                    id="${ContextParam.SELF_COMMAND}">
 
-                <c:if test="<%= ContextParam.getCurrentUserRole(session) != null && ContextParam.getCurrentUserRole(session) == Role.READER %>">
+                <sec:authorize access="hasRole('READER')">
                     <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.LOAN_REMOVE}"/>
-                </c:if>
+                </sec:authorize>
 
                 <h:user-info />
 
@@ -44,21 +44,18 @@
                                                         price="${loan.price}" />
                             </td>
                             <td>
-                                <c:choose> <%-- creating a button for when current role is "Reader" --%>
-                                    <c:when test='<%= ContextParam.getCurrentUserRole(session) != null &&
-                                                      ContextParam.getCurrentUserRole(session) == Role.READER %>' >
-                                        <c:if test="${empty loan.dateOut}" > <%-- only if book is not loaned yet --%>
-                                            <button type="submit"
-                                                    class="btn btn-warning btn-sm"
-                                                    name="${ContextParam.LOAN_ID_TO_PROCESS}" value="${loan.id}" >
-                                                <fmt:message key="list_users_librarians_jsp.button.remove"/>
-                                            </button>
-                                        </c:if>
-                                    </c:when>
-                                    <c:otherwise> <%-- creating a button for when current role is "Librarian" --%>
-                                        <h:action-loan-buttons-from-loan-status loanStatus="${loan.status}" loanId="${loan.id}"  userId="${loan.userId}" loanBlocked="${loan.blocked}" />
-                                    </c:otherwise>
-                                </c:choose>
+                                <sec:authorize access="hasRole('READER')">
+                                    <c:if test="${empty loan.dateOut}" > <%-- only if book is not loaned yet --%>
+                                        <button type="submit"
+                                                class="btn btn-warning btn-sm"
+                                                name="${ContextParam.LOAN_ID_TO_PROCESS}" value="${loan.id}" >
+                                            <fmt:message key="list_users_librarians_jsp.button.remove"/>
+                                        </button>
+                                    </c:if>
+                                </sec:authorize>
+                                <sec:authorize access="hasRole('LIBRARIAN')">
+                                    <h:action-loan-buttons-from-loan-status loanStatus="${loan.status}" loanId="${loan.id}"  userId="${loan.userId}" loanBlocked="${loan.blocked}" />
+                                </sec:authorize>
                             </td>
                         </tr>
                     </c:forEach>

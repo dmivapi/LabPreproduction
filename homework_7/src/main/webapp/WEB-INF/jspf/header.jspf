@@ -14,7 +14,7 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading"><fmt:message key="header_jsp.app.title"/> </div>
         <div class="list-group list-group-flush">
-            <h:left_side_actions_panel role="${sessionScope[ContextParam.CURRENT_USER_ROLE]}" />
+            <h:left_side_actions_panel />
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
