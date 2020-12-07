@@ -1,14 +1,17 @@
 package com.epam.dmivapi.service.impl;
 
+import com.epam.dmivapi.model.CurrentUser;
 import com.epam.dmivapi.model.User;
 import com.epam.dmivapi.repository.impl.UserRepositoryImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Arrays;
+
 import static java.util.Objects.isNull;
-import static org.springframework.security.core.userdetails.User.*;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
@@ -17,9 +20,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (isNull(user))
             throw new UsernameNotFoundException("User: " + s + " was not found");
 
-        return withUsername(user.getEmail())
-                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
-                .roles(user.getUserRole().toString())
-                .build();
+        return new CurrentUser(
+                user.getEmail(),
+                new BCryptPasswordEncoder().encode(user.getPassword()),
+                Arrays.asList(new SimpleGrantedAuthority("ROLE_" + user.getUserRole().toString())),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getLocaleName(),
+                user.getUserRole().toString()
+        );
+//        return withUsername(user.getEmail())
+//                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
+//                .roles(user.getUserRole().toString())
+//                .build();
     }
 }

@@ -1,5 +1,7 @@
 package com.epam.dmivapi.config;
 
+import com.epam.dmivapi.ContextParam;
+import com.epam.dmivapi.security.AuthSuccessHandler;
 import com.epam.dmivapi.service.impl.UserDetailsServiceImpl;
 import lombok.extern.log4j.Log4j;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    AuthSuccessHandler authSuccessHandler() {
+        return new AuthSuccessHandler();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -39,15 +46,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/book/list").permitAll()
                 .antMatchers("/loan").hasRole("LIBRARIAN")
                 .antMatchers("/loan/**").hasAnyRole("READER", "LIBRARIAN")
                 .antMatchers("/user/librarian/**").hasAnyRole("LIBRARIAN")
                 .antMatchers("/user/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/login").permitAll()
                 .and()
-                .formLogin().permitAll()
+                .formLogin()
+                .loginPage("/book/list")
+                .permitAll()
+                .usernameParameter(ContextParam.USR_LOGIN)
+                .passwordParameter(ContextParam.USR_PASSWORD)
+                .successHandler(authSuccessHandler())
                 .and()
-                .logout().permitAll().logoutSuccessUrl("/login");
+                .logout().permitAll().logoutSuccessUrl("/book/list");
     }
 }

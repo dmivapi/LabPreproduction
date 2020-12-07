@@ -11,7 +11,7 @@ public enum Command {
     ENTER_USER_INFO("enterUserInfo", new EnterUserInfoCmd(), false),
     ENTER_BOOK_INFO("enterBookInfo", new EnterBookInfoCmd(), false),
 
-    LOGIN("login", new UserLoginCmd(), true),
+    LOGIN("/book/list", new UserLoginCmd(), true),
     REGISTER("register", new UserRegisterCmd(), true),
     LOGOUT("logout", new UserLogoutCmd(), true),
     USER_NEW("userNew", null, true),
