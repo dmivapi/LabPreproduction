@@ -1,6 +1,5 @@
 package com.epam.dmivapi.converter;
 
-import com.epam.dmivapi.dto.LoanDto;
 import com.epam.dmivapi.dto.LoanDtoViewAll;
 import com.epam.dmivapi.dto.LoanStatus;
 import com.epam.dmivapi.model.Loan;

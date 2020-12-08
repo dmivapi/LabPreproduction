@@ -5,7 +5,10 @@ import com.epam.dmivapi.repository.impl.db.DBManager;
 import com.epam.dmivapi.repository.impl.db.EntityMapper;
 import com.epam.dmivapi.model.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.epam.dmivapi.repository.UserRepository;
@@ -53,11 +56,6 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public int countUsersByRole(Role role) {
         return countUsers(role, null);
-    }
-
-    @Override
-    public User findUserByEmail(String email) {
-        return findUserByLogin(email);
     }
 
     // -------------------------------------------------------------------------

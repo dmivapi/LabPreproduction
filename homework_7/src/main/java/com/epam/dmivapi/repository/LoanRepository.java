@@ -1,6 +1,5 @@
 package com.epam.dmivapi.repository;
 
-import com.epam.dmivapi.dto.LoanDtoViewAll;
 import com.epam.dmivapi.model.Loan;
 
 import java.time.LocalDate;

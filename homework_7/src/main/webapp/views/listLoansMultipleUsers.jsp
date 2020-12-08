@@ -12,10 +12,6 @@
                    value="${Command.LIST_LOANS_OF_ALL.systemName}"
                    id="${ContextParam.SELF_COMMAND}">
 
-                <sec:authorize access="hasRole('READER')">
-                    <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.LOAN_REMOVE}"/>
-                </sec:authorize>
-
                 <table class="table table-striped" id="list_books_table">
                     <thead>
                     <tr>

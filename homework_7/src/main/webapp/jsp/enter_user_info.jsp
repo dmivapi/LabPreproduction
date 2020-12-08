@@ -10,7 +10,7 @@
                name="${ContextParam.SELF_COMMAND}"
                value="${Command.ENTER_USER_INFO.systemName}"
                id="${ContextParam.SELF_COMMAND}">
-            <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.REGISTER}"/>
+<%--            <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.REGISTER}"/>--%>
             <h:bs-input-group entity="${ContextParam.USR_LOGIN}" label="login_jsp.label.login" placeholder="login_jsp.placeholder.login" help="login_jsp.help.login" type="email"/>
             <h:bs-input-group entity="${ContextParam.USR_PASSWORD}" label="login_jsp.label.password" placeholder="login_jsp.placeholder.password" help="login_jsp.help.password" type="password" />
             <h:bs-input-group entity="${ContextParam.USR_FIRST_NAME}" label="register_jsp.label.first_name" placeholder="register_jsp.placeholder.first_name" help="register_jsp.help.first_name" />

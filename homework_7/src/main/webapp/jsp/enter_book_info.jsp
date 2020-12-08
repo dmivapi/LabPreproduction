@@ -8,7 +8,7 @@
                name="${ContextParam.SELF_COMMAND}"
                value="${Command.ENTER_BOOK_INFO.systemName}"
                id="${ContextParam.SELF_COMMAND}">
-            <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.BOOK_NEW}"/>
+<%--            <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.BOOK_NEW}"/>--%>
 
 <div class="form-group row">
     <div class="col-auto my-1">

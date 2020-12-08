@@ -17,11 +17,9 @@
                 </sec:authorize>
                    id="${ContextParam.SELF_COMMAND}">
 
-<%--                <sec:authorize access="hasRole('READER')">--%>
-<%--                    <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.LOAN_REMOVE.systemName}"/>--%>
-<%--                </sec:authorize>--%>
-
-                <h:user-info />
+                <sec:authorize access="!hasRole('READER')">
+                    <h:user-info />
+                </sec:authorize>
 
                 <table class="table table-striped" id="list_books_table">
                     <thead>

@@ -2,6 +2,7 @@ package com.epam.dmivapi;
 
 import com.epam.dmivapi.dto.Role;
 import com.epam.dmivapi.model.User;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
@@ -12,14 +13,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Log4j
 public class ContextParam {
-    private static final Logger log = Logger.getLogger(ContextParam.class);
-
     // strings used in get/post request
-    public static final String CONTROLLER_SERVLET = "/controller";
-    public static final String COMMAND = "command";
     public static final String SELF_COMMAND = "selfCommand";
-    public static final String SELF_PAGE = "selfPage";
 
     // id for the html form used for submitting data
     // at all app pages

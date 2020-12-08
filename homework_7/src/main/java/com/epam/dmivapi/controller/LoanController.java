@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/loan")
@@ -66,6 +64,7 @@ public class LoanController {
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model
     ) {
+        log.debug("getLoansByUserId invoked");
         final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
 
         List<LoanDto> loans = loanService.getLoansByUserId(
@@ -96,7 +95,7 @@ public class LoanController {
             @RequestParam(value = ContextParam.PGN_RECORDS_PER_PAGE,
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model) {
-
+        log.debug("getLoansByCurrentUserId invoked");
         final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
         final Integer userId = ((CurrentUser)authentication.getPrincipal()).getId();
 

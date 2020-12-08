@@ -1,7 +1,6 @@
 package com.epam.dmivapi.converter;
 
-import com.epam.dmivapi.dto.*;
-import com.epam.dmivapi.model.Loan;
+import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.model.User;
 import org.springframework.stereotype.Component;
 

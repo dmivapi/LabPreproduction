@@ -1,11 +1,9 @@
 package com.epam.dmivapi.config;
 
 import com.epam.dmivapi.ContextParam;
-import com.epam.dmivapi.service.impl.UserDetailsServiceImpl;
 import lombok.extern.log4j.Log4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -15,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.jsp.jstl.core.Config;
 
 @Log4j
+@Order(value = Ordered.LOWEST_PRECEDENCE)
 public class LibraryApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {

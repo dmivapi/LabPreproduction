@@ -51,7 +51,6 @@
     $(document).ready(function(){
         $('.custom-control-input').click(function()
         {
-            $('#${ContextParam.COMMAND}').val("${Command.USER_BLOCK.systemName}");
             $('#clickedUserId').val($(this).attr('id'));
             $('#clickedCheckValue').val($(this).is(':checked'));
             $('#${ContextParam.MAIN_PAGE_FORM}').submit();

@@ -1,6 +1,5 @@
 package com.epam.dmivapi.security;
 
-import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.dto.Role;
 import com.epam.dmivapi.model.CurrentUser;
 import org.springframework.security.core.Authentication;

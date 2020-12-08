@@ -31,7 +31,6 @@
         </nav>
 
         <div class="container-fluid">
-            <form id="${ContextParam.MAIN_PAGE_FORM}" action="${ContextParam.CONTROLLER_SERVLET}" method="post">
-                <input type="hidden" name="${ContextParam.COMMAND}" id="${ContextParam.COMMAND}" >
+            <form id="${ContextParam.MAIN_PAGE_FORM}" method="post">
 
             <!-- Specific page content starts after inserting this file -->

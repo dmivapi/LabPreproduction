@@ -1,6 +1,5 @@
 package com.epam.dmivapi.service.impl.command;
 
-import com.epam.dmivapi.ContextParam;
 import org.apache.log4j.Logger;
 
 

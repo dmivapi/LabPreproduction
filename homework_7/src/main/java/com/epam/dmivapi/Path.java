@@ -1,16 +1,14 @@
 package com.epam.dmivapi;
 
-import com.epam.dmivapi.service.impl.command.Command;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * Provides constants with paths and some static utility methods
  * to work with them
  */
-
+@Log4j
 public class Path {
-    private static final Logger log = Logger.getLogger(Path.class);
     // pages
     public static final String PAGE__HOME = "/jsp/home.jsp";
     public static final String PAGE__LOGOUT = "/jsp/logout.jsp";

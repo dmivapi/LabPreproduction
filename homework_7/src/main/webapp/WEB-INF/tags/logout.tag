@@ -1,6 +1,5 @@
 <%@ tag pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/directive/taglibs.jspf" %>
-<%@ tag import="com.epam.dmivapi.ContextParam" %>
 <%@ tag import="com.epam.dmivapi.service.impl.command.Command" %>
 
 <form action="${Command.LOGOUT.systemName}" method="POST" id="logoutForm">

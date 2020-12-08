@@ -10,7 +10,7 @@
                name="${ContextParam.SELF_COMMAND}"
                value="${Command.LIST_USERS_LIBRARIANS.systemName}"
                id="${ContextParam.SELF_COMMAND}">
-        <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.USER_REMOVE}"/>
+
             <c:if test="${not empty requestScope[ContextParam.USR_USERS]}" >
                 <table class="table table-striped table-hover" id="list_users_table">
                     <thead>
