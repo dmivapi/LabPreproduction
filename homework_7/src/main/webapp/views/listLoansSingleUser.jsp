@@ -17,9 +17,9 @@
                 </sec:authorize>
                    id="${ContextParam.SELF_COMMAND}">
 
-                <sec:authorize access="hasRole('READER')">
-                    <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.LOAN_REMOVE}"/>
-                </sec:authorize>
+<%--                <sec:authorize access="hasRole('READER')">--%>
+<%--                    <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.LOAN_REMOVE.systemName}"/>--%>
+<%--                </sec:authorize>--%>
 
                 <h:user-info />
 
@@ -48,7 +48,8 @@
                                     <c:if test="${empty loan.dateOut}" > <%-- only if book is not loaned yet --%>
                                         <button type="submit"
                                                 class="btn btn-warning btn-sm"
-                                                name="${ContextParam.LOAN_ID_TO_PROCESS}" value="${loan.id}" >
+                                                name="${ContextParam.LOAN_ID_TO_PROCESS}" value="${loan.id}"
+                                                formaction="Command.LOAN_REMOVE.systemName">
                                             <fmt:message key="list_users_librarians_jsp.button.remove"/>
                                         </button>
                                     </c:if>
@@ -60,7 +61,7 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <h:pagination-status-actions baseLink="${Command.LIST_LOANS_OF_USER.systemName}" message="" />
+                <h:pagination-status-actions message="" />
         </div>
     </div>
 <%@ include file="../WEB-INF/jspf/footer.jspf"%>

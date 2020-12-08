@@ -5,75 +5,45 @@ import org.apache.log4j.Logger;
 
 
 public enum Command {
-    NO_COMMAND("", new NoCmd(), false),
-    SWITCH_LOCALE("switchLocale", new SwitchLocaleCmd(), false),
+    SWITCH_LOCALE("switchLocale"),
 
-    ENTER_USER_INFO("enterUserInfo", new EnterUserInfoCmd(), false),
-    ENTER_BOOK_INFO("enterBookInfo", new EnterBookInfoCmd(), false),
+    ENTER_USER_INFO("enterUserInfo"),
+    ENTER_BOOK_INFO("enterBookInfo"),
 
-    LOGIN("/book/list", new UserLoginCmd(), true),
-    REGISTER("register", new UserRegisterCmd(), true),
-    LOGOUT("logout", new UserLogoutCmd(), true),
-    USER_NEW("userNew", null, true),
-    USER_BLOCK("userBlock", new UserBlockCmd(), false),
-    USER_REMOVE("userRemove", new UserRemoveCmd(), true),
+    LOGIN("/book/list"),
+    REGISTER("register"),
+    LOGOUT("logout"),
+    USER_NEW("userNew"),
+    USER_BLOCK("userBlock"),
+    USER_REMOVE("userRemove"),
 
-    LIST_BOOKS("/book/list", null, false),
-    BOOK_NEW("/book/new", null, true),
-    BOOK_REMOVE("/book/remove", null, true),
+    LIST_BOOKS("/book/list"),
+    BOOK_NEW("/book/new"),
+    BOOK_REMOVE("/book/remove"),
 
-    LIST_LOANS_OF_SELF("/loan/listSelf", null, false),
-    LIST_LOANS_OF_USER("/loan/", null, false),
-    LIST_LOANS_OF_ALL("/loan", null, false),
+    LIST_LOANS_OF_SELF("/loan/self"),
+    LIST_LOANS_OF_USER("/loan/"),
+    LIST_LOANS_OF_ALL("/loan"),
 
-    LIST_USERS_LIBRARIANS("/user/admin/librarians", null, false),
-    LIST_USERS_READERS_FOR_ADMIN("/user/admin/borrowers",null, false),
-    LIST_USERS_READERS_FOR_LIBRARIAN("/user/librarian/borrowers",null, false),
+    LIST_USERS_LIBRARIANS("/user/admin/librarians"),
+    LIST_USERS_READERS_FOR_ADMIN("/user/admin/borrowers"),
+    LIST_USERS_READERS_FOR_LIBRARIAN("/user/librarian/borrowers"),
 
-    LOAN_NEW("/new", null, false),
-    LOAN_OUT("/out", null, false),
-    LOAN_REMOVE("/delete", null, false),
-    LOAN_IN("/in", null, false);
+    LOAN_NEW("/loan/new"),
+    LOAN_OUT("/loan/out"),
+    LOAN_REMOVE("/loan/delete"),
+    LOAN_IN("/loan/in");
 
     private static final Logger log = Logger.getLogger(Command.class);
 
     public final String systemName;
-    private final AbstractCmd implementation;
-    private final boolean stateChanger; // if it does (1) we use redirect after it's execution,
-                                  //            (2) we do not save it as a command that is possible to return to
 
 
-    Command(String systemName, AbstractCmd implementation, boolean stateChanger) {
-        this.implementation = implementation;
+    Command(String systemName) {
         this.systemName = systemName;
-        this.stateChanger = stateChanger;
     }
 
     public String getSystemName() {
         return systemName;
-    }
-    public AbstractCmd getImplementation() { return implementation; }
-    public boolean isStateChanger() { return stateChanger; }
-
-    public static Command safeValueOf(String commandName) {
-        if (commandName != null) {
-            String simplifiedCmdName = commandName.replaceAll("_", "");
-            for (Command cmd : values()) {
-                if (cmd.getSystemName().equalsIgnoreCase(simplifiedCmdName))
-                    return cmd;
-            }
-        }
-        log.trace("Command not found, name --> " + commandName);
-        return NO_COMMAND;
-    }
-
-    public String getPath() {
-        return ContextParam.CONTROLLER_SERVLET +
-                (this == NO_COMMAND ? "" : ("?" + ContextParam.COMMAND + "=" + systemName));
-    }
-
-    @Override
-    public String toString() {
-        return "Command: " + systemName + " forward to: " + getPath() + " isStateChanger: " + stateChanger;
     }
 }

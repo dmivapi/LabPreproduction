@@ -21,7 +21,7 @@ public class UserRemoveCmd extends AbstractCmd {
 
         if (UserRepositoryImpl.removeUser(Integer.parseInt(userId))) {
             log.debug("UserRemoveCmd finished");
-            return Command.LIST_USERS_LIBRARIANS.getPath();
+            return Command.LIST_USERS_LIBRARIANS.getSystemName();
         }
 
         log.debug("UserRemoveCmd finished with error");

@@ -37,7 +37,7 @@ public class BookNewCmd extends AbstractCmd {
                 return getErrorPageWithMessage(request,"Something went wrong: book creation failed");
 
         log.debug("BookNewCmd finished");
-        return Command.LIST_BOOKS.getPath();
+        return Command.LIST_BOOKS.getSystemName();
     }
 
     String[] generateLibCodes(String base, int quantity) {

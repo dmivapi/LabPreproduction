@@ -21,6 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User: " + s + " was not found");
 
         return new CurrentUser(
+                user.getId(),
                 user.getEmail(),
                 new BCryptPasswordEncoder().encode(user.getPassword()),
                 Arrays.asList(new SimpleGrantedAuthority("ROLE_" + user.getUserRole().toString())),
@@ -29,9 +30,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getLocaleName(),
                 user.getUserRole().toString()
         );
-//        return withUsername(user.getEmail())
-//                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
-//                .roles(user.getUserRole().toString())
-//                .build();
     }
 }

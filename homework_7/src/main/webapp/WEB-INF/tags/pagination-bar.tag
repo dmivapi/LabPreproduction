@@ -3,8 +3,6 @@
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ tag import="com.epam.dmivapi.ContextParam" %>
 
-<%@ attribute name="baseLink" required="true" %>
-
 <c:set var="currentPage"
        value="${(empty param[ContextParam.PGN_CURRENT_PAGE]) ? 1 : param[ContextParam.PGN_CURRENT_PAGE]}" />
 <c:set var="numOfPages" value="${requestScope[ContextParam.PGN_NUMBER_OF_PAGES]}" />

@@ -41,7 +41,7 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <h:pagination-status-actions baseLink="${Command.LIST_USERS_READERS_FOR_ADMIN.path}" message="" />
+                <h:pagination-status-actions message="" />
         </div>
     </div>
 

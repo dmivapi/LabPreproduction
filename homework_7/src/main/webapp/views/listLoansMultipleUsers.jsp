@@ -42,7 +42,7 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <h:pagination-status-actions baseLink="${Command.LIST_LOANS_OF_ALL.systemName}" message="" />
+                <h:pagination-status-actions message="" />
         </div>
     </div>
 <%@ include file="../WEB-INF/jspf/footer.jspf"%>

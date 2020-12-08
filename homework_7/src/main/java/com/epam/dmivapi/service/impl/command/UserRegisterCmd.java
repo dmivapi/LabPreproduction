@@ -58,7 +58,7 @@ public class UserRegisterCmd extends AbstractCmd {
                 return getErrorPageWithMessage(request,"Something went wrong: registration of user failed");
 
             log.debug("UserRegisterCmd finished");
-            return Command.LIST_USERS_LIBRARIANS.getPath();
+            return Command.LIST_USERS_LIBRARIANS.getSystemName();
 //        }
     }
 

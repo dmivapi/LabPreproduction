@@ -44,7 +44,7 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <h:pagination-status-actions baseLink="${Command.LIST_BOOKS.path}" message="" />
+                <h:pagination-status-actions message="" />
                 <sec:authorize access="hasRole('READER')">
                      <h:button-submit buttonKey="list_books_jsp.button.loan" buttonAction="${Command.LOAN_NEW.systemName}" />
                 </sec:authorize>

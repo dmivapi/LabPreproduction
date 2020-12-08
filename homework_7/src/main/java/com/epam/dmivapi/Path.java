@@ -28,9 +28,7 @@ public class Path {
     public static String getCurrentPageName(HttpServletRequest request) {
         String fullCmd = request.getParameter(ContextParam.SELF_COMMAND);
         log.debug("getCurrentPageName --> " + fullCmd);
-        return (fullCmd == null) ?
-            request.getParameter(ContextParam.SELF_PAGE) :
-            Command.safeValueOf(fullCmd).getPath();
+        return fullCmd;
     }
 
     private Path() {}

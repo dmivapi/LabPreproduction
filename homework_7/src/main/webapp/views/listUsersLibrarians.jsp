@@ -39,7 +39,7 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <h:pagination-status-actions baseLink="${Command.LIST_USERS_LIBRARIANS.path}" message="" />
+                <h:pagination-status-actions message="" />
             </c:if>
         </form>
     </div>
