@@ -49,7 +49,7 @@
                                         <button type="submit"
                                                 class="btn btn-warning btn-sm"
                                                 name="${ContextParam.LOAN_ID_TO_PROCESS}" value="${loan.id}"
-                                                formaction="Command.LOAN_REMOVE.systemName">
+                                                formaction="${Command.LOAN_REMOVE.systemName}">
                                             <fmt:message key="list_users_librarians_jsp.button.remove"/>
                                         </button>
                                     </c:if>
