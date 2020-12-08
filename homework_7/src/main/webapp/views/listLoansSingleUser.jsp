@@ -13,7 +13,7 @@
                    value="${Command.LIST_LOANS_OF_SELF.systemName}"
                 </sec:authorize>
                 <sec:authorize access="hasRole('LIBRARIAN')">
-                   value="${Command.LIST_LOANS_OF_USER.systemName}"
+                   value="${Command.LIST_LOANS_OF_USER.systemName}${requestScope[ContextParam.USER_ID_TO_PROCESS]}"
                 </sec:authorize>
                    id="${ContextParam.SELF_COMMAND}">
 

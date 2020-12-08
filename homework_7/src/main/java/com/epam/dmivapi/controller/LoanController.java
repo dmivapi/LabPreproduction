@@ -71,7 +71,6 @@ public class LoanController {
                 currentPage,
                 recordsPerPage
         );
-        model.addAttribute(ContextParam.LS_LOANS, loans);
 
         int nOfPages = loanService.countLoansByUserId(
                 userId,
@@ -79,6 +78,8 @@ public class LoanController {
                 recordsPerPage
         );
 
+        model.addAttribute(ContextParam.USER_ID_TO_PROCESS, userId);
+        model.addAttribute(ContextParam.LS_LOANS, loans);
         model.addAttribute(ContextParam.PGN_RECORDS_PER_PAGE, recordsPerPage);
         model.addAttribute(ContextParam.PGN_NUMBER_OF_PAGES, nOfPages);
 
