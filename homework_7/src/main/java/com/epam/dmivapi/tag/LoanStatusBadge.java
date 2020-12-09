@@ -1,6 +1,5 @@
 package com.epam.dmivapi.tag;
 
-import com.epam.dmivapi.dto.LoanDtoViewAll;
 import com.epam.dmivapi.dto.LoanStatus;
 
 import javax.servlet.jsp.JspException;

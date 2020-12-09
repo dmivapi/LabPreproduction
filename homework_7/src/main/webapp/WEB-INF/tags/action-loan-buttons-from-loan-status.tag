@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ tag import="com.epam.dmivapi.ContextParam" %>
-<%@ tag import="com.epam.dmivapi.service.impl.command.Command" %>
+<%@ tag import="com.epam.dmivapi.controller.Command" %>
 <%@ tag import="com.epam.dmivapi.dto.LoanStatus" %>
 
 <%--

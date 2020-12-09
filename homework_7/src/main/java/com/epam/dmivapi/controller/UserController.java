@@ -7,6 +7,7 @@ import com.epam.dmivapi.service.UserService;
 import com.epam.dmivapi.dto.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -94,5 +95,38 @@ public class UserController {
         model.addAttribute(ContextParam.PGN_NUMBER_OF_PAGES, nOfPages);
 
         return Path.PAGE__LIST_USERS_LIBRARIANS;
+    }
+
+    @RequestMapping("/enter")
+    public String enterUser() {
+        return Path.PAGE__ENTER_USER_INFO;
+    }
+
+    @RequestMapping("/create/librarian")
+    public String createUserLibrarian(@ModelAttribute UserDto userDto) {
+        userDto.setUserRole(Role.LIBRARIAN);
+        userService.createUser(userDto);
+        return userDto.getUserRole().getDefaultPage();
+    }
+
+    @RequestMapping("/create/reader")
+    public String createUserReader(@ModelAttribute UserDto userDto) {
+        userDto.setUserRole(Role.READER);
+        userService.createUser(userDto);
+        return userDto.getUserRole().getDefaultPage();
+    }
+
+    @RequestMapping("/delete")
+    public String deleteUser(@RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId) {
+        userService.deleteUser(userId);
+        return Path.PAGE__ENTER_USER_INFO;
+    }
+    @RequestMapping("/updateblock")
+    public String updateUserBlock(
+            @RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId,
+            @RequestParam(value = ContextParam.BLOCK_OPTION) String blockOption
+    ) {
+        userService.updateUserBlock(userId, blockOption);
+        return Path.PAGE__ENTER_USER_INFO;
     }
 }

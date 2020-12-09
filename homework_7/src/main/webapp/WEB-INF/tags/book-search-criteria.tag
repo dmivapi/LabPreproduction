@@ -1,7 +1,7 @@
 <%@ tag pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/directive/taglibs.jspf" %>
 <%@ tag import="com.epam.dmivapi.ContextParam" %>
-<%@ tag import="com.epam.dmivapi.service.impl.command.Command" %>
+<%@ tag import="com.epam.dmivapi.controller.Command" %>
 
 <%--
     group of controls for book searching criteria,

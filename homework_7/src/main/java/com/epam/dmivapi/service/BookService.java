@@ -22,5 +22,6 @@ public interface BookService {
             int recordsPerPage
     );
 
-    void createBook(Book book, int authorId, int publisherId, int genreId, int year, int price, String languageCode, String libCodes[]);
+    void createBook(Book book, int authorId, int publisherId, int genreId, int year, int price, String languageCode, String libCodeBase, int quantity);
+    void deleteBook(List<String> publicationIds);
 }

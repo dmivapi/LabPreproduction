@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 @Log4j
 public class Path {
     // pages
-    public static final String PAGE__HOME = "/jsp/home.jsp";
     public static final String PAGE__LOGOUT = "/jsp/logout.jsp";
-    public static final String PAGE__ENTER_USER_INFO = "enter_user_info";
-    public static final String PAGE__ENTER_BOOK_INFO = "enter_book_info";
+    public static final String PAGE__ENTER_USER_INFO = "enterUserInfo";
+    public static final String PAGE__ENTER_BOOK_INFO = "enterBookInfo";
     public static final String PAGE__ERROR = "error_page";
 
     public static final String PAGE__LIST_BOOKS = "listBooks";

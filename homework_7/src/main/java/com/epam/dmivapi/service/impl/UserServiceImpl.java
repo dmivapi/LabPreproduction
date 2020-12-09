@@ -3,14 +3,18 @@ package com.epam.dmivapi.service.impl;
 import com.epam.dmivapi.converter.UserDtoConverter;
 import com.epam.dmivapi.dto.Role;
 import com.epam.dmivapi.dto.UserDto;
+import com.epam.dmivapi.exception.EntityAlreadyExistsException;
 import com.epam.dmivapi.model.User;
 import com.epam.dmivapi.repository.UserRepository;
+import com.epam.dmivapi.repository.impl.UserRepositoryImpl;
 import com.epam.dmivapi.service.UserService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Log4j
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -24,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUsersByRole(Role role, int currentPage, int recordsPerPage) {
+        log.debug("deleteUser invoked");
         if (recordsPerPage == 0) {
             throw new IllegalArgumentException("The number of records per page can not be 0");
         }
@@ -33,6 +38,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int countUsersPagesByRole(Role role, int recordsPerPage) {
+        log.debug("deleteUser invoked");
+
         if (recordsPerPage == 0) {
             throw new IllegalArgumentException("The number of records per page can not be 0");
         }
@@ -40,5 +47,31 @@ public class UserServiceImpl implements UserService {
                 userRepository.countUsersByRole(role),
                 recordsPerPage
         );
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        log.debug("deleteUser invoked");
+
+        userRepository.deleteUserById(userId);
+    }
+
+    @Override
+    public void createUser(UserDto userDto) {
+        log.debug("createUser invoked");
+
+        // check if this user already exists
+        User userFromDB = userRepository.findUserByEmail(userDto.getEmail());
+
+        if (userFromDB != null)
+            throw new EntityAlreadyExistsException("This user is already registered, please login instead");
+
+        userRepository.createUser(userDtoConverter.convert(userDto));
+    }
+
+    @Override
+    public void updateUserBlock(Integer userId, String blockOption) {
+        log.debug("updateUserBlock invoked");
+        UserRepositoryImpl.updateUserBlockStatus(userId, Boolean.parseBoolean(blockOption));
     }
 }

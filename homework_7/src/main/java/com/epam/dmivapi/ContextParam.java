@@ -3,7 +3,6 @@ package com.epam.dmivapi;
 import com.epam.dmivapi.dto.Role;
 import com.epam.dmivapi.model.User;
 import lombok.extern.log4j.Log4j;
-import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

@@ -3,7 +3,7 @@
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ tag import="com.epam.dmivapi.ContextParam" %>
-<%@ tag import="com.epam.dmivapi.service.impl.command.Command" %>
+<%@ tag import="com.epam.dmivapi.controller.Command" %>
 
 <c:set var="aclasses" value="class=\"list-group-item list-group-item-action bg-light lsa-panel-link\"" />
 

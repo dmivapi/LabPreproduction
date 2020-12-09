@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = UserRepositoryImpl.findUserByLogin(s);
+        User user = (new UserRepositoryImpl()).findUserByEmail(s);
         if (isNull(user))
             throw new UsernameNotFoundException("User: " + s + " was not found");
 

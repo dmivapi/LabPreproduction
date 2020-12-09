@@ -6,7 +6,9 @@ import com.epam.dmivapi.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -58,7 +60,22 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void createBook(Book book, int authorId, int publisherId, int genreId, int year, int price, String languageCode, String libCodes[]) {
-        bookRepository.save(book, authorId, publisherId, genreId, year, price, languageCode, libCodes);
+    public void createBook(Book book, int authorId, int publisherId, int genreId, int year, int price, String languageCode, String libCodeBase, int quantity) {
+        bookRepository.createBook(book, authorId, publisherId, genreId, year, price, languageCode, generateLibCodes(libCodeBase, quantity));
+    }
+
+    private List<String> generateLibCodes(String base, int quantity) {
+        List<String> codes = new ArrayList<>(quantity);
+        for (int i = 0; i < quantity; i++) {
+            codes.add(base + "." + i);
+        }
+        return codes;
+    }
+
+    @Override
+    public void deleteBook(List<String> publicationIds) {
+        bookRepository.deleteBook(
+                publicationIds.stream().map(Integer::valueOf).collect(Collectors.toList())
+        );
     }
 }

@@ -9,4 +9,7 @@ public interface UserService {
     List<UserDto> getUsersByRole(Role role, int currentPage, int recordsPerPage);
 
     int countUsersPagesByRole(Role role, int recordsPerPage);
+    void createUser(UserDto userDto);
+    void updateUserBlock(Integer userId, String blockOption);
+    void deleteUser(Integer userId);
 }

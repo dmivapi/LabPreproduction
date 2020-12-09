@@ -58,6 +58,10 @@ public class UserRepositoryImpl implements UserRepository {
         return countUsers(role, null);
     }
 
+    @Override
+    public void createUser(User user) {
+        updateUser(user, true);
+    }
     // -------------------------------------------------------------------------
 
     private static String getSqlWithCriteria(Role role, Boolean isBlocked,
@@ -155,7 +159,8 @@ public class UserRepositoryImpl implements UserRepository {
         return userList;
     }
 
-    public static User findUserByLogin(String login) {
+    @Override
+    public User findUserByEmail(String email) {
         User user = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -164,7 +169,7 @@ public class UserRepositoryImpl implements UserRepository {
             con = DBManager.getInstance().getConnection();
             UserMapper mapper = new UserMapper();
             pstmt = con.prepareStatement(SQL__FIND_USER_BY_LOGIN);
-            pstmt.setString(1, login);
+            pstmt.setString(1, email);
             rs = pstmt.executeQuery();
             if (rs.next())
                 user = mapper.mapRow(rs);
@@ -201,7 +206,8 @@ public class UserRepositoryImpl implements UserRepository {
         return true;
     }
 
-    public static boolean removeUser(int userId) {
+    @Override
+    public void deleteUserById(int userId) {
         Connection con = null;
         try {
             con = DBManager.getInstance().getConnection();
@@ -215,11 +221,9 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (SQLException ex) {
             DBManager.getInstance().rollbackAndClose(con);
             ex.printStackTrace();
-            return false;
         } finally {
             DBManager.getInstance().commitAndClose(con);
         }
-        return true;
     }
 
     /**

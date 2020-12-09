@@ -1,10 +1,10 @@
-package com.epam.dmivapi.service.impl.command;
+package com.epam.dmivapi.controller;
 
 import org.apache.log4j.Logger;
 
 
 public enum Command {
-    SWITCH_LOCALE("switchLocale"),
+    SWITCH_LOCALE("/app/switchLocale"),
 
     ENTER_USER_INFO("enterUserInfo"),
     ENTER_BOOK_INFO("enterBookInfo"),

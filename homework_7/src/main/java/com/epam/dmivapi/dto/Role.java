@@ -1,6 +1,6 @@
 package com.epam.dmivapi.dto;
 
-import com.epam.dmivapi.service.impl.command.Command;
+import com.epam.dmivapi.controller.Command;
 
 import java.io.Serializable;
 

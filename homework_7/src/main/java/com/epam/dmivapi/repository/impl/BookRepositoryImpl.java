@@ -10,7 +10,11 @@ import com.epam.dmivapi.model.Publisher;
 import com.epam.dmivapi.repository.BookRepository;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,11 +53,6 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public int countBooksByTitleAndAuthor(String title, String author, String genreLanguageCode) {
         return countBooks(genreLanguageCode, title, author);
-    }
-
-    @Override
-    public void save(Book book, int authorId, int publisherId, int genreId, int year, int price, String languageCode, String libCodes[]) {
-        createBook(book, authorId, publisherId, genreId, year, price, languageCode, libCodes);
     }
 
 // --------------------------------------------------------------------------
@@ -242,7 +241,8 @@ public class BookRepositoryImpl implements BookRepository {
         return genres;
     }
 
-    public static boolean createBook(Book book, int authorId, int publisherId, int genreId, int year, int price, String languageCode, String libCodes[]) {
+    @Override
+    public void createBook(Book book, int authorId, int publisherId, int genreId, int year, int price, String languageCode, List<String> libCodes) {
         Connection con = null;
         final String SQL_INSERT_BOOK = "INSERT INTO book (title) VALUES (?)";
         final String SQL_INSERT_BOOK_HAS_AUTHOR = "INSERT INTO book_has_author (author_id, book_id) VALUES (?, ?)";
@@ -321,15 +321,13 @@ public class BookRepositoryImpl implements BookRepository {
         } catch (SQLException ex) {
             DBManager.getInstance().rollbackAndClose(con);
             ex.printStackTrace();
-            return false;
         } finally {
             DBManager.getInstance().commitAndClose(con);
         }
-
-        return true;
     }
 
-    public static boolean bookRemove(int[] publicationIds) {
+    @Override
+    public void deleteBook(List<Integer> publicationIds) {
         final String SQL_BOOK_REMOVE = "DELETE FROM publication WHERE id=?";
         Connection con = null;
         try {
@@ -347,11 +345,9 @@ public class BookRepositoryImpl implements BookRepository {
         } catch (SQLException ex) {
             DBManager.getInstance().rollbackAndClose(con);
             ex.printStackTrace();
-            return false;
         } finally {
             DBManager.getInstance().commitAndClose(con);
         }
-        return true;
     }
 
     private static class AuthorMapper extends EntityMapper<Author> {
