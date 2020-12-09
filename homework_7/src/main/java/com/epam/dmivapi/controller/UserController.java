@@ -118,7 +118,7 @@ public class UserController {
     @RequestMapping("/admin/delete/librarian")
     public String deleteUser(@RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId) {
         userService.deleteUser(userId);
-        return Path.PAGE__ENTER_USER_INFO;
+        return "redirect:" + Command.LIST_USERS_LIBRARIANS.getSystemName();
     }
     @RequestMapping("/admin/update/readerblocked")
     public String updateUserBlocked(

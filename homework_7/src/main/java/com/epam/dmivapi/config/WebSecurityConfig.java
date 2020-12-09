@@ -49,8 +49,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/app/switchLocale").permitAll()
                 .antMatchers("/loan").hasRole("LIBRARIAN")
                 .antMatchers("/loan/**").hasAnyRole("READER", "LIBRARIAN")
-                .antMatchers("/user/librarian/**").hasAnyRole("LIBRARIAN")
-                .antMatchers("/user/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/librarian/**").hasAnyRole("LIBRARIAN")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/guest/**").anonymous()
+                .anyRequest().permitAll() // TODO remove after testing
                 .and()
                 .formLogin()
                 .loginPage("/book/list").permitAll()

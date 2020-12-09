@@ -31,6 +31,7 @@
                             <td>${user.lastName}</td>
                             <td>
                                 <button type="submit"
+                                        formaction="${Command.DELETE_LIBRARIAN.systemName}"
                                         class="btn btn-warning btn-sm"
                                         name="${ContextParam.USER_ID_TO_PROCESS}" value="${user.id}">
                                 <fmt:message key="list_users_librarians_jsp.button.remove"/>
