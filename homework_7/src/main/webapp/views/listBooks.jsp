@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
-<%--requestScope[ContextParam.BK_TITLE] = ${requestScope[ContextParam.BK_TITLE]}--%>
-<%--pageContext.request.getParameter(ContextParam.BK_TITLE) = ${pageContext.request.getParameter(BK_TITLE)}--%>
-
    <%-- This parameter is used to return to this page after certain commands
      -- and therefore should be present and properly initializated in the body of every page
    --%>

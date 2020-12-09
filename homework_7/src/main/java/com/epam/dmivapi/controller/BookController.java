@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,10 +20,12 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
     private BookService bookService;
+    private HttpSession session;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, HttpSession session) {
         this.bookService = bookService;
+        this.session = session;
     }
 
     @RequestMapping("/list")
@@ -36,7 +39,7 @@ public class BookController {
             Model model
     ) {
         log.debug("getBooksByTitleAndAuthor invoked");
-        final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
+        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         List<Book> books = bookService.getBooksByTitleAndAuthor(
                 title, author, GENRE_LANGUAGE_CODE,
@@ -59,7 +62,7 @@ public class BookController {
     @RequestMapping("/enter")
     public String enterBook(Model model) {
         log.debug("EnterBook invoked");
-        final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
+        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         model.addAttribute(ContextParam.BK_AUTHORS, BookRepositoryImpl.findAuthors());
         model.addAttribute(ContextParam.BK_PUBLISHERS, BookRepositoryImpl.findPublishers());
@@ -80,7 +83,7 @@ public class BookController {
             @RequestParam(value = ContextParam.BK_LIB_CODE_BASE, defaultValue = "") String libCodeBase,
             @RequestParam(value = ContextParam.BK_QUANTITY, defaultValue = "") int quantity
     ) {
-        final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
+        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
         Book book = new Book();
         book.setTitle(title);
         bookService.createBook(book, authorId, publisherId, genreId, year, price, GENRE_LANGUAGE_CODE, libCodeBase, quantity);

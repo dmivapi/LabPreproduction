@@ -29,7 +29,6 @@
     $(document).ready(function(){
         $('#${Command.SWITCH_LOCALE} li').click(function()
         {
-            <%--$('#${ContextParam.COMMAND}').val($(this).data('action'));--%>
             $('#${ContextParam.MAIN_PAGE_FORM}').attr('action', $(this).data('action'));
             $('#newLocale').val($(this).data('locale'));
             $('#${ContextParam.MAIN_PAGE_FORM}').submit();

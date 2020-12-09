@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,10 +23,12 @@ import java.util.List;
 @Log4j
 public class LoanController {
     private LoanService loanService;
+    private HttpSession session;
 
     @Autowired
-    public LoanController(LoanService loanService) {
+    public LoanController(LoanService loanService, HttpSession session) {
         this.loanService = loanService;
+        this.session = session;
     }
 
     @RequestMapping("")
@@ -36,7 +39,7 @@ public class LoanController {
             Model model
     ) {
         log.debug("getAllLoan invoked");
-        final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
+        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         List<LoanDtoViewAll> loans = loanService.getAllLoan(
                 GENRE_LANGUAGE_CODE,
@@ -65,7 +68,7 @@ public class LoanController {
             Model model
     ) {
         log.debug("getLoansByUserId invoked");
-        final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
+        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         List<LoanDto> loans = loanService.getLoansByUserId(
                 userId,
@@ -96,7 +99,7 @@ public class LoanController {
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model) {
         log.debug("getLoansByCurrentUserId invoked");
-        final String GENRE_LANGUAGE_CODE = "ru"; // TODO change this hardcoding later
+        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
         final Integer userId = ((CurrentUser)authentication.getPrincipal()).getId();
 
         List<LoanDto> loans = loanService.getLoansByUserId(

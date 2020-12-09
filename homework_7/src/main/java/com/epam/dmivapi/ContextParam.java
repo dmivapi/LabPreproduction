@@ -11,6 +11,7 @@ import javax.servlet.jsp.jstl.core.Config;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @Log4j
 public class ContextParam {
@@ -120,7 +121,7 @@ public class ContextParam {
         if(defaultLocale ==null)
             defaultLocale ="en";
 
-        servletContext.setAttribute(ContextParam.DEFAULT_LOCALE,defaultLocale);
+        servletContext.setAttribute(ContextParam.DEFAULT_LOCALE, defaultLocale);
     }
 
     public static String getCurrentLocale(HttpSession session) {
@@ -137,66 +138,6 @@ public class ContextParam {
         Config.set(session, Config.FMT_LOCALE, newLocale); // for jsp pages i18n
         log.trace("Set the session attribute: CURRENT_LOCALE --> " + newLocale);
     }
-
-    public static User getCurrentUser(HttpSession session) {
-        User user = null;
-        user = (User) session.getAttribute(ContextParam.CURRENT_USER);
-        return user;
-    }
-
-    public static void setCurrentUser(HttpSession session, User user) {
-        if (user == null)
-            session.removeAttribute(ContextParam.CURRENT_USER);
-        session.setAttribute(ContextParam.CURRENT_USER, user);
-        log.trace("Set the session attribute: user --> " + user);
-    }
-
-    public static Role getCurrentUserRole(HttpSession session) {
-        Role role = null;
-        role = (Role) session.getAttribute(ContextParam.CURRENT_USER_ROLE);
-        //return role == null ? Role.GUEST : role;
-        return Role.LIBRARIAN;
-    }
-
-    public static void setCurrentUserRole(HttpSession session, Role role) {
-        session.setAttribute(ContextParam.CURRENT_USER_ROLE, role);
-        log.trace("Set the session attribute: userRole --> " + role);
-    }
-
-    public static String getErrorPageWithMessage(HttpServletRequest request, String errorMessage) {
-        request.getSession().setAttribute(ContextParam.ERROR_MESSAGE, errorMessage);
-        log.error("errorMessage --> " + errorMessage);
-        return Path.PAGE__ERROR;
-    }
-
-    // set of getters and setters for pagination parameters
-    public static String getPgnNumberOfPages(HttpServletRequest request) {
-        return (String) request.getAttribute(PGN_NUMBER_OF_PAGES);
-    }
-
-    public static void setPgnNumberOfPages(HttpServletRequest request, Integer numberOfPages) {
-        request.setAttribute(PGN_NUMBER_OF_PAGES, numberOfPages);
-    }
-
-/*    public static int getPgnCurrentPage(HttpServletRequest request) {
-        String curPage = (String) request.getParameter(ContextParam.PGN_CURRENT_PAGE);
-        int cPage = (curPage == null || curPage.isEmpty()) ?
-                1 : Integer.parseInt(curPage);
-        log.debug("getPgnCurrentPage: " + curPage + " ---> " + cPage);
-        return cPage;
-    }
-
-    public static Integer getPgnRecordsPerPage(HttpServletRequest request) {
-        Integer rpp = (Integer) request.getAttribute(ContextParam.PGN_RECORDS_PER_PAGE);
-        return (rpp == null) ?
-                // default value is initialised in SessionListener
-                (Integer) request.getSession().getAttribute(ContextParam.PGN_RECORDS_PER_PAGE) :
-                rpp;
-    }
-
-    public static void setPgnRecordsPerPage(HttpServletRequest request, Integer numberOfPages) {
-        request.setAttribute(PGN_RECORDS_PER_PAGE, numberOfPages);
-    }*/
 
     private ContextParam() {}
 }
