@@ -6,15 +6,16 @@ import org.apache.log4j.Logger;
 public enum Command {
     SWITCH_LOCALE("/app/switchLocale"),
 
-    ENTER_USER_INFO("enterUserInfo"),
-    ENTER_BOOK_INFO("enterBookInfo"),
+    ENTER_READER("/guest/enter/reader"),
+    ENTER_LIBRARIAN("/admin/enter/librarian"),
+    ENTER_BOOK_INFO("/book/enter"),
 
     LOGIN("/book/list"),
-    REGISTER("register"),
     LOGOUT("logout"),
-    USER_NEW("userNew"),
-    USER_BLOCK("userBlock"),
-    USER_REMOVE("userRemove"),
+    CREATE_READER("/guest/create/reader"),
+    CREATE_LIBRARIAN("/admin/create/librarian"),
+    UPDATE_READER_BLOCKED("/admin/update/readerblocked"),
+    DELETE_LIBRARIAN("/admin/delete/librarian"),
 
     LIST_BOOKS("/book/list"),
     BOOK_NEW("/book/new"),
@@ -24,9 +25,9 @@ public enum Command {
     LIST_LOANS_OF_USER("/loan/"),
     LIST_LOANS_OF_ALL("/loan"),
 
-    LIST_USERS_LIBRARIANS("/user/admin/librarians"),
-    LIST_USERS_READERS_FOR_ADMIN("/user/admin/borrowers"),
-    LIST_USERS_READERS_FOR_LIBRARIAN("/user/librarian/borrowers"),
+    LIST_USERS_LIBRARIANS("/admin/list/librarians"),
+    LIST_USERS_READERS_FOR_ADMIN("/admin/list/readers"),
+    LIST_USERS_READERS_FOR_LIBRARIAN("/librarian/list/readers"),
 
     LOAN_NEW("/loan/new"),
     LOAN_OUT("/loan/out"),
@@ -35,7 +36,7 @@ public enum Command {
 
     private static final Logger log = Logger.getLogger(Command.class);
 
-    public final String systemName;
+    private final String systemName;
 
 
     Command(String systemName) {

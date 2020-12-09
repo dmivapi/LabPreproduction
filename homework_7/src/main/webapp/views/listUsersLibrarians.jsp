@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
 <div class="row">
-    <div class="col-sm-10" style="margin: auto";>
+    <div class="col-sm-10" style="margin: auto">
         <%-- This parameter is used to return to this page after certain commands
           -- and therefore should be present and properly initializated in the body of every page
         --%>
@@ -41,7 +41,6 @@
                 </table>
                 <h:pagination-status-actions message="" />
             </c:if>
-        </form>
     </div>
 </div>
 <%@ include file="../WEB-INF/jspf/footer.jspf"%>

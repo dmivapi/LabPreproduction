@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
     private UserService userService;
 
@@ -22,8 +21,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/librarian/borrowers")
-    public String getAllBorrowersForLibrarian(
+    @RequestMapping("/librarian/list/readers")
+    public String getAllReadersForLibrarian(
             @RequestParam(value = ContextParam.PGN_CURRENT_PAGE, defaultValue = "1") int currentPage,
             @RequestParam(value = ContextParam.PGN_RECORDS_PER_PAGE,
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
@@ -47,7 +46,7 @@ public class UserController {
         return Path.PAGE__LIST_USERS_READERS_FOR_LIBRARIAN;
     }
 
-    @RequestMapping("/admin/borrowers")
+    @RequestMapping("/admin/list/readers")
     public String getAllBorrowersForAdmin(
             @RequestParam(value = ContextParam.PGN_CURRENT_PAGE, defaultValue = "1") int currentPage,
             @RequestParam(value = ContextParam.PGN_RECORDS_PER_PAGE,
@@ -72,7 +71,7 @@ public class UserController {
         return Path.PAGE__LIST_USERS_READERS_FOR_ADMIN;
     }
 
-    @RequestMapping("/admin/librarians")
+    @RequestMapping("/admin/list/librarians")
     public String getAllLibrarians(
             @RequestParam(value = ContextParam.PGN_CURRENT_PAGE, defaultValue = "1") int currentPage,
             @RequestParam(value = ContextParam.PGN_RECORDS_PER_PAGE,
@@ -97,36 +96,36 @@ public class UserController {
         return Path.PAGE__LIST_USERS_LIBRARIANS;
     }
 
-    @RequestMapping("/enter")
+    @RequestMapping({"/guest/enter/reader", "/admin/enter/librarian"})
     public String enterUser() {
         return Path.PAGE__ENTER_USER_INFO;
     }
 
-    @RequestMapping("/create/librarian")
-    public String createUserLibrarian(@ModelAttribute UserDto userDto) {
+    @RequestMapping("/admin/create/librarian")
+    public String createLibrarian(@ModelAttribute UserDto userDto) {
         userDto.setUserRole(Role.LIBRARIAN);
         userService.createUser(userDto);
-        return userDto.getUserRole().getDefaultPage();
+        return "redirect:" + userDto.getUserRole().getDefaultPage();
     }
 
-    @RequestMapping("/create/reader")
-    public String createUserReader(@ModelAttribute UserDto userDto) {
+    @RequestMapping("/guest/create/reader")
+    public String createReader(@ModelAttribute UserDto userDto) {
         userDto.setUserRole(Role.READER);
         userService.createUser(userDto);
-        return userDto.getUserRole().getDefaultPage();
+        return "redirect:" + userDto.getUserRole().getDefaultPage();
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("/admin/delete/librarian")
     public String deleteUser(@RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId) {
         userService.deleteUser(userId);
         return Path.PAGE__ENTER_USER_INFO;
     }
-    @RequestMapping("/updateblock")
-    public String updateUserBlock(
+    @RequestMapping("/admin/update/readerblocked")
+    public String updateUserBlocked(
             @RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId,
             @RequestParam(value = ContextParam.BLOCK_OPTION) String blockOption
     ) {
         userService.updateUserBlock(userId, blockOption);
-        return Path.PAGE__ENTER_USER_INFO;
+        return "forward:" + Command.LIST_USERS_READERS_FOR_ADMIN.getSystemName();
     }
 }

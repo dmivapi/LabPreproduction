@@ -88,10 +88,10 @@ public class ContextParam {
     public static final String USR_USERS = "usrUsers";
 
     // login parameters
-    public static final String USR_LOGIN = "usrLogin";
-    public static final String USR_PASSWORD = "usrPassword";
-    public static final String USR_FIRST_NAME = "usrFirstName";
-    public static final String USR_LAST_NAME = "usrLastName";
+    public static final String USR_LOGIN = "email";
+    public static final String USR_PASSWORD = "password";
+    public static final String USR_FIRST_NAME = "firstName";
+    public static final String USR_LAST_NAME = "lastName";
 
     // logged user information attribute key
     public static final String LN_USER = "user";

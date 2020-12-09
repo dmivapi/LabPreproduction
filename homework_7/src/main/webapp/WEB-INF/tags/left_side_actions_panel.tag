@@ -9,7 +9,7 @@
 
 <sec:authorize access="hasRole('ADMIN')">
     <a href="${Command.LIST_USERS_READERS_FOR_ADMIN.systemName}" ${aclasses}><fmt:message key="left_side_actions_panel_tag.usersBlocking"/></a>
-    <a href="${Command.ENTER_USER_INFO.systemName}" ${aclasses}><fmt:message key="left_side_actions_panel_tag.addLibrarian"/></a>
+    <a href="${Command.ENTER_LIBRARIAN.systemName}" ${aclasses}><fmt:message key="left_side_actions_panel_tag.addLibrarian"/></a>
     <a href="${Command.LIST_USERS_LIBRARIANS.systemName}" ${aclasses}><fmt:message key="left_side_actions_panel_tag.viewRemoveLibrarians"/></a>
     <a href="${Command.LIST_BOOKS.systemName}" ${aclasses}><fmt:message key="left_side_actions_panel_tag.books"/></a>
 </sec:authorize>

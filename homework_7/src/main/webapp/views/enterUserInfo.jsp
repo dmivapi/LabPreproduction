@@ -8,14 +8,26 @@
         --%>
             <input type="hidden"
                name="${ContextParam.SELF_COMMAND}"
-               value="${Command.ENTER_USER_INFO.systemName}"
+               <sec:authorize access="hasRole('ADMIN')">
+                   value="${Command.ENTER_LIBRARIAN.systemName}"
+               </sec:authorize>
+               <sec:authorize access="!isAuthenticated()">
+                   value="${Command.ENTER_READER.systemName}"
+               </sec:authorize>
                id="${ContextParam.SELF_COMMAND}">
-<%--            <input type="hidden" name="${ContextParam.COMMAND}" value="${Command.REGISTER}"/>--%>
             <h:bs-input-group entity="${ContextParam.USR_LOGIN}" label="login_jsp.label.login" placeholder="login_jsp.placeholder.login" help="login_jsp.help.login" type="email"/>
             <h:bs-input-group entity="${ContextParam.USR_PASSWORD}" label="login_jsp.label.password" placeholder="login_jsp.placeholder.password" help="login_jsp.help.password" type="password" />
             <h:bs-input-group entity="${ContextParam.USR_FIRST_NAME}" label="register_jsp.label.first_name" placeholder="register_jsp.placeholder.first_name" help="register_jsp.help.first_name" />
             <h:bs-input-group entity="${ContextParam.USR_LAST_NAME}" label="register_jsp.label.last_name" placeholder="register_jsp.placeholder.last_name" help="register_jsp.help.last_name" />
-            <h:button-submit buttonKey="actions_list_general_tag.register" />
+            <c:set var="submitCmd">
+                <sec:authorize access="hasRole('ADMIN')">
+                    ${Command.CREATE_LIBRARIAN.systemName}
+                </sec:authorize>
+                <sec:authorize access="!isAuthenticated()">
+                    ${Command.CREATE_READER.systemName}
+                </sec:authorize>
+            </c:set>
+            <h:button-submit buttonAction="${submitCmd}" buttonKey="actions_list_general_tag.register" />
     </div>
     <div class="col-sm"></div>
 </div>

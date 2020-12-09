@@ -53,6 +53,10 @@
         {
             $('#clickedUserId').val($(this).attr('id'));
             $('#clickedCheckValue').val($(this).is(':checked'));
+            $('#${ContextParam.MAIN_PAGE_FORM}').attr(
+                'action',
+                "${Command.UPDATE_READER_BLOCKED.systemName}"
+            );
             $('#${ContextParam.MAIN_PAGE_FORM}').submit();
         });
     });
