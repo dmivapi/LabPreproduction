@@ -5,21 +5,34 @@ import com.epam.dmivapi.Path;
 import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.service.UserService;
 import com.epam.dmivapi.dto.Role;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpRequest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class UserController {
     private UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private AuthenticationManager authenticationManager;
+    private AuthenticationSuccessHandler successHandler;
 
     @RequestMapping("/librarian/list/readers")
     public String getAllReadersForLibrarian(
@@ -109,10 +122,10 @@ public class UserController {
     }
 
     @RequestMapping("/guest/create/reader")
-    public String createReader(@ModelAttribute UserDto userDto) {
+    public String createReader(@ModelAttribute UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
         userDto.setUserRole(Role.READER);
         userService.createUser(userDto);
-        return "redirect:" + userDto.getUserRole().getDefaultPage();
+        return "forward:" + "/guest/dologin";
     }
 
     @RequestMapping("/admin/delete/librarian")
@@ -127,5 +140,21 @@ public class UserController {
     ) {
         userService.updateUserBlock(userId, blockOption);
         return "forward:" + Command.LIST_USERS_READERS_FOR_ADMIN.getSystemName();
+    }
+
+    @RequestMapping("/guest/dologin")
+    private String doLogin(@ModelAttribute UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
+        UsernamePasswordAuthenticationToken authReq =
+                new UsernamePasswordAuthenticationToken(HtmlUtils.htmlEscape(userDto.getEmail()), userDto.getPassword());
+        Authentication auth = authenticationManager.authenticate(authReq);
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(auth);
+        try {
+            successHandler.onAuthenticationSuccess(request, response, auth);
+        } catch (IOException | ServletException e) {
+            throw new RuntimeException(e);
+        }
+        request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
+        return "redirect:" + userDto.getUserRole().getDefaultPage();
     }
 }
