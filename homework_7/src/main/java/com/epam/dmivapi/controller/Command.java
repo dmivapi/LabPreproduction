@@ -11,7 +11,7 @@ public enum Command {
     ENTER_BOOK_INFO("/book/enter"),
 
     LOGIN("/book/list"),
-    LOGOUT("logout"),
+    LOGOUT("/logout"),
     CREATE_READER("/guest/create/reader"),
     CREATE_LIBRARIAN("/admin/create/librarian"),
     UPDATE_READER_BLOCKED("/admin/update/readerblocked"),
@@ -34,12 +34,9 @@ public enum Command {
     LOAN_REMOVE("/loan/delete"),
     LOAN_IN("/loan/in");
 
-    private static final Logger log = Logger.getLogger(Command.class);
 
     private final String systemName;
-
-
-    Command(String systemName) {
+    private Command(String systemName) {
         this.systemName = systemName;
     }
 

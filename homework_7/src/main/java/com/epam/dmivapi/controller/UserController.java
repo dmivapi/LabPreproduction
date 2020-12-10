@@ -118,7 +118,7 @@ public class UserController {
     public String createLibrarian(@ModelAttribute UserDto userDto) {
         userDto.setUserRole(Role.LIBRARIAN);
         userService.createUser(userDto);
-        return "redirect:" + userDto.getUserRole().getDefaultPage();
+        return "redirect:" + Command.LIST_USERS_LIBRARIANS.getSystemName();
     }
 
     @RequestMapping("/guest/create/reader")
@@ -129,17 +129,22 @@ public class UserController {
     }
 
     @RequestMapping("/admin/delete/librarian")
-    public String deleteUser(@RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId) {
+    public String deleteLibrarian(
+            @RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId,
+            @RequestParam(ContextParam.SELF_COMMAND) String senderPage
+    ) {
         userService.deleteUser(userId);
-        return "redirect:" + Command.LIST_USERS_LIBRARIANS.getSystemName();
+        return "forward:" + senderPage;
     }
+
     @RequestMapping("/admin/update/readerblocked")
     public String updateUserBlocked(
             @RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId,
-            @RequestParam(value = ContextParam.BLOCK_OPTION) String blockOption
+            @RequestParam(value = ContextParam.BLOCK_OPTION) String blockOption,
+            @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ) {
         userService.updateUserBlock(userId, blockOption);
-        return "forward:" + Command.LIST_USERS_READERS_FOR_ADMIN.getSystemName();
+        return "forward:" + senderPage;
     }
 
     @RequestMapping("/guest/dologin")

@@ -42,7 +42,6 @@
     $(document).ready(function(){
         $('.clickable-row').click(function()
         {
-
             $('#${ContextParam.MAIN_PAGE_FORM}').attr(
                 'action',
                 "${Command.LIST_LOANS_OF_USER.systemName}" + $(this).data('uid')

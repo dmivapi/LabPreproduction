@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/loan").hasRole("LIBRARIAN")
                 .antMatchers("/loan/**").hasAnyRole("READER", "LIBRARIAN")
                 .antMatchers("/librarian/**").hasAnyRole("LIBRARIAN")
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/admin/**", "/book/enter", "/book/create", "/book/delete").hasAnyRole("ADMIN")
                 .antMatchers("/guest/**").anonymous()
                 .anyRequest().permitAll() // TODO remove after testing
                 .and()

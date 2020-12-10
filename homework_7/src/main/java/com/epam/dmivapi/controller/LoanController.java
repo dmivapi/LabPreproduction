@@ -143,7 +143,7 @@ public class LoanController {
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ){
         loanService.updateLoanStatusToOutById(loanId);
-        return "redirect:" + senderPage;
+        return "forward:" + senderPage;
     }
 
     @RequestMapping("/in")
@@ -152,7 +152,7 @@ public class LoanController {
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ){
         loanService.updateLoanStatusToReturnedById(loanId);
-        return "redirect:" + senderPage;
+        return "forward:" + senderPage;
     }
 
     @RequestMapping("/delete")
@@ -161,6 +161,6 @@ public class LoanController {
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ){
         loanService.deleteLoanById(loanId);
-        return "redirect:" + senderPage;
+        return "forward:" + senderPage;
     }
 }

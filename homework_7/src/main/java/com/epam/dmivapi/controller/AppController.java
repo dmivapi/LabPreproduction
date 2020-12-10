@@ -19,13 +19,13 @@ public class AppController {
     @RequestMapping("/switchLocale")
     public String switchLanguage(
             @RequestParam(value = ContextParam.CURRENT_LOCALE) String locale,
-            HttpServletRequest request,
+            @RequestParam(ContextParam.SELF_COMMAND) String senderPage,
             HttpSession session
     ) {
         log.debug("SwitchLocaleCmd starts");
         setCurrentLocale(session, locale);
         log.debug("SwitchLocaleCmd finished");
 
-        return "redirect:" + Path.getCurrentPageName(request);
+        return "forward:" + senderPage;
     }
 }
