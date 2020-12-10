@@ -23,6 +23,7 @@
 %>
 
 <%@ attribute name="loanId" required="true" rtexprvalue="true" %>
+<%@ attribute name="includeSupportingScipt"  required="true" type="java.lang.Boolean" rtexprvalue="true" %>
 
 <div class="btn-group dropright">
     <c:if test = "<%= loanStatus != LoanStatus.RETURNED %>">
@@ -34,16 +35,16 @@
         <c:choose>
             <c:when test = "<%= loanStatus == LoanStatus.NEW %>">
             <c:if test = "${not loanBlocked}">
-                <a class="dropdown-item" href="#" data-lid="${loanId}" data-action="${Command.LOAN_OUT.systemName}">
+                <a class="dropdown-item loan-action-button" href="#" data-lid="${loanId}" data-action="${Command.LOAN_OUT.systemName}">
                     <fmt:message key="list_loans_jsp.button.lend_out" />
                 </a>
             </c:if>
-                <a class="dropdown-item" href="#" data-lid="${loanId}" data-action="${Command.LOAN_REMOVE.systemName}">
+                <a class="dropdown-item loan-action-button" href="#" data-lid="${loanId}" data-action="${Command.LOAN_REMOVE.systemName}">
                     <fmt:message key="list_loans_jsp.button.remove" />
                 </a>
             </c:when>
             <c:when test = "<%= loanStatus == LoanStatus.OUT || loanStatus == LoanStatus.OVERDUE %>">
-                <a class="dropdown-item" href="#" data-lid="${loanId}" data-action="${Command.LOAN_IN.systemName}">
+                <a class="dropdown-item loan-action-button" href="#" data-lid="${loanId}" data-action="${Command.LOAN_IN.systemName}">
                     <fmt:message key="list_loans_jsp.button.return" />
                 </a>
             </c:when>
@@ -55,14 +56,16 @@
 </div>
 </c:if>
 
-<input type="hidden" name="${ContextParam.LOAN_ID_TO_PROCESS}" id="${ContextParam.LOAN_ID_TO_PROCESS}">
-<script>
-    $(document).ready(function(){
-        $('.dropdown-item').click(function(e)
-        {
-            $('#${ContextParam.MAIN_PAGE_FORM}').attr('action', $(this).data('action'));
-            $('#${ContextParam.LOAN_ID_TO_PROCESS}').val($(this).data('lid'));
-            $('#${ContextParam.MAIN_PAGE_FORM}').submit();
+<c:if test = "${includeSupportingScipt}">
+    <input type="hidden" name="${ContextParam.LOAN_ID_TO_PROCESS}" id="${ContextParam.LOAN_ID_TO_PROCESS}">
+    <script>
+        $(document).ready(function(){
+            $('.loan-action-button').click(function(e)
+            {
+                $('#${ContextParam.MAIN_PAGE_FORM}').attr('action', $(this).data('action'));
+                $('#${ContextParam.LOAN_ID_TO_PROCESS}').val($(this).data('lid'));
+                $('#${ContextParam.MAIN_PAGE_FORM}').submit();
+            });
         });
-    });
-</script>
+    </script>
+</c:if>

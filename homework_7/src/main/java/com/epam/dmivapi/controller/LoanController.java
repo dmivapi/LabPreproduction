@@ -38,7 +38,7 @@ public class LoanController {
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model
     ) {
-        log.debug("getAllLoan invoked");
+        log.debug("/loan invoked");
         final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         List<LoanDtoViewAll> loans = loanService.getAllLoan(
@@ -67,7 +67,7 @@ public class LoanController {
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model
     ) {
-        log.debug("getLoansByUserId invoked");
+        log.debug("/loan/" + userId + " invoked");
         final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         List<LoanDto> loans = loanService.getLoansByUserId(
@@ -98,7 +98,7 @@ public class LoanController {
             @RequestParam(value = ContextParam.PGN_RECORDS_PER_PAGE,
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model) {
-        log.debug("getLoansByCurrentUserId invoked");
+        log.debug("/loan/self invoked");
         final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
         final Integer userId = ((CurrentUser)authentication.getPrincipal()).getId();
 
@@ -129,6 +129,7 @@ public class LoanController {
             @RequestParam(ContextParam.PUBLICATIONS_IDS_TO_PROCESS) List<Integer> publicationIds,
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
             ) {
+        log.debug("/loan/new invoked");
         loanService.createLoansByUserIdAndPublicationsList(
                 ((CurrentUser)authentication.getPrincipal()).getId(),
                 publicationIds
@@ -142,6 +143,7 @@ public class LoanController {
             @RequestParam(ContextParam.LOAN_ID_TO_PROCESS) Integer loanId,
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ){
+        log.debug("/loan/out invoked");
         loanService.updateLoanStatusToOutById(loanId);
         return "forward:" + senderPage;
     }
@@ -151,6 +153,7 @@ public class LoanController {
             @RequestParam(ContextParam.LOAN_ID_TO_PROCESS) Integer loanId,
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ){
+        log.debug("/loan/in invoked");
         loanService.updateLoanStatusToReturnedById(loanId);
         return "forward:" + senderPage;
     }
@@ -160,6 +163,7 @@ public class LoanController {
             @RequestParam(ContextParam.LOAN_ID_TO_PROCESS) Integer loanId,
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ){
+        log.debug("/loan/delete invoked");
         loanService.deleteLoanById(loanId);
         return "forward:" + senderPage;
     }

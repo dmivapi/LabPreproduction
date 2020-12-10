@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUsersByRole(Role role, int currentPage, int recordsPerPage) {
-        log.debug("deleteUser invoked");
+        log.debug("method invoked");
         if (recordsPerPage == 0) {
             throw new IllegalArgumentException("The number of records per page can not be 0");
         }
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int countUsersPagesByRole(Role role, int recordsPerPage) {
-        log.debug("deleteUser invoked");
+        log.debug("method invoked");
 
         if (recordsPerPage == 0) {
             throw new IllegalArgumentException("The number of records per page can not be 0");
@@ -51,14 +51,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Integer userId) {
-        log.debug("deleteUser invoked");
-
+        log.debug("method invoked");
         userRepository.deleteUserById(userId);
     }
 
     @Override
     public void createUser(UserDto userDto) {
-        log.debug("createUser invoked");
+        log.debug("method invoked");
 
         // check if this user already exists
         User userFromDB = userRepository.findUserByEmail(userDto.getEmail());
@@ -71,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserBlock(Integer userId, String blockOption) {
-        log.debug("updateUserBlock invoked");
+        log.debug("method invoked");
         UserRepositoryImpl.updateUserBlockStatus(userId, Boolean.parseBoolean(blockOption));
     }
 }

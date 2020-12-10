@@ -8,6 +8,7 @@ import com.epam.dmivapi.exception.EntityDoesNotExistException;
 import com.epam.dmivapi.model.Loan;
 import com.epam.dmivapi.repository.LoanRepository;
 import com.epam.dmivapi.service.LoanService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 import static java.util.Objects.isNull;
 
 @Service
+@Log4j
 public class LoanServiceImpl implements LoanService {
     private final LoanRepository loanRepository;
     private final LoanDtoConverter dtoConverter;
@@ -38,7 +40,9 @@ public class LoanServiceImpl implements LoanService {
             int currentPage,
             int recordsPerPage
     ) {
+        log.debug("method invoked");
         if (recordsPerPage == 0) {
+            log.error("The number of records per page can not be 0");
             throw new IllegalArgumentException("The number of records per page can not be 0");
         }
 
@@ -57,6 +61,7 @@ public class LoanServiceImpl implements LoanService {
             int currentPage,
             int recordsPerPage
     ) {
+        log.debug("method invoked");
         if (isNull(userId)) {
             throw new EntityDoesNotExistException(String.format("User with ID=%s does not exist", userId));
         }
@@ -74,6 +79,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public int countLoans(String genreLanguageCode, int recordsPerPage) {
+        log.debug("method invoked");
         if (recordsPerPage == 0) {
             throw new IllegalArgumentException("The number of records per page can not be 0");
         }
@@ -85,6 +91,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public int countLoansByUserId(Integer userId, String genreLanguageCode, int recordsPerPage) {
+        log.debug("method invoked");
         if (isNull(userId)) {
             throw new EntityDoesNotExistException(String.format("User with ID=%s does not exist", userId));
         }
@@ -96,6 +103,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public void createLoansByUserIdAndPublicationsList(Integer userId, List<Integer> publicationIds) {
+        log.debug("method invoked");
         if (isNull(userId)) {
             throw new EntityDoesNotExistException(String.format("User with ID=%s does not exist", userId));
         }
@@ -109,7 +117,8 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void updateLoanStatusToOutById(Integer loanId){
+    public void updateLoanStatusToOutById(Integer loanId) {
+        log.debug("method invoked");
         final int DEFAULT_TERM = 14;
 
         if (isNull(loanId)) {
@@ -119,7 +128,8 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void updateLoanStatusToReturnedById(Integer loanId){
+    public void updateLoanStatusToReturnedById(Integer loanId) {
+        log.debug("method invoked");
         if (isNull(loanId)) {
             throw new EntityDoesNotExistException(String.format("Loan with ID=%s does not exist", loanId));
         }
@@ -127,7 +137,8 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void deleteLoanById(Integer loanId){
+    public void deleteLoanById(Integer loanId) {
+        log.debug("method invoked");
         if (isNull(loanId)) {
             throw new EntityDoesNotExistException(String.format("Loan with ID=%s does not exist", loanId));
         }

@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@Log4j
 @RequestMapping("/book")
+@Log4j
 public class BookController {
     private BookService bookService;
     private HttpSession session;
@@ -38,7 +38,7 @@ public class BookController {
             @RequestParam(value = ContextParam.PGN_RECORDS_PER_PAGE, defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model
     ) {
-        log.debug("getBooksByTitleAndAuthor invoked");
+        log.debug("/book/list invoked");
         final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         List<Book> books = bookService.getBooksByTitleAndAuthor(
@@ -61,7 +61,7 @@ public class BookController {
 
     @RequestMapping("/enter")
     public String enterBook(Model model) {
-        log.debug("EnterBook invoked");
+        log.debug("/book/enter invoked");
         final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
 
         model.addAttribute(ContextParam.BK_AUTHORS, BookRepositoryImpl.findAuthors());
@@ -83,6 +83,7 @@ public class BookController {
             @RequestParam(value = ContextParam.BK_LIB_CODE_BASE, defaultValue = "") String libCodeBase,
             @RequestParam(value = ContextParam.BK_QUANTITY, defaultValue = "") int quantity
     ) {
+        log.debug("/book/create invoked");
         final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
         Book book = new Book();
         book.setTitle(title);
@@ -93,6 +94,7 @@ public class BookController {
 
     @RequestMapping("/delete")
     public String deleteBook(@RequestParam(value = ContextParam.PUBLICATIONS_IDS_TO_PROCESS) List<String> publicationIds) {
+        log.debug("/log/delete invoked");
         bookService.deleteBook(publicationIds);
         return Path.PAGE__LIST_BOOKS;
     }

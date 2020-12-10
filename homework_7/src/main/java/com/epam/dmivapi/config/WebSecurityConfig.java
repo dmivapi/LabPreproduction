@@ -53,20 +53,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/app/switchLocale").permitAll()
-                .antMatchers("/loan").hasRole("LIBRARIAN")
-                .antMatchers("/loan/**").hasAnyRole("READER", "LIBRARIAN")
-                .antMatchers("/librarian/**").hasAnyRole("LIBRARIAN")
-                .antMatchers("/admin/**", "/book/enter", "/book/create", "/book/delete").hasAnyRole("ADMIN")
-                .antMatchers("/guest/**").anonymous()
-                .anyRequest().permitAll() // TODO remove after testing
-                .and()
+                    .antMatchers("/app/switchLocale", "/book/list").permitAll()
+                    .antMatchers("/loan/**").hasAnyRole("READER", "LIBRARIAN")
+                    .antMatchers("/librarian/**").hasRole("LIBRARIAN")
+                    .antMatchers("/admin/**", "/book/enter", "/book/create", "/book/delete").hasRole("ADMIN")
+                    .antMatchers("/guest/**").anonymous()
+                    .anyRequest().permitAll() // TODO remove after testing
+                    .and()
                 .formLogin()
-                .loginPage("/book/list").permitAll()
-                .usernameParameter(ContextParam.USR_LOGIN)
-                .passwordParameter(ContextParam.USR_PASSWORD)
-                .successHandler(authSuccessHandler())
+                    .loginPage("/book/list").permitAll()
+                    .usernameParameter(ContextParam.USR_LOGIN)
+                    .passwordParameter(ContextParam.USR_PASSWORD)
+                    .successHandler(authSuccessHandler())
                 .and()
-                .logout().permitAll().logoutSuccessUrl("/book/list");
+                    .logout().permitAll()
+                    .logoutSuccessUrl("/book/list");
     }
 }

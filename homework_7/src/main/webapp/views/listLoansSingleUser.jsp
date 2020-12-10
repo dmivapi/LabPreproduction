@@ -1,5 +1,3 @@
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="com.epam.dmivapi.dto.LoanDto" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
     <div class="row">
@@ -53,7 +51,7 @@
                                     </c:if>
                                 </sec:authorize>
                                 <sec:authorize access="hasRole('LIBRARIAN')">
-                                    <h:action-loan-buttons-from-loan-status loanStatus="${loan.status}" loanId="${loan.id}"  userId="${loan.userId}" loanBlocked="${loan.blocked}" />
+                                    <h:action-loan-buttons-from-loan-status loanStatus="${loan.status}" loanId="${loan.id}"  userId="${loan.userId}" loanBlocked="${loan.blocked}" includeSupportingScipt="${status.first}" />
                                 </sec:authorize>
                             </td>
                         </tr>

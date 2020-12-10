@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 import static com.epam.dmivapi.ContextParam.setCurrentLocale;
 
 @Controller
-@Log4j
 @RequestMapping("/app")
+@Log4j
 public class AppController {
     @RequestMapping("/switchLocale")
     public String switchLanguage(
@@ -22,10 +22,8 @@ public class AppController {
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage,
             HttpSession session
     ) {
-        log.debug("SwitchLocaleCmd starts");
+        log.debug("/app/switchLocale invoked");
         setCurrentLocale(session, locale);
-        log.debug("SwitchLocaleCmd finished");
-
         return "forward:" + senderPage;
     }
 }

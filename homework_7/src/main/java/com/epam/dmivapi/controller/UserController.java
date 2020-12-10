@@ -6,7 +6,7 @@ import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.service.UserService;
 import com.epam.dmivapi.dto.Role;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpRequest;
+import lombok.extern.log4j.Log4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,6 +29,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@Log4j
 public class UserController {
     private UserService userService;
     private AuthenticationManager authenticationManager;
@@ -41,6 +42,7 @@ public class UserController {
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model
     ) {
+        log.debug("/librarian/list/readers invoked");
         List<UserDto> users = userService.getUsersByRole(
                 Role.READER,
                 currentPage,
@@ -60,12 +62,13 @@ public class UserController {
     }
 
     @RequestMapping("/admin/list/readers")
-    public String getAllBorrowersForAdmin(
+    public String getAllReadersForAdmin(
             @RequestParam(value = ContextParam.PGN_CURRENT_PAGE, defaultValue = "1") int currentPage,
             @RequestParam(value = ContextParam.PGN_RECORDS_PER_PAGE,
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model
     ) {
+        log.debug("/admin/list/readers invoked");
         List<UserDto> users = userService.getUsersByRole(
                 Role.READER,
                 currentPage,
@@ -91,6 +94,7 @@ public class UserController {
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model
     ) {
+        log.debug("/admin/list/librarians invoked");
         List<UserDto> users = userService.getUsersByRole(
                 Role.LIBRARIAN,
                 currentPage,
@@ -111,11 +115,13 @@ public class UserController {
 
     @RequestMapping({"/guest/enter/reader", "/admin/enter/librarian"})
     public String enterUser() {
+        log.debug("/*/enter/reader invoked");
         return Path.PAGE__ENTER_USER_INFO;
     }
 
     @RequestMapping("/admin/create/librarian")
     public String createLibrarian(@ModelAttribute UserDto userDto) {
+        log.debug("/admin/create/librarian invoked");
         userDto.setUserRole(Role.LIBRARIAN);
         userService.createUser(userDto);
         return "redirect:" + Command.LIST_USERS_LIBRARIANS.getSystemName();
@@ -123,6 +129,7 @@ public class UserController {
 
     @RequestMapping("/guest/create/reader")
     public String createReader(@ModelAttribute UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
+        log.debug("/guest/create/reader invoked");
         userDto.setUserRole(Role.READER);
         userService.createUser(userDto);
         return "forward:" + "/guest/dologin";
@@ -133,6 +140,7 @@ public class UserController {
             @RequestParam(value = ContextParam.USER_ID_TO_PROCESS) Integer userId,
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ) {
+        log.debug(" invoked");
         userService.deleteUser(userId);
         return "forward:" + senderPage;
     }
@@ -143,14 +151,16 @@ public class UserController {
             @RequestParam(value = ContextParam.BLOCK_OPTION) String blockOption,
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
     ) {
+        log.debug("/admin/update/readerblocked invoked");
         userService.updateUserBlock(userId, blockOption);
         return "forward:" + senderPage;
     }
 
-    @RequestMapping("/guest/dologin")
+    @RequestMapping("/guest/doLogin")
     private String doLogin(@ModelAttribute UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
         UsernamePasswordAuthenticationToken authReq =
                 new UsernamePasswordAuthenticationToken(HtmlUtils.htmlEscape(userDto.getEmail()), userDto.getPassword());
+        log.debug("/guest/doLogin invoked");
         Authentication auth = authenticationManager.authenticate(authReq);
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(auth);
