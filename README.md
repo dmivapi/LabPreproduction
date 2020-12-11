@@ -1,12 +1,13 @@
 <h1 id="contents">LabPreproduction homework</h1>
 <ol>
-<li><a href="#hw1">homework_1</a></li>
-<li><a href="#hw2">homework_2</a></li>
-<li><a href="#hw3">homework_3</a></li>
-<li><a href="#hw4">homework_4</a></li>
-<li><a href="#hw5">homework_5</a></li>
-<li><a href="#hw6">homework_6</a></li>
-<li><a href="#hw7">homework_7</a></li>
+<li><a href="#hw1">homework_1 Spring framework</a></li>
+<li><a href="#hw2">homework_2 Spring BPP</a></li>
+<li><a href="#hw3">homework_3 Spring MVC Exception handing</a></li>
+<li><a href="#hw4">homework_4 Spring Integration & Spring Batch</a></li>
+<li><a href="#hw5">homework_5 Spring Boot & Microservices</a></li>
+<li><a href="#hw6">homework_6 Spring AOP</a></li>
+<li><a href="#hw7">homework_7 Spring Security</a></li>
+<li><a href="#hw8">homework_8 Spring Testing</a></li>
 </ol>
 
 
@@ -91,4 +92,14 @@ Rework your pet project using Spring Security.
 <li>In your SecurityConfiguration use jdbc as a datasource for users and roles.</li>
 </ol>
 </div>
+<p><a href="#contents">Back to contents</a></p>
+
+
+<h3 id="hw8">homework #8: Spring Testing</h3>
+
+<ol>
+<li>Выбрать 3 контроллера из вашего PET project.</li>  
+<li>Для каждого из выбранных контроллеров и, связанных с ними сервисами сделать покрытие unit тестами.</li>  
+<li>Для одного из выбранного контроллера сделать integration тест. </li>
+</ol>
 <p><a href="#contents">Back to contents</a></p>
