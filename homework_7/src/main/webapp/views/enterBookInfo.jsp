@@ -87,6 +87,6 @@
         />
     </div>
 </div>
-<h:button-submit buttonKey="list_books_jsp.button.create" />
+<h:button-submit buttonAction="${Command.BOOK_NEW.systemName}" buttonKey="list_books_jsp.button.create" />
 
 <%@ include file="../WEB-INF/jspf/footer.jspf"%>

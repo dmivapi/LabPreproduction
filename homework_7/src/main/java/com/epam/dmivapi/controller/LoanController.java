@@ -123,18 +123,17 @@ public class LoanController {
         return Path.PAGE__LIST_LOANS_SINGLE_USER;
     }
 
-    @RequestMapping("/new")
+    @RequestMapping("/add")
     public String createLoansByUserIdAndPublicationsList(
             Authentication authentication,
             @RequestParam(ContextParam.PUBLICATIONS_IDS_TO_PROCESS) List<Integer> publicationIds,
             @RequestParam(ContextParam.SELF_COMMAND) String senderPage
             ) {
-        log.debug("/loan/new invoked");
+        log.debug("/loan/add invoked");
         loanService.createLoansByUserIdAndPublicationsList(
                 ((CurrentUser)authentication.getPrincipal()).getId(),
                 publicationIds
         );
-
         return "redirect:" + senderPage;
     }
 

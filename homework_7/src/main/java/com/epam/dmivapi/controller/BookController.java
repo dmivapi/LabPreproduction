@@ -68,11 +68,10 @@ public class BookController {
         model.addAttribute(ContextParam.BK_PUBLISHERS, BookRepositoryImpl.findPublishers());
         model.addAttribute(ContextParam.BK_GENRES, BookRepositoryImpl.findGenres(GENRE_LANGUAGE_CODE));
 
-        log.debug("EnterBookInfoCmd finished");
         return Path.PAGE__ENTER_BOOK_INFO;
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/add")
     public String createBook(
             @RequestParam(value = ContextParam.BK_TITLE, defaultValue = "") String title,
             @RequestParam(value = ContextParam.BK_AUTHOR, defaultValue = "") int authorId,
@@ -83,19 +82,22 @@ public class BookController {
             @RequestParam(value = ContextParam.BK_LIB_CODE_BASE, defaultValue = "") String libCodeBase,
             @RequestParam(value = ContextParam.BK_QUANTITY, defaultValue = "") int quantity
     ) {
-        log.debug("/book/create invoked");
+        log.debug("/book/add invoked");
         final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
         Book book = new Book();
         book.setTitle(title);
         bookService.createBook(book, authorId, publisherId, genreId, year, price, GENRE_LANGUAGE_CODE, libCodeBase, quantity);
 
-        return Path.PAGE__LIST_BOOKS;
+        return "redirect:" + Command.LIST_BOOKS.getSystemName();
     }
 
     @RequestMapping("/delete")
-    public String deleteBook(@RequestParam(value = ContextParam.PUBLICATIONS_IDS_TO_PROCESS) List<String> publicationIds) {
+    public String deleteBook(
+            @RequestParam(value = ContextParam.PUBLICATIONS_IDS_TO_PROCESS) List<String> publicationIds,
+            @RequestParam(ContextParam.SELF_COMMAND) String senderPage) {
         log.debug("/log/delete invoked");
         bookService.deleteBook(publicationIds);
-        return Path.PAGE__LIST_BOOKS;
+
+        return "forward:" + senderPage;
     }
 }

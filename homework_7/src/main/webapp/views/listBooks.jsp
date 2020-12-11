@@ -47,8 +47,7 @@
                 </sec:authorize>
               </c:if>
             <sec:authorize access="hasRole('ADMIN')">
-                <h:button-submit buttonKey="list_books_jsp.button.create" buttonAction="${Command.ENTER_BOOK_INFO.systemName}" />
-                <h:button-submit buttonKey="list_books_jsp.button.remove" buttonAction="${Command.BOOK_REMOVE.systemName}" />
+                <h:button-submit buttonKey="list_books_jsp.button.remove" buttonAction="${Command.BOOK_DELETE.systemName}" />
             </sec:authorize>
         </div>
     </div>

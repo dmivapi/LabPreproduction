@@ -119,17 +119,17 @@ public class UserController {
         return Path.PAGE__ENTER_USER_INFO;
     }
 
-    @RequestMapping("/admin/create/librarian")
+    @RequestMapping("/admin/add/librarian")
     public String createLibrarian(@ModelAttribute UserDto userDto) {
-        log.debug("/admin/create/librarian invoked");
+        log.debug("/admin/add/librarian invoked");
         userDto.setUserRole(Role.LIBRARIAN);
         userService.createUser(userDto);
         return "redirect:" + Command.LIST_USERS_LIBRARIANS.getSystemName();
     }
 
-    @RequestMapping("/guest/create/reader")
+    @RequestMapping("/guest/add/reader")
     public String createReader(@ModelAttribute UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
-        log.debug("/guest/create/reader invoked");
+        log.debug("/guest/add/reader invoked");
         userDto.setUserRole(Role.READER);
         userService.createUser(userDto);
         return "forward:" + "/guest/dologin";

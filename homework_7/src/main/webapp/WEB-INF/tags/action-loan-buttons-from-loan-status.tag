@@ -39,7 +39,7 @@
                     <fmt:message key="list_loans_jsp.button.lend_out" />
                 </a>
             </c:if>
-                <a class="dropdown-item loan-action-button" href="#" data-lid="${loanId}" data-action="${Command.LOAN_REMOVE.systemName}">
+                <a class="dropdown-item loan-action-button" href="#" data-lid="${loanId}" data-action="${Command.LOAN_DELETE.systemName}">
                     <fmt:message key="list_loans_jsp.button.remove" />
                 </a>
             </c:when>

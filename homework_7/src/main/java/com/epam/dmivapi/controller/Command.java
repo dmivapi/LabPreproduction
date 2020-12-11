@@ -10,16 +10,16 @@ public enum Command {
     ENTER_LIBRARIAN("/admin/enter/librarian"),
     ENTER_BOOK_INFO("/book/enter"),
 
-    LOGIN("/book/list"),
+    LOGIN("/app/login"),
     LOGOUT("/logout"),
-    CREATE_READER("/guest/create/reader"),
-    CREATE_LIBRARIAN("/admin/create/librarian"),
-    UPDATE_READER_BLOCKED("/admin/update/readerblocked"),
+    ADD_READER("/guest/add/reader"),
+    ADD_LIBRARIAN("/admin/add/librarian"),
+    UPDATE_READER_BLOCKED("/admin/update/readerBlocked"),
     DELETE_LIBRARIAN("/admin/delete/librarian"),
 
     LIST_BOOKS("/book/list"),
-    BOOK_NEW("/book/new"),
-    BOOK_REMOVE("/book/remove"),
+    BOOK_NEW("/book/add"),
+    BOOK_DELETE("/book/delete"),
 
     LIST_LOANS_OF_SELF("/loan/self"),
     LIST_LOANS_OF_USER("/loan/"),
@@ -29,9 +29,9 @@ public enum Command {
     LIST_USERS_READERS_FOR_ADMIN("/admin/list/readers"),
     LIST_USERS_READERS_FOR_LIBRARIAN("/librarian/list/readers"),
 
-    LOAN_NEW("/loan/new"),
+    LOAN_NEW("/loan/add"),
     LOAN_OUT("/loan/out"),
-    LOAN_REMOVE("/loan/delete"),
+    LOAN_DELETE("/loan/delete"),
     LOAN_IN("/loan/in");
 
 

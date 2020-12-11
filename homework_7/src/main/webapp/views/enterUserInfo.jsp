@@ -21,10 +21,10 @@
             <h:bs-input-group entity="${ContextParam.USR_LAST_NAME}" label="register_jsp.label.last_name" placeholder="register_jsp.placeholder.last_name" help="register_jsp.help.last_name" />
             <c:set var="submitCmd">
                 <sec:authorize access="hasRole('ADMIN')">
-                    ${Command.CREATE_LIBRARIAN.systemName}
+                    ${Command.ADD_LIBRARIAN.systemName}
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
-                    ${Command.CREATE_READER.systemName}
+                    ${Command.ADD_READER.systemName}
                 </sec:authorize>
             </c:set>
             <h:button-submit buttonAction="${submitCmd}" buttonKey="actions_list_general_tag.register" />

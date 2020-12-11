@@ -53,20 +53,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/app/switchLocale", "/book/list").permitAll()
-                    .antMatchers("/loan/**").hasAnyRole("READER", "LIBRARIAN")
-                    .antMatchers("/librarian/**").hasRole("LIBRARIAN")
-                    .antMatchers("/admin/**", "/book/enter", "/book/create", "/book/delete").hasRole("ADMIN")
+                    .antMatchers("/loan/self").hasRole("READER")
+                    .antMatchers("/librarian/**", "/loan/**").hasRole("LIBRARIAN")
+                    .antMatchers("/admin/**", "/book/enter", "/book/add", "/book/delete").hasRole("ADMIN")
                     .antMatchers("/guest/**").anonymous()
-                    .anyRequest().permitAll() // TODO remove after testing
+                    .antMatchers("/app/switchLocale", "/app/login", "/book/list").permitAll()
                     .and()
                 .formLogin()
-                    .loginPage("/book/list").permitAll()
+                    .loginPage("/app/login").permitAll()
                     .usernameParameter(ContextParam.USR_LOGIN)
                     .passwordParameter(ContextParam.USR_PASSWORD)
                     .successHandler(authSuccessHandler())
                 .and()
                     .logout().permitAll()
-                    .logoutSuccessUrl("/book/list");
+                    .logoutSuccessUrl("/app/login");
     }
 }

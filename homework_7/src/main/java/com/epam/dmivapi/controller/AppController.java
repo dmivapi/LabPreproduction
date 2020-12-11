@@ -26,4 +26,10 @@ public class AppController {
         setCurrentLocale(session, locale);
         return "forward:" + senderPage;
     }
+
+    @RequestMapping("/login") // avoiding Spring Security behaviour when home and login are the same page
+    public String goHomeAsLogin() {
+        log.debug("/app/login invoked");
+        return "forward:" + "/book/list";
+    }
 }
