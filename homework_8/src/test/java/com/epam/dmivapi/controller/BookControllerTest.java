@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsInRelativeOrder;
 import static org.hamcrest.Matchers.hasSize;
 
 import static com.epam.dmivapi.utils.TestBooksGenerator.generateBooks;
@@ -53,6 +54,7 @@ class BookControllerTest {
                 .andExpect(view().name(Path.PAGE__LIST_BOOKS))
                 .andExpect(forwardedUrl(Path.PAGE__LIST_BOOKS))
                 .andExpect(model().attribute(ContextParam.BS_BOOKS, hasSize(BOOK_LIST_SIZE)))
+                .andExpect(model().attribute(ContextParam.BS_BOOKS, containsInRelativeOrder(books.toArray())))
                 .andExpect(model().attribute(ContextParam.PGN_RECORDS_PER_PAGE, BOOK_LIST_SIZE))
                 .andExpect(model().attribute(ContextParam.PGN_NUMBER_OF_PAGES, NUMBER_OF_PAGES)
                 );
