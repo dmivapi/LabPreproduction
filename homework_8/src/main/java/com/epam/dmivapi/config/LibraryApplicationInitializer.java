@@ -3,19 +3,16 @@ package com.epam.dmivapi.config;
 import com.epam.dmivapi.ContextParam;
 import lombok.extern.log4j.Log4j;
 import org.apache.log4j.PropertyConfigurator;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.jsp.jstl.core.Config;
-import java.io.File;
 
 @Log4j
 @Order(value = Ordered.HIGHEST_PRECEDENCE)

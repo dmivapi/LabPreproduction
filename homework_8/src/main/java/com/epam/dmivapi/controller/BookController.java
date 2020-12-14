@@ -1,7 +1,7 @@
 package com.epam.dmivapi.controller;
 
-import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.ContextParam;
+import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.Path;
 import com.epam.dmivapi.repository.impl.BookRepositoryImpl;
 import com.epam.dmivapi.service.BookService;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping(path = "/book")
 @Log4j
 public class BookController {
     private BookService bookService;

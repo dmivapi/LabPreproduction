@@ -1,16 +1,12 @@
 package com.epam.dmivapi.controller;
 
-import com.epam.dmivapi.ContextParam;
-import com.epam.dmivapi.Path;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import static com.epam.dmivapi.ContextParam.setCurrentLocale;
+import static com.epam.dmivapi.ContextParam.*;
 
 @Controller
 @RequestMapping("/app")
@@ -18,8 +14,8 @@ import static com.epam.dmivapi.ContextParam.setCurrentLocale;
 public class AppController {
     @RequestMapping("/switchLocale")
     public String switchLanguage(
-            @RequestParam(value = ContextParam.CURRENT_LOCALE) String locale,
-            @RequestParam(ContextParam.SELF_COMMAND) String senderPage,
+            @RequestParam(value = com.epam.dmivapi.ContextParam.CURRENT_LOCALE) String locale,
+            @RequestParam(com.epam.dmivapi.ContextParam.SELF_COMMAND) String senderPage,
             HttpSession session
     ) {
         log.debug("/app/switchLocale invoked");
