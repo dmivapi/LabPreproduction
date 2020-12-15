@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import static com.epam.dmivapi.ContextParam.*;
 
 @Controller
 @RequestMapping(path = "/book")

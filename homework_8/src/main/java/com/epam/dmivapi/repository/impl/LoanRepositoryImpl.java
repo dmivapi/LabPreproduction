@@ -6,6 +6,7 @@ import com.epam.dmivapi.repository.impl.db.EntityMapper;
 import com.epam.dmivapi.model.Loan;
 import com.epam.dmivapi.repository.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -157,7 +158,7 @@ public class LoanRepositoryImpl implements LoanRepository {
         ResultSet rs = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
 
             pstmt = con.prepareStatement(
                     getSqlWithSearchCriteria(status, userId, 0, 0, true)
@@ -193,7 +194,7 @@ public class LoanRepositoryImpl implements LoanRepository {
         boolean shouldLimit = recordsPerPage != 0;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
 
             pstmt = con.prepareStatement(
                     getSqlWithSearchCriteria(status, userId,
@@ -224,7 +225,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanNew(int userId, int[] publicationIds) {
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_INSERT_LOAN);
 
@@ -255,7 +256,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanOut(int loanId, LocalDate dateOut, LocalDate dueDate) {
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_LOAN_OUT);
 
@@ -280,7 +281,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanIn(int loanId, LocalDate dateIn) {
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_LOAN_IN);
 
@@ -302,7 +303,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanRemove(int loanId) {
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_LOAN_REMOVE);
 

@@ -14,6 +14,7 @@ import java.util.List;
 import com.epam.dmivapi.repository.UserRepository;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -102,7 +103,7 @@ public class UserRepositoryImpl implements UserRepository {
         ResultSet rs = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
 
             pstmt = con.prepareStatement(
                     getSqlWithCriteria(role, isBlocked,0,true)
@@ -136,7 +137,7 @@ public class UserRepositoryImpl implements UserRepository {
         boolean shouldLimit = recordsPerPage != 0;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
 
             pstmt = con.prepareStatement(
                     getSqlWithCriteria(role, blocked, recordsPerPage,false)
@@ -170,7 +171,7 @@ public class UserRepositoryImpl implements UserRepository {
         ResultSet rs = null;
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             UserMapper mapper = new UserMapper();
             pstmt = con.prepareStatement(SQL__FIND_USER_BY_LOGIN);
             pstmt.setString(1, email);
@@ -191,7 +192,7 @@ public class UserRepositoryImpl implements UserRepository {
     public static boolean updateUserBlockStatus(int userId, boolean isBlocked) {
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             PreparedStatement pstmt = con.prepareStatement(SQL_UPDATE_USER_BLOCKED_STATUS);
 
             int k = 1;
@@ -214,7 +215,7 @@ public class UserRepositoryImpl implements UserRepository {
     public void deleteUserById(int userId) {
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             PreparedStatement pstmt = con.prepareStatement(SQL_DELETE_USER);
 
             int k = 1;
@@ -237,7 +238,7 @@ public class UserRepositoryImpl implements UserRepository {
     public static boolean updateUser(User user, boolean isNew) {
         Connection con = null;
         try {
-            con = dataSource.getConnection();
+            con = DataSourceUtils.getConnection(dataSource);
             writeUser(con, user, isNew);
             return true;
         } catch (SQLException ex) {

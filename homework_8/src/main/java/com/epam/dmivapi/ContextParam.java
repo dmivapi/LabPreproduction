@@ -13,82 +13,82 @@ import java.util.List;
 @Log4j
 @UtilityClass
 public class ContextParam {
-    // strings used in get/post request
-    public final  String SELF_COMMAND = "selfCommand";
+    //static Strings used in get/post request
+    public final String SELF_COMMAND = "selfCommand";
 
     // id for the html form used for submitting data
     // at all app pages
-    public final  String MAIN_PAGE_FORM = "mainPageForm";
+    public final String MAIN_PAGE_FORM = "mainPageForm";
 
     // cmdOption possible values:
-    public final  String BLOCK_OPTION = "blkBlock";
+    public final String BLOCK_OPTION = "blkBlock";
 
     // for pagination purposes
-    public final  String PGN_NUMBER_OF_PAGES = "pgnNumberOfPages";
-    public final  String PGN_CURRENT_PAGE = "pgnCurrentPage";
-    public final  String PGN_RECORDS_PER_PAGE = "pgnRecordsPerPage";
-    public final  String RECORDS_PER_PAGE = "3"; // TODO change this hardcoding to user entered value
+    public final String PGN_NUMBER_OF_PAGES = "pgnNumberOfPages";
+    public final String PGN_CURRENT_PAGE = "pgnCurrentPage";
+    public final String PGN_RECORDS_PER_PAGE = "pgnRecordsPerPage";
+    public final String RECORDS_PER_PAGE = "3"; // TODO change this hardcoding to user entered value
 
-    public final  String LOG4J_CONFIG_LOCATION = "log4j-config-location";
+    public final String LOG4J_CONFIG_LOCATION = "log4j-config-location";
 
     // library system defaults parameters names
-    public final  String DEFAULT_LOAN_TERM_IN_DAYS = "default-loan-term-in-days";
+    public final String DEFAULT_LOAN_TERM_IN_DAYS = "default-loan-term-in-days";
 
     // session settings
-    public final  String LOCALES = "locales";
-    public final  String CURRENT_USER = "currentUser";
+    public final String LOCALES = "locales";
+    public final String CURRENT_USER = "currentUser";
 
-    public final  String DEFAULT_LOCALE = "defaultLocale"; // app level
-    public final  String CURRENT_LOCALE = "currentLocale"; // session level
+    public final String DEFAULT_LOCALE = "defaultLocale"; // app level
+    public final String CURRENT_LOCALE = "currentLocale"; // session level
 
     // book related fields
-    public final  String BK_TITLE = "bsTitle";
-    public final  String BK_AUTHOR = "bsAuthor";
-    public final  String BK_AUTHORS = "bsAuthors";
-    public final  String BK_PUBLISHER = "bsPublisher";
-    public final  String BK_PUBLISHERS = "bsPublishers";
-    public final  String BK_YEAR = "bsYear";
-    public final  String BK_PRICE = "bsPrice";
-    public final  String BK_GENRE = "bsGenre";
-    public final  String BK_GENRES = "bsGenres";
-    public final  String BK_LIB_CODE_BASE = "bsLibCodeBase";
-    public final  String BK_QUANTITY = "bsQuantity";
+    public final String BK_TITLE = "bsTitle";
+    public final String BK_AUTHOR = "bsAuthor";
+    public final String BK_AUTHORS = "bsAuthors";
+    public final String BK_PUBLISHER = "bsPublisher";
+    public final String BK_PUBLISHERS = "bsPublishers";
+    public final String BK_YEAR = "bsYear";
+    public final String BK_PRICE = "bsPrice";
+    public final String BK_GENRE = "bsGenre";
+    public final String BK_GENRES = "bsGenres";
+    public final String BK_LIB_CODE_BASE = "bsLibCodeBase";
+    public final String BK_QUANTITY = "bsQuantity";
 
 
     // book search parameters
-    public final  String BS_ORDER_BY = "bsOrderBy";
-    public final  String BS_ORDER_BY_DIRECTION = "bsOrderByDirection";
-    public final  String BS_BOOKS = "bsBooks";
+    public final String BS_ORDER_BY = "bsOrderBy";
+    public final String BS_ORDER_BY_DIRECTION = "bsOrderByDirection";
+    public final String BS_BOOKS = "bsBooks";
 
     // a common key for storing selected userIds as session attribute to use in DAO
-    public final  String USER_ID_TO_PROCESS = "userIdToProcess";
+    public final String USER_ID_TO_PROCESS = "userIdToProcess";
     // a common key for storing selected user's block statuses as session attribute to use in DAO
-    public final  String USER_BLOCK_TO_PROCESS = "userBlocksToProcess";
+    public final String USER_BLOCK_TO_PROCESS = "userBlocksToProcess";
 
     // this key is used for storing as session attribute publications ids
     // for future processing in DAO
-    public final  String PUBLICATIONS_IDS_TO_PROCESS = "lnPublicationId";
+    public final String PUBLICATIONS_IDS_TO_PROCESS = "lnPublicationId";
 
 
     // parameter name for passing loans list to view (as session attribute)
-    public final  String LS_LOANS = "lsLoans";
+    public final String LS_LOANS = "lsLoans";
     // selected loan ids
-    public final  String LOAN_ID_TO_PROCESS = "loanIdToProcess";
+    public final String LOAN_ID_TO_PROCESS = "loanIdToProcess";
 
     // users list attribute key
-    public final  String USR_USERS = "usrUsers";
+    public final String USR_USERS = "usrUsers";
 
     // login parameters
-    public final  String USR_LOGIN = "email";
-    public final  String USR_PASSWORD = "password";
-    public final  String USR_FIRST_NAME = "firstName";
-    public final  String USR_LAST_NAME = "lastName";
+    public final String USR_LOGIN = "email";
+    public final String USR_PASSWORD = "password";
+    public final String USR_FIRST_NAME = "firstName";
+    public final String USR_LAST_NAME = "lastName";
 
     public List<String> getLocalesList(HttpSession session) {
         return (List<String>) session.getServletContext().getAttribute(ContextParam.LOCALES);
     }
 
-    public void setLocalesList(ServletContext servletContext, String localesString) {
+    public void setLocalesList(ServletContext servletContext,String localesString) {
         List<String> locales;
         if (localesString == null || localesString.isEmpty()) {
             locales = new ArrayList<>();
@@ -101,7 +101,7 @@ public class ContextParam {
         servletContext.setAttribute(ContextParam.LOCALES, locales);
     }
 
-    public String getDefaultLocale(ServletContext servletContext) {
+    public static String getDefaultLocale(ServletContext servletContext) {
         return (String) servletContext.getAttribute(ContextParam.DEFAULT_LOCALE);
     }
 

@@ -19,10 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {WebSecurityConfig.class})
-@WebAppConfiguration(value = "")
-public class AbstractBaseSpringTest {
+@WebAppConfiguration(value = "/")
+public abstract class AbstractBaseSpringTest {
     @Autowired
-    private MockMvc mockMvc;
+    protected MockMvc mockMvc;
 
     @Configuration
     @EnableWebMvc
