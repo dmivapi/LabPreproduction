@@ -8,8 +8,10 @@ import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.model.Genre;
 import com.epam.dmivapi.model.Publisher;
 import com.epam.dmivapi.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -23,6 +25,9 @@ import static com.epam.dmivapi.repository.impl.db.DaoUtil.getLanguageId;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
+    @Autowired
+    static DataSource dataSource;
+    
     private static final String SQL_FIND_BOOK_COPY = "SELECT id FROM view_available_book_copies WHERE publication_id=? LIMIT 1";
     private static final String SQL_COUNT_ALL_PUBLICATIONS = "SELECT COUNT(id) FROM view_book_authors_genre WHERE";
     private static final String SQL_FIND_ALL_PUBLICATIONS = "SELECT * FROM view_book_authors_genre WHERE";
@@ -109,7 +114,7 @@ public class BookRepositoryImpl implements BookRepository {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
 
             pstmt = fillPStatement(con, languageCode, title, author,null, true,0, 0, true);
 
@@ -134,7 +139,7 @@ public class BookRepositoryImpl implements BookRepository {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
 
             pstmt = fillPStatement(con, languageCode, title, author, orderByField, isAscending,
                     currentPage, recordsPerPage,false
@@ -185,7 +190,7 @@ public class BookRepositoryImpl implements BookRepository {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL_FIND_ALL_AUTHORS);
             authors = new AuthorMapper().mapRows(rs);
@@ -206,7 +211,7 @@ public class BookRepositoryImpl implements BookRepository {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL_FIND_ALL_PUBLISHERS);
             publisher = new PublisherMapper().mapRows(rs);
@@ -227,7 +232,7 @@ public class BookRepositoryImpl implements BookRepository {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             pstmt = con.prepareStatement(SQL_FIND_ALL_GENRES);
             pstmt.setInt(1, getLanguageId(con, languageCode));
             rs = pstmt.executeQuery();
@@ -252,7 +257,7 @@ public class BookRepositoryImpl implements BookRepository {
         boolean result = false;
 
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             con.setAutoCommit(false);
 
 //---------
@@ -331,7 +336,7 @@ public class BookRepositoryImpl implements BookRepository {
         final String SQL_BOOK_REMOVE = "DELETE FROM publication WHERE id=?";
         Connection con = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_BOOK_REMOVE);
 

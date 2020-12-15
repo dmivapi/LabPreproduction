@@ -5,8 +5,10 @@ import com.epam.dmivapi.repository.impl.db.DBManager;
 import com.epam.dmivapi.repository.impl.db.EntityMapper;
 import com.epam.dmivapi.model.Loan;
 import com.epam.dmivapi.repository.LoanRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +21,9 @@ import static com.epam.dmivapi.repository.impl.db.DaoUtil.getLanguageId;
 
 @Repository
 public class LoanRepositoryImpl implements LoanRepository {
+    @Autowired
+    static DataSource dataSource;
+    
     private static final String FLD_ID = "id";
     private static final String FLD_USER_ID = "user_id";
     private static final String FLD_BOOK_COPY_ID = "book_copy_id";
@@ -52,8 +57,6 @@ public class LoanRepositoryImpl implements LoanRepository {
             "UPDATE book_loan SET " + FLD_DATE_IN + "=? WHERE " + FLD_ID + "=?";
     private static final String SQL_LOAN_REMOVE =
             "DELETE FROM book_loan WHERE " + FLD_ID + "=?";
-
-    private static final String SQL_BOOK_COPY_ID_ITEM = " book_copy_id=?"; // can be repeated during appending
 
     @Override
     public List<Loan> findAll(
@@ -154,7 +157,7 @@ public class LoanRepositoryImpl implements LoanRepository {
         ResultSet rs = null;
 
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
 
             pstmt = con.prepareStatement(
                     getSqlWithSearchCriteria(status, userId, 0, 0, true)
@@ -190,7 +193,7 @@ public class LoanRepositoryImpl implements LoanRepository {
         boolean shouldLimit = recordsPerPage != 0;
 
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
 
             pstmt = con.prepareStatement(
                     getSqlWithSearchCriteria(status, userId,
@@ -221,7 +224,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanNew(int userId, int[] publicationIds) {
         Connection con = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_INSERT_LOAN);
 
@@ -252,7 +255,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanOut(int loanId, LocalDate dateOut, LocalDate dueDate) {
         Connection con = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_LOAN_OUT);
 
@@ -277,7 +280,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanIn(int loanId, LocalDate dateIn) {
         Connection con = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_LOAN_IN);
 
@@ -299,7 +302,7 @@ public class LoanRepositoryImpl implements LoanRepository {
     public static boolean loanRemove(int loanId) {
         Connection con = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = dataSource.getConnection();
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(SQL_LOAN_REMOVE);
 

@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBManager {
-    private static final Logger log = Logger.getLogger(DBManager.class);
     private static DBManager instance;
 
     private DBManager() {
@@ -21,19 +20,6 @@ public class DBManager {
             instance = new DBManager();
         }
         return instance;
-    }
-
-    public Connection getConnection() throws SQLException {
-        Connection con = null;
-        try {
-            Context initContext = new InitialContext();
-            Context envContext = (Context) initContext.lookup("java:/comp/env");
-            DataSource ds = (DataSource) envContext.lookup("jdbc/library");
-            con = ds.getConnection();
-        } catch (NamingException ex) {
-            log.error("Cannot obtain a connection from the pool", ex);
-        }
-        return con;
     }
 
     public void rollbackAndClose(Connection con) {
