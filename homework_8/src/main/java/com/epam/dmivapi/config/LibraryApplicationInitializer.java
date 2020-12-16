@@ -19,7 +19,7 @@ import javax.servlet.jsp.jstl.core.Config;
 public class LibraryApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{WebSecurityConfig.class};
+        return new Class<?>[]{WebSecurityConfig.class, PersistenceConfig.class};
     }
 
     @Override

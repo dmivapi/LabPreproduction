@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Getter @Setter
 public class UserDto implements Serializable {
-    private int id;
+    private Integer id;
     private String email;
     private String password;
     private String firstName;
@@ -15,4 +15,12 @@ public class UserDto implements Serializable {
     private String localeName;
     private Role userRole;
     private boolean blocked;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
