@@ -15,12 +15,4 @@ public class UserDto implements Serializable {
     private String localeName;
     private Role userRole;
     private boolean blocked;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

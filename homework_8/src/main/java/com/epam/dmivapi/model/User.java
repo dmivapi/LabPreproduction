@@ -18,12 +18,4 @@ public class User {
     private String localeName;
     private Role userRole;
     private boolean blocked;
-
-    public Integer getId() { //TODO: check out if needed for Nullable and remove
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

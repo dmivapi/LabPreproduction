@@ -55,6 +55,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
+    @Bean
+    public LocaleResolver localeResolver() {
+        return new SessionLocaleResolver();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();

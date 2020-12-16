@@ -10,6 +10,7 @@ import com.epam.dmivapi.repository.LoanRepository;
 import com.epam.dmivapi.service.LoanService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,14 +25,18 @@ public class LoanServiceImpl implements LoanService {
     private final LoanDtoConverter dtoConverter;
     private final LoanDtoViewAllConverter dtoViewAllConverter;
 
+    private final int DEFAULT_TERM;
+
     @Autowired
     public LoanServiceImpl(LoanRepository loanRepository,
                            LoanDtoConverter dtoConverter,
-                           LoanDtoViewAllConverter dtoViewAllConverter
+                           LoanDtoViewAllConverter dtoViewAllConverter,
+                           @Value("${library.default-loan-term-in-days:14}") int defaultTerm
     ) {
         this.loanRepository = loanRepository;
         this.dtoConverter = dtoConverter;
         this.dtoViewAllConverter = dtoViewAllConverter;
+        this.DEFAULT_TERM = defaultTerm;
     }
 
     @Override
@@ -119,8 +124,6 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public void updateLoanStatusToOutById(Integer loanId) {
         log.debug("method invoked");
-        final int DEFAULT_TERM = 14;
-
         if (isNull(loanId)) {
             throw new EntityDoesNotExistException(String.format("Loan with ID=%s does not exist", loanId));
         }

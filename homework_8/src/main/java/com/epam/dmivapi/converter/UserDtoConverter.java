@@ -15,8 +15,7 @@ public class UserDtoConverter extends AbstractConverter<User, UserDto> {
 
         UserDto userDto = new UserDto();
 
-        Integer iid = user.getId();
-        userDto.setId(iid);
+        userDto.setId(user.getId());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
         userDto.setFirstName(user.getFirstName());

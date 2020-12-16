@@ -2,14 +2,6 @@ package com.epam.dmivapi;
 
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.jstl.core.Config;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Log4j
 @UtilityClass
@@ -31,9 +23,6 @@ public class ContextParam {
     public final String RECORDS_PER_PAGE = "3"; // TODO change this hardcoding to user entered value
 
     public final String LOG4J_CONFIG_LOCATION = "library.log4j-config-location";
-
-    // library system defaults parameters names
-    public final String DEFAULT_LOAN_TERM_IN_DAYS = "library.default-loan-term-in-days";
 
     // session settings
     public final String LOCALES = "library.locales";

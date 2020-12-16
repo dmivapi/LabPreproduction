@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Log4j
 public class UserControllerIT extends AbstractBaseSpringTest {
-
     @Test
     @Transactional
     public void userCreationWorksThroughAllLayers() throws Exception {

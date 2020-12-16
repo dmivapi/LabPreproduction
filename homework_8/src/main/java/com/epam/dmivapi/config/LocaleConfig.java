@@ -2,6 +2,7 @@ package com.epam.dmivapi.config;
 
 import com.epam.dmivapi.ContextParam;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,9 @@ public class LocaleConfig {
 
     @Value("${library.locales:en,ru}")
     private List<String> locales;
+
+    @Autowired
+    LocaleResolver localeResolver;
 
     public List<String> getLocalesList(HttpSession session) {
         return locales;
@@ -59,11 +63,6 @@ public class LocaleConfig {
     }
 
     @Bean
-    public LocaleResolver localeResolver() {
-        return new SessionLocaleResolver();
-    }
-
-    @Bean
     public HandlerInterceptor libLocaleInterceptor() {
         return new HandlerInterceptor() {
             @Override
@@ -73,8 +72,7 @@ public class LocaleConfig {
                     language = getDefaultLocale();
                     setCurrentLocale(request.getSession(), language);
                 }
-                //TODO: uncomment this
-//                ((SessionLocaleResolver) localeResolver()).setLocale(request, response, new Locale(language));
+                ((SessionLocaleResolver) localeResolver).setLocale(request, response, new Locale(language));
                 return true;
             }
         };
