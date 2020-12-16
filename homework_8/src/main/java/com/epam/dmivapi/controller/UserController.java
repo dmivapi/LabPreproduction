@@ -2,9 +2,9 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
+import com.epam.dmivapi.dto.Role;
 import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.service.UserService;
-import com.epam.dmivapi.dto.Role;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,20 +1,16 @@
 package com.epam.dmivapi.repository.impl;
 
 import com.epam.dmivapi.dto.LoanStatus;
-import com.epam.dmivapi.repository.impl.db.DBManager;
-import com.epam.dmivapi.repository.impl.db.EntityMapper;
 import com.epam.dmivapi.model.Loan;
 import com.epam.dmivapi.repository.LoanRepository;
+import com.epam.dmivapi.repository.impl.db.DBManager;
+import com.epam.dmivapi.repository.impl.db.EntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 

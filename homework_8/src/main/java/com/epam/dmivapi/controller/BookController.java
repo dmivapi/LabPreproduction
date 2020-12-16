@@ -1,9 +1,9 @@
 package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
+import com.epam.dmivapi.Path;
 import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.model.Book;
-import com.epam.dmivapi.Path;
 import com.epam.dmivapi.repository.impl.BookRepositoryImpl;
 import com.epam.dmivapi.service.BookService;
 import lombok.extern.log4j.Log4j;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import static com.epam.dmivapi.ContextParam.*;
 
 @Controller
 @RequestMapping(path = "/book")

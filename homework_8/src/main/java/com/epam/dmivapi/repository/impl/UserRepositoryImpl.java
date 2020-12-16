@@ -1,23 +1,20 @@
 package com.epam.dmivapi.repository.impl;
 
 import com.epam.dmivapi.dto.Role;
+import com.epam.dmivapi.model.User;
+import com.epam.dmivapi.repository.UserRepository;
 import com.epam.dmivapi.repository.impl.db.DBManager;
 import com.epam.dmivapi.repository.impl.db.EntityMapper;
-import com.epam.dmivapi.model.User;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import com.epam.dmivapi.repository.UserRepository;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {

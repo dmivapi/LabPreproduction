@@ -6,7 +6,6 @@ import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.exception.EntityAlreadyExistsException;
 import com.epam.dmivapi.model.User;
 import com.epam.dmivapi.repository.UserRepository;
-import com.epam.dmivapi.repository.impl.UserRepositoryImpl;
 import com.epam.dmivapi.service.UserService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

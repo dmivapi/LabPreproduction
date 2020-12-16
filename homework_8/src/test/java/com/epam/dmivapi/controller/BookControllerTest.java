@@ -5,10 +5,9 @@ import com.epam.dmivapi.Path;
 import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.service.BookService;
-//import org.junit.jupiter.api.Test;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -18,13 +17,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
 import static com.epam.dmivapi.utils.TestBooksGenerator.generateBooks;
+import static org.hamcrest.Matchers.containsInRelativeOrder;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 
 public class BookControllerTest {
@@ -42,7 +41,7 @@ public class BookControllerTest {
 
     private MockMvc mockMvc;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(sut).build();
@@ -90,14 +89,17 @@ public class BookControllerTest {
     }
 
     @Test
+    @Disabled("Not Implemented yet")
     public void enterBook() {
     }
 
     @Test
+    @Disabled("Not Implemented yet")
     public void createBook() {
     }
 
     @Test
+    @Disabled("Not Implemented yet")
     public void deleteBook() {
     }
 }

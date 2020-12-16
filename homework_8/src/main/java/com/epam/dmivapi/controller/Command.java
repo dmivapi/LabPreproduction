@@ -1,8 +1,5 @@
 package com.epam.dmivapi.controller;
 
-import org.apache.log4j.Logger;
-
-
 public enum Command {
     SWITCH_LOCALE("/app/switchLocale"),
 
