@@ -23,20 +23,21 @@ public class DBManager {
     }
 
     public void rollbackAndClose(Connection con) {
-        try {
-            con.rollback();
-            con.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+//TODO: check if we need this
+//        try {
+//            con.rollback();
+//            con.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     public void commitAndClose(Connection con) {
-        try {
-            con.commit();
-            con.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            con.commit();
+//            con.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
     }
 }

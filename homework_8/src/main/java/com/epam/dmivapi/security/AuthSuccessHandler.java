@@ -1,9 +1,10 @@
 package com.epam.dmivapi.security;
 
-import com.epam.dmivapi.ContextParam;
+import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.dto.Role;
 import com.epam.dmivapi.model.CurrentUser;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -14,11 +15,14 @@ import java.io.IOException;
 
 @Log4j
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
+    @Autowired
+    LocaleConfig localeConfig;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
           log.debug("method invoked");
           CurrentUser authUser = (CurrentUser) authentication.getPrincipal();
-          ContextParam.setCurrentLocale(httpServletRequest.getSession(), authUser.getLocaleName());
+          localeConfig.setCurrentLocale(httpServletRequest.getSession(), authUser.getLocaleName());
           handle(httpServletRequest, httpServletResponse, authUser);
           log.debug("method finished");
     }

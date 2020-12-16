@@ -2,40 +2,62 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
+import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.service.BookService;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+//import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsInRelativeOrder;
-import static org.hamcrest.Matchers.hasSize;
-
+import static org.hamcrest.Matchers.*;
 import static com.epam.dmivapi.utils.TestBooksGenerator.generateBooks;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
-class BookControllerTest {
 
-    private final BookService bookService = Mockito.mock(BookService.class);
-    private final MockHttpSession session = new MockHttpSession();
-    private final BookController sut = new BookController(bookService, session);
+public class BookControllerTest {
+    @Mock
+    private BookService bookService;
 
-    private final MockMvc mockMvc = MockMvcBuilders.standaloneSetup(sut).build();
+    @Mock
+    private LocaleConfig localeConfig;
+
+    @Mock
+    private MockHttpSession session;
+
+    @InjectMocks
+    private BookController sut;
+
+    private MockMvc mockMvc;
+
+    @Before
+    public void setup() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(sut).build();
+    }
 
     @Test
-    void getBooksByTitleAndAuthor() throws Exception {
+    public void getBooksByTitleAndAuthor() throws Exception {
         final int BOOK_LIST_SIZE = 9;
         final int NUMBER_OF_PAGES = 1;
         //Given
         List<Book> books = generateBooks(BOOK_LIST_SIZE);
+        doReturn("ru")
+                .when(localeConfig)
+                .getCurrentLocale(any());
+
         doReturn(books)
                 .when(bookService)
                 .getBooksByTitleAndAuthor(
@@ -68,14 +90,14 @@ class BookControllerTest {
     }
 
     @Test
-    void enterBook() {
+    public void enterBook() {
     }
 
     @Test
-    void createBook() {
+    public void createBook() {
     }
 
     @Test
-    void deleteBook() {
+    public void deleteBook() {
     }
 }

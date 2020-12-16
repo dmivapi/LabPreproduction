@@ -1,6 +1,7 @@
 package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
+import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.Path;
 import com.epam.dmivapi.repository.impl.BookRepositoryImpl;
@@ -20,11 +21,13 @@ import static com.epam.dmivapi.ContextParam.*;
 @RequestMapping(path = "/book")
 @Log4j
 public class BookController {
+    private LocaleConfig localeConfig;
     private BookService bookService;
     private HttpSession session;
 
     @Autowired
-    public BookController(BookService bookService, HttpSession session) {
+    public BookController(LocaleConfig localeConfig, BookService bookService, HttpSession session) {
+        this.localeConfig = localeConfig;
         this.bookService = bookService;
         this.session = session;
     }
@@ -40,7 +43,7 @@ public class BookController {
             Model model
     ) {
         log.debug("/book/list invoked");
-        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
+        final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);
 
         List<Book> books = bookService.getBooksByTitleAndAuthor(
                 title, author, GENRE_LANGUAGE_CODE,
@@ -63,7 +66,7 @@ public class BookController {
     @RequestMapping("/enter")
     public String enterBook(Model model) {
         log.debug("/book/enter invoked");
-        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
+        final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);
 
         model.addAttribute(ContextParam.BK_AUTHORS, BookRepositoryImpl.findAuthors());
         model.addAttribute(ContextParam.BK_PUBLISHERS, BookRepositoryImpl.findPublishers());
@@ -84,7 +87,7 @@ public class BookController {
             @RequestParam(value = ContextParam.BK_QUANTITY, defaultValue = "") int quantity
     ) {
         log.debug("/book/add invoked");
-        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
+        final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);
         Book book = new Book();
         book.setTitle(title);
         bookService.createBook(book, authorId, publisherId, genreId, year, price, GENRE_LANGUAGE_CODE, libCodeBase, quantity);

@@ -21,6 +21,7 @@
         <org.projectlombok.version>1.18.8</org.projectlombok.version>
         <spring.version>5.3.1</spring.version>
         <spring-security.version>5.2.4.RELEASE</spring-security.version>
+        <mockito-core.version>3.3.0</mockito-core.version>
         <hamcrest.version>2.2</hamcrest.version>
     </properties>
 
@@ -95,7 +96,6 @@
             <version>8.0.22</version>
         </dependency>
 
-
         <!-- Logging -->
         <dependency>
             <groupId>log4j</groupId>
@@ -118,16 +118,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.10.19</version>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -137,6 +130,14 @@
             <version>${hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <!-- Apache utility -->
         <dependency>
@@ -148,6 +149,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
             <version>2.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
 

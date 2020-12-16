@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
     @Autowired
-    static DataSource dataSource;
+    DataSource dataSource;
 
     private static final String FLD_ID = "id";
     private static final String FLD_EMAIL = "email";
@@ -96,7 +96,7 @@ public class UserRepositoryImpl implements UserRepository {
         return sb.toString();
     }
 
-    public static int countUsers(Role role, Boolean isBlocked) {
+    public int countUsers(Role role, Boolean isBlocked) {
         List<User> userList = null;
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -126,7 +126,8 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return 0;
     }
-    public static List<User> findUsers(Role role,
+
+    public List<User> findUsers(Role role,
                                        Boolean blocked,
                                        int currentPage,
                                        int recordsPerPage) {
@@ -189,7 +190,8 @@ public class UserRepositoryImpl implements UserRepository {
         return user;
     }
 
-    public static boolean updateUserBlockStatus(int userId, boolean isBlocked) {
+    @Override
+    public void updateUserBlockById(int userId, boolean isBlocked) {
         Connection con = null;
         try {
             con = DataSourceUtils.getConnection(dataSource);
@@ -204,11 +206,9 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (SQLException ex) {
             DBManager.getInstance().rollbackAndClose(con);
             ex.printStackTrace();
-            return false;
         } finally {
             DBManager.getInstance().commitAndClose(con);
         }
-        return true;
     }
 
     @Override
@@ -235,7 +235,7 @@ public class UserRepositoryImpl implements UserRepository {
      * @param user user.id is modified with db-generated value
      * in case this is a new record creation
      */
-    public static boolean updateUser(User user, boolean isNew) {
+    public boolean updateUser(User user, boolean isNew) {
         Connection con = null;
         try {
             con = DataSourceUtils.getConnection(dataSource);

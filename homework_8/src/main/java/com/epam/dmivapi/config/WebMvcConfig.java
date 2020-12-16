@@ -1,6 +1,9 @@
 package com.epam.dmivapi.config;
 
 import com.epam.dmivapi.ContextParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +24,10 @@ import java.util.Locale;
 @EnableWebMvc
 @ComponentScan(basePackages="com.epam.dmivapi")
 public class WebMvcConfig implements WebMvcConfigurer {
+    @Autowired
+    @Qualifier("libLocaleInterceptor")
+    HandlerInterceptor libLocaleInterceptor;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/static/css/").setCachePeriod(31556926);
@@ -48,32 +55,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-    @Bean
-    public LocaleResolver localeResolver() {
-        return new SessionLocaleResolver();
-    }
-
-    @Bean
-    public HandlerInterceptor localeInterceptor() {
-        return new HandlerInterceptor() {
-            @Override
-            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-                String language = ContextParam.getCurrentLocale(request.getSession());
-                if (language == null) {
-                    language = ContextParam.getDefaultLocale(request.getServletContext());
-                    ContextParam.setCurrentLocale(request.getSession(), language);
-                }
-                ((SessionLocaleResolver) localeResolver()).setLocale(request, response, new Locale(language));
-                return true;
-            }
-        };
-    }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName(ContextParam.CURRENT_LOCALE);
         registry.addInterceptor(localeChangeInterceptor);
-        registry.addInterceptor(localeInterceptor());
+        registry.addInterceptor(libLocaleInterceptor);
     }
 }

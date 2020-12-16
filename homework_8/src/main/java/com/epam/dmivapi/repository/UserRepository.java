@@ -12,4 +12,5 @@ public interface UserRepository {
     int countUsersByRole(Role role);
     void createUser(User user);
     void deleteUserById(int userId);
+    void updateUserBlockById(int userId, boolean blockOption);
 }

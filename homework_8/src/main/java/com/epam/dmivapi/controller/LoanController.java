@@ -2,6 +2,7 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
+import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.dto.LoanDto;
 import com.epam.dmivapi.dto.LoanDtoViewAll;
 import com.epam.dmivapi.model.CurrentUser;
@@ -22,11 +23,13 @@ import java.util.List;
 @RequestMapping("/loan")
 @Log4j
 public class LoanController {
+    private LocaleConfig localeConfig;
     private LoanService loanService;
     private HttpSession session;
 
     @Autowired
-    public LoanController(LoanService loanService, HttpSession session) {
+    public LoanController(LocaleConfig localeConfig, LoanService loanService, HttpSession session) {
+        this.localeConfig = localeConfig;
         this.loanService = loanService;
         this.session = session;
     }
@@ -39,7 +42,7 @@ public class LoanController {
             Model model
     ) {
         log.debug("/loan invoked");
-        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
+        final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);
 
         List<LoanDtoViewAll> loans = loanService.getAllLoan(
                 GENRE_LANGUAGE_CODE,
@@ -68,7 +71,7 @@ public class LoanController {
             Model model
     ) {
         log.debug("/loan/" + userId + " invoked");
-        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
+        final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);
 
         List<LoanDto> loans = loanService.getLoansByUserId(
                 userId,
@@ -99,7 +102,7 @@ public class LoanController {
                     defaultValue = ContextParam.RECORDS_PER_PAGE) int recordsPerPage,
             Model model) {
         log.debug("/loan/self invoked");
-        final String GENRE_LANGUAGE_CODE = ContextParam.getCurrentLocale(session);
+        final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);
         final Integer userId = ((CurrentUser)authentication.getPrincipal()).getId();
 
         List<LoanDto> loans = loanService.getLoansByUserId(

@@ -29,9 +29,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getUsersByRole(Role role, int currentPage, int recordsPerPage) {
         log.debug("method invoked");
-        if (recordsPerPage == 0) {
-            throw new IllegalArgumentException("The number of records per page can not be 0");
-        }
         List<User> users = userRepository.findUsersByRole(role, currentPage, recordsPerPage);
         return userDtoConverter.convertList(users);
     }
@@ -39,10 +36,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public int countUsersPagesByRole(Role role, int recordsPerPage) {
         log.debug("method invoked");
-
-        if (recordsPerPage == 0) {
-            throw new IllegalArgumentException("The number of records per page can not be 0");
-        }
         return ServiceUtils.calculateNumOfPages(
                 userRepository.countUsersByRole(role),
                 recordsPerPage
@@ -71,6 +64,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserBlock(Integer userId, String blockOption) {
         log.debug("method invoked");
-        UserRepositoryImpl.updateUserBlockStatus(userId, Boolean.parseBoolean(blockOption));
+        userRepository.updateUserBlockById(userId, Boolean.parseBoolean(blockOption));
     }
 }

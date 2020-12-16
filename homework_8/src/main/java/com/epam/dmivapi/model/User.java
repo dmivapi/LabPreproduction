@@ -19,7 +19,7 @@ public class User {
     private Role userRole;
     private boolean blocked;
 
-    public Integer getId() {
+    public Integer getId() { //TODO: check out if needed for Nullable and remove
         return id;
     }
 
