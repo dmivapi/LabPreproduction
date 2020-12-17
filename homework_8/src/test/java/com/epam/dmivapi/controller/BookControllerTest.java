@@ -3,7 +3,10 @@ package com.epam.dmivapi.controller;
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
 import com.epam.dmivapi.config.LocaleConfig;
+import com.epam.dmivapi.model.Author;
 import com.epam.dmivapi.model.Book;
+import com.epam.dmivapi.model.Genre;
+import com.epam.dmivapi.model.Publisher;
 import com.epam.dmivapi.service.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -17,9 +20,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
-import static com.epam.dmivapi.utils.TestBooksGenerator.generateBooks;
-import static org.hamcrest.Matchers.containsInRelativeOrder;
-import static org.hamcrest.Matchers.hasSize;
+import static com.epam.dmivapi.utils.TestBooksGenerator.*;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -89,8 +91,48 @@ public class BookControllerTest {
     }
 
     @Test
-    @Disabled("Not Implemented yet")
-    public void enterBook() {
+    public void enterBook() throws Exception {
+        //Given
+        final int NUM_OF_AUTHORS = 25;
+        final int NUM_OF_PUBLISHERS = 15;
+        final int NUM_OF_GENRES = 10;
+
+        List<Author> authors = generateAuthors(NUM_OF_AUTHORS);
+        List<Publisher> publishers = generatePublishers(NUM_OF_PUBLISHERS);
+        List<Genre> genres = generateGenres(NUM_OF_GENRES);
+
+        doReturn("ru")
+                .when(localeConfig)
+                .getCurrentLocale(any());
+
+        doReturn(authors)
+                .when(bookService)
+                .getAllAuthors();
+
+        doReturn(publishers)
+                .when(bookService)
+                .getAllPublishers();
+
+        doReturn(genres)
+                .when(bookService)
+                .getGenresByLanguageCode(anyString());
+
+        //When
+        mockMvc.perform(post("/book/enter"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name(Path.PAGE__ENTER_BOOK_INFO))
+                .andExpect(model().attribute(ContextParam.BK_AUTHORS, hasSize(NUM_OF_AUTHORS)))
+                .andExpect(model().attribute(ContextParam.BK_AUTHORS, contains(authors.toArray())))
+                .andExpect(model().attribute(ContextParam.BK_PUBLISHERS, hasSize(NUM_OF_PUBLISHERS)))
+                .andExpect(model().attribute(ContextParam.BK_PUBLISHERS, containsInAnyOrder(publishers.toArray())))
+                .andExpect(model().attribute(ContextParam.BK_GENRES, hasSize(NUM_OF_GENRES)))
+                .andExpect(model().attribute(ContextParam.BK_GENRES, containsInAnyOrder(genres.toArray())));
+
+        //Then
+        verify(bookService, times(1)).getAllAuthors();
+        verify(bookService, times(1)).getAllPublishers();
+        verify(bookService, times(1)).getGenresByLanguageCode(anyString());
     }
 
     @Test

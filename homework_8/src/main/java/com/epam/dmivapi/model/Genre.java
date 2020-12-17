@@ -1,9 +1,11 @@
 package com.epam.dmivapi.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Genre {
     @EqualsAndHashCode.Include

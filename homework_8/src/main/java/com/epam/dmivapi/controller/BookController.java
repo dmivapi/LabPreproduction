@@ -67,9 +67,9 @@ public class BookController {
         log.debug("/book/enter invoked");
         final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);
 
-        model.addAttribute(ContextParam.BK_AUTHORS, BookRepositoryImpl.findAuthors());
-        model.addAttribute(ContextParam.BK_PUBLISHERS, BookRepositoryImpl.findPublishers());
-        model.addAttribute(ContextParam.BK_GENRES, BookRepositoryImpl.findGenres(GENRE_LANGUAGE_CODE));
+        model.addAttribute(ContextParam.BK_AUTHORS, bookService.getAllAuthors());
+        model.addAttribute(ContextParam.BK_PUBLISHERS, bookService.getAllPublishers());
+        model.addAttribute(ContextParam.BK_GENRES, bookService.getGenresByLanguageCode(GENRE_LANGUAGE_CODE));
 
         return Path.PAGE__ENTER_BOOK_INFO;
     }

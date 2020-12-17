@@ -179,7 +179,8 @@ public class BookRepositoryImpl implements BookRepository {
         return bookCopyId;
     }
 
-    public static List<Author> findAuthors() {
+    @Override
+    public List<Author> findAllAuthors() {
         final String SQL_FIND_ALL_AUTHORS ="SELECT * FROM author";
 
         List<Author> authors = null;
@@ -200,7 +201,8 @@ public class BookRepositoryImpl implements BookRepository {
         return authors;
     }
 
-    public static List<Publisher> findPublishers() {
+    @Override
+    public List<Publisher> findAllPublishers() {
         final String SQL_FIND_ALL_PUBLISHERS ="SELECT * FROM publisher";
 
         List<Publisher> publisher = null;
@@ -221,7 +223,8 @@ public class BookRepositoryImpl implements BookRepository {
         return publisher;
     }
 
-    public static List<Genre> findGenres(String languageCode) {
+    @Override
+    public List<Genre> findGenresByLanguageCode(String languageCode) {
         final String SQL_FIND_ALL_GENRES ="SELECT * FROM genre_translation WHERE language_id=?";
 
         List<Genre> genres = null;

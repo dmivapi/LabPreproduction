@@ -1,6 +1,9 @@
 package com.epam.dmivapi.service.impl;
 
+import com.epam.dmivapi.model.Author;
 import com.epam.dmivapi.model.Book;
+import com.epam.dmivapi.model.Genre;
+import com.epam.dmivapi.model.Publisher;
 import com.epam.dmivapi.repository.BookRepository;
 import com.epam.dmivapi.service.BookService;
 import lombok.extern.log4j.Log4j;
@@ -83,5 +86,23 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteBook(
                 publicationIds.stream().map(Integer::valueOf).collect(Collectors.toList())
         );
+    }
+
+    @Override
+    public List<Genre> getGenresByLanguageCode(String languageCode) {
+        log.debug("method invoked");
+        return bookRepository.findGenresByLanguageCode(languageCode);
+    }
+
+    @Override
+    public List<Publisher> getAllPublishers() {
+        log.debug("method invoked");
+        return bookRepository.findAllPublishers();
+    }
+
+    @Override
+    public List<Author> getAllAuthors() {
+        log.debug("method invoked");
+        return bookRepository.findAllAuthors();
     }
 }
