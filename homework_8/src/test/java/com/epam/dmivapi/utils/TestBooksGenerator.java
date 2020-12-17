@@ -18,9 +18,15 @@ public class TestBooksGenerator {
                 .collect(Collectors.toList());
     }
 
-    Book createBook(int counter) {
+    Book createBook(int seed) {
         return Book.builder()
-                .id(counter)
+                .id(seed)
+                .authors("Author " + seed)
+                .title("Title " + seed)
+                .genre("Genre " + seed)
+                .publisher("Publisher " + seed)
+                .year(seed % 3000)
+                .price(seed % 1000)
                 .build();
     }
 

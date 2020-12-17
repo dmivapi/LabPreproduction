@@ -35,9 +35,7 @@ public class BookServiceImpl implements BookService {
             int recordsPerPage
     ) {
         log.debug("method invoked");
-        if (recordsPerPage == 0) {
-            throw new IllegalArgumentException("The number of records per page can not be 0");
-        }
+
         return bookRepository.findBooksByTitleAndAuthor(
                 title,
                 author,

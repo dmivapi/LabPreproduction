@@ -20,7 +20,7 @@ public class PersistenceConfig {
         final String TZ = "EST5EDT";
 
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUrl("jdbc:mysql://localhost:3306/Library?serverTimezone=EST5EDT");
+        mysqlDataSource.setUrl("jdbc:mysql://localhost:3306/Library?serverTimezone=" + TZ);
         mysqlDataSource.setUser("test");
         mysqlDataSource.setPassword("test");
         try {
