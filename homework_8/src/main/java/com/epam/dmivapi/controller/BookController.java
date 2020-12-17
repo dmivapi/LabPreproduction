@@ -77,13 +77,13 @@ public class BookController {
     @RequestMapping("/add")
     public String createBook(
             @RequestParam(value = ContextParam.BK_TITLE, defaultValue = "") String title,
-            @RequestParam(value = ContextParam.BK_AUTHOR, defaultValue = "") int authorId,
-            @RequestParam(value = ContextParam.BK_PUBLISHER, defaultValue = "") int publisherId,
-            @RequestParam(value = ContextParam.BK_GENRE, defaultValue = "") int genreId,
-            @RequestParam(value = ContextParam.BK_YEAR, defaultValue = "") int year,
-            @RequestParam(value = ContextParam.BK_PRICE, defaultValue = "") int price,
+            @RequestParam(value = ContextParam.BK_AUTHOR, defaultValue = "0") int authorId,
+            @RequestParam(value = ContextParam.BK_PUBLISHER, defaultValue = "0") int publisherId,
+            @RequestParam(value = ContextParam.BK_GENRE, defaultValue = "0") int genreId,
+            @RequestParam(value = ContextParam.BK_YEAR, defaultValue = "0") int year,
+            @RequestParam(value = ContextParam.BK_PRICE, defaultValue = "0") int price,
             @RequestParam(value = ContextParam.BK_LIB_CODE_BASE, defaultValue = "") String libCodeBase,
-            @RequestParam(value = ContextParam.BK_QUANTITY, defaultValue = "") int quantity
+            @RequestParam(value = ContextParam.BK_QUANTITY, defaultValue = "0") int quantity
     ) {
         log.debug("/book/add invoked");
         final String GENRE_LANGUAGE_CODE = localeConfig.getCurrentLocale(session);

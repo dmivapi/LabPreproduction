@@ -9,7 +9,6 @@ import com.epam.dmivapi.model.Genre;
 import com.epam.dmivapi.model.Publisher;
 import com.epam.dmivapi.service.BookService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,10 +17,13 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.dmivapi.utils.TestBooksGenerator.*;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -136,12 +138,36 @@ public class BookControllerTest {
     }
 
     @Test
-    @Disabled("Not Implemented yet")
-    public void createBook() {
+    public void createBook() throws Exception {
+        doReturn("ru")
+                .when(localeConfig)
+                .getCurrentLocale(any());
+
+        //When
+        mockMvc.perform(post("/book/add"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl(Command.LIST_BOOKS.getSystemName()));
+
+        //Then
+        verify(bookService, times(1)).createBook(any(), anyInt(), anyInt(), anyInt(), anyInt(), anyInt(), anyString(), anyString(), anyInt());
     }
 
     @Test
-    @Disabled("Not Implemented yet")
-    public void deleteBook() {
+    public void deleteBook() throws Exception {
+        //Given
+        List<String> publicationIds = Arrays.asList("7", "6", "5");
+        final String SENDER_PAGE = "senderPage";
+
+        //When
+        mockMvc.perform(post("/book/delete")
+                .param(ContextParam.PUBLICATIONS_IDS_TO_PROCESS, publicationIds.toString())
+                .param(ContextParam.SELF_COMMAND, SENDER_PAGE))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(forwardedUrl(SENDER_PAGE));
+
+        //Then
+        verify(bookService).deleteBook(anyList());
     }
 }
