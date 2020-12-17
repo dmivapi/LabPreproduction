@@ -9,14 +9,18 @@ import java.util.List;
 
 public interface BookRepository {
     List<Book> findBooksByTitleAndAuthor(
-            String title, String author,
+            String title,
+            String author,
             String genreLanguageCode,
-            String orderByField, boolean isAscending,
-            int currentPage, int recordsPerPage
+            String orderByField,
+            boolean isAscending,
+            int currentPage,
+            int recordsPerPage
     );
 
     int countBooksByTitleAndAuthor(
-            String title, String author,
+            String title,
+            String author,
             String genreLanguageCode
     );
 

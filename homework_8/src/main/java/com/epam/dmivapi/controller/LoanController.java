@@ -51,7 +51,7 @@ public class LoanController {
         );
         model.addAttribute(ContextParam.LS_LOANS, loans);
 
-        int nOfPages = loanService.countLoans(
+        int nOfPages = loanService.countLoanPages(
                 GENRE_LANGUAGE_CODE,
                 recordsPerPage
         );
@@ -80,7 +80,7 @@ public class LoanController {
                 recordsPerPage
         );
 
-        int nOfPages = loanService.countLoansByUserId(
+        int nOfPages = loanService.countLoanPagesByUserId(
                 userId,
                 GENRE_LANGUAGE_CODE,
                 recordsPerPage
@@ -112,7 +112,7 @@ public class LoanController {
                 recordsPerPage
         );
 
-        int nOfPages = loanService.countLoansByUserId(
+        int nOfPages = loanService.countLoanPagesByUserId(
                 userId,
                 GENRE_LANGUAGE_CODE,
                 recordsPerPage

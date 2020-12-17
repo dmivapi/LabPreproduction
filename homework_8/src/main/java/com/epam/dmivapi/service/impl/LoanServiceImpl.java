@@ -83,7 +83,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public int countLoans(String genreLanguageCode, int recordsPerPage) {
+    public int countLoanPages(String genreLanguageCode, int recordsPerPage) {
         log.debug("method invoked");
         if (recordsPerPage == 0) {
             throw new IllegalArgumentException("The number of records per page can not be 0");
@@ -95,7 +95,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public int countLoansByUserId(Integer userId, String genreLanguageCode, int recordsPerPage) {
+    public int countLoanPagesByUserId(Integer userId, String genreLanguageCode, int recordsPerPage) {
         log.debug("method invoked");
         if (isNull(userId)) {
             throw new EntityDoesNotExistException(String.format("User with ID=%s does not exist", userId));

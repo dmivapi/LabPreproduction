@@ -23,7 +23,7 @@ public class LoanDtoViewAll implements Serializable {
     private int bookPublicationYear;
     private int price;
 
-    private int userId;
+    private Integer userId;
     private String email; // login
     private String firstName;
     private String lastName;

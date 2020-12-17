@@ -23,6 +23,6 @@ public class LoanDto implements Serializable {
     private int bookPublicationYear;
     private int price;
 
-    private int userId;
+    private Integer userId;
     private boolean blocked;
 }

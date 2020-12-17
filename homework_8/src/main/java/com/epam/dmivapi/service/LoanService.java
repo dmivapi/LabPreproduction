@@ -19,12 +19,12 @@ public interface LoanService {
             int recordsPerPage
     );
 
-    int countLoans(
+    int countLoanPages(
             String genreLanguageCode,
             int recordsPerPage
     );
 
-    int countLoansByUserId(
+    int countLoanPagesByUserId(
             Integer userId,
             String genreLanguageCode,
             int recordsPerPage

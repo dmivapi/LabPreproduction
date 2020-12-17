@@ -89,7 +89,6 @@ public class BookControllerTest {
                 anyString(), anyString(), anyString(), anyString(), anyBoolean(), anyInt(), anyInt());
         verify(bookService, times(1)).countBooksPagesByTitleAndAuthor(
                 anyString(), anyString(), anyString(), anyInt());
-
     }
 
     @Test

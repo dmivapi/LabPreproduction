@@ -18,15 +18,21 @@ public class TestUsersGenerator {
     private final UserDtoConverter userDtoConverter = new UserDtoConverter();
 
     public List<UserDto> generateUserDtos(int count) {
+        return generateUsers(count).stream()
+                .map(userDtoConverter::convert)
+                .collect(Collectors.toList());
+    }
+
+    public List<User> generateUsers(int count) {
         return IntStream.range(0, count)
                 .mapToObj(TestUsersGenerator::createUser)
-                .map(userDtoConverter::convert)
                 .collect(Collectors.toList());
     }
 
     User createUser(int seed) {
         String token = RandomStringUtils.randomAlphabetic(abs(seed) % 10 + 1);
         return User.builder()
+                .id(seed)
                 .email(token + "@" + token + ".com")
                 .password(token + "password")
                 .firstName(token + "fname")
