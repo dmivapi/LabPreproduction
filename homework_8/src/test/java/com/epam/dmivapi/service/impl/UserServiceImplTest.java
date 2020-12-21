@@ -11,13 +11,18 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-import static com.epam.dmivapi.utils.TestUsersGenerator.*;
+import static com.epam.dmivapi.utils.TestUsersGenerator.generateUsers;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class UserServiceImplTest {
     private UserRepository userRepository = mock(UserRepository.class);

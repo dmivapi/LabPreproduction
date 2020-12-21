@@ -1,7 +1,11 @@
 package com.epam.dmivapi.model;
 
 import com.epam.dmivapi.dto.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder

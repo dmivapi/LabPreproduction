@@ -13,10 +13,19 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-import static com.epam.dmivapi.utils.TestBooksGenerator.*;
+import static com.epam.dmivapi.utils.TestBooksGenerator.generateAuthors;
+import static com.epam.dmivapi.utils.TestBooksGenerator.generateBooks;
+import static com.epam.dmivapi.utils.TestBooksGenerator.generateGenres;
+import static com.epam.dmivapi.utils.TestBooksGenerator.generatePublishers;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 

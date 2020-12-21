@@ -4,7 +4,6 @@ import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
 import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.model.Book;
-import com.epam.dmivapi.repository.impl.BookRepositoryImpl;
 import com.epam.dmivapi.service.BookService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ import java.util.List;
 @RequestMapping(path = "/book")
 @Log4j
 public class BookController {
-    private LocaleConfig localeConfig;
-    private BookService bookService;
-    private HttpSession session;
+    private final LocaleConfig localeConfig;
+    private final BookService bookService;
+    private final HttpSession session;
 
     @Autowired
     public BookController(LocaleConfig localeConfig, BookService bookService, HttpSession session) {
