@@ -1,5 +1,6 @@
 package com.epam.dmivapi.service.impl;
 
+import com.epam.dmivapi.utils.TestBooksGenerator;
 import com.epam.dmivapi.model.Author;
 import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.model.Genre;
@@ -13,10 +14,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-import static com.epam.dmivapi.utils.TestBooksGenerator.generateAuthors;
-import static com.epam.dmivapi.utils.TestBooksGenerator.generateBooks;
-import static com.epam.dmivapi.utils.TestBooksGenerator.generateGenres;
-import static com.epam.dmivapi.utils.TestBooksGenerator.generatePublishers;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -45,7 +42,7 @@ class BookServiceImplTest {
     void getBooksByTitleAndAuthor() {
         //Given
         final int NUM_OF_BOOKS = 11;
-        List<Book> books = generateBooks(NUM_OF_BOOKS);
+        List<Book> books = TestBooksGenerator.generateBooks(NUM_OF_BOOKS);
         doReturn(books).
                 when(bookRepository).findBooksByTitleAndAuthor(anyString(), anyString(), anyString(), anyString(), anyBoolean(), anyInt(), anyInt());
 
@@ -88,7 +85,7 @@ class BookServiceImplTest {
     void getGenresByLanguageCode() {
         //Given
         final int NUM_OF_GENRES = 11;
-        List<Genre> genres = generateGenres(NUM_OF_GENRES);
+        List<Genre> genres = TestBooksGenerator.generateGenres(NUM_OF_GENRES);
         doReturn(genres).
                 when(bookRepository).findGenresByLanguageCode(anyString());
 
@@ -112,7 +109,7 @@ class BookServiceImplTest {
     void getAllPublishers() {
         //Given
         final int NUM_OF_PUBLISHERS = 11;
-        List<Publisher> publishers = generatePublishers(NUM_OF_PUBLISHERS);
+        List<Publisher> publishers = TestBooksGenerator.generatePublishers(NUM_OF_PUBLISHERS);
         doReturn(publishers).
                 when(bookRepository).findAllPublishers();
 
@@ -133,7 +130,7 @@ class BookServiceImplTest {
     void getAllAuthors() {
         //Given
         final int NUM_OF_AUTHORS = 11;
-        List<Author> authors = generateAuthors(NUM_OF_AUTHORS);
+        List<Author> authors = TestBooksGenerator.generateAuthors(NUM_OF_AUTHORS);
         doReturn(authors).
                 when(bookRepository).findAllAuthors();
 

@@ -2,6 +2,7 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
+import com.epam.dmivapi.utils.TestBooksGenerator;
 import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.model.Author;
 import com.epam.dmivapi.model.Book;
@@ -20,10 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.dmivapi.utils.TestBooksGenerator.generateAuthors;
-import static com.epam.dmivapi.utils.TestBooksGenerator.generateBooks;
-import static com.epam.dmivapi.utils.TestBooksGenerator.generateGenres;
-import static com.epam.dmivapi.utils.TestBooksGenerator.generatePublishers;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsInRelativeOrder;
@@ -72,7 +69,7 @@ public class BookControllerTest {
         final int BOOK_LIST_SIZE = 9;
         final int NUMBER_OF_PAGES = 1;
         //Given
-        List<Book> books = generateBooks(BOOK_LIST_SIZE);
+        List<Book> books = TestBooksGenerator.generateBooks(BOOK_LIST_SIZE);
         doReturn("ru")
                 .when(localeConfig)
                 .getCurrentLocale(any());
@@ -114,9 +111,9 @@ public class BookControllerTest {
         final int NUM_OF_PUBLISHERS = 15;
         final int NUM_OF_GENRES = 10;
 
-        List<Author> authors = generateAuthors(NUM_OF_AUTHORS);
-        List<Publisher> publishers = generatePublishers(NUM_OF_PUBLISHERS);
-        List<Genre> genres = generateGenres(NUM_OF_GENRES);
+        List<Author> authors = TestBooksGenerator.generateAuthors(NUM_OF_AUTHORS);
+        List<Publisher> publishers = TestBooksGenerator.generatePublishers(NUM_OF_PUBLISHERS);
+        List<Genre> genres = TestBooksGenerator.generateGenres(NUM_OF_GENRES);
 
         doReturn("ru")
                 .when(localeConfig)

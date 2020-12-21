@@ -2,6 +2,7 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
+import com.epam.dmivapi.utils.TestLoansGenerator;
 import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.dto.LoanDto;
 import com.epam.dmivapi.service.LoanService;
@@ -16,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
-import static com.epam.dmivapi.utils.TestLoansGenerator.generateLoanDtos;
 import static org.hamcrest.Matchers.containsInRelativeOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -30,8 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-;
 
 class LoanControllerTest {
     @Mock
@@ -61,7 +59,7 @@ class LoanControllerTest {
         final String USER_ID = "17";
 
         //Given
-        List<LoanDto> loans = generateLoanDtos(LOAN_LIST_SIZE);
+        List<LoanDto> loans = TestLoansGenerator.generateLoanDtos(LOAN_LIST_SIZE);
         doReturn("ru")
                 .when(localeConfig)
                 .getCurrentLocale(any());

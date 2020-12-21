@@ -2,6 +2,7 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
+import com.epam.dmivapi.utils.TestUsersGenerator;
 import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
-import static com.epam.dmivapi.utils.TestUsersGenerator.generateUserDtos;
 import static org.hamcrest.Matchers.containsInRelativeOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -59,7 +59,7 @@ class UserControllerTest {
         final int RECORDS_PER_PAGE = 0; // no pagination
         final int NUMBER_OF_PAGES = 9;
 
-        List<UserDto> usersDto = generateUserDtos(USER_LIST_SIZE);
+        List<UserDto> usersDto = TestUsersGenerator.generateUserDtos(USER_LIST_SIZE);
 
         doReturn(usersDto)
                 .when(userService)
