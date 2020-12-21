@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @WebAppConfiguration
-public abstract class AbstractBaseSpringTest {
+public abstract class AbstractBaseSpringIT {
     @Autowired
     protected MockMvc mockMvc;
 

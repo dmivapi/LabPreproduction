@@ -1,5 +1,6 @@
 package com.epam.dmivapi.controller;
 
+import com.epam.dmivapi.AbstractBaseTestCase;
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
 import com.epam.dmivapi.config.LocaleConfig;
@@ -13,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -42,7 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
-public class BookControllerTest {
+public class BookControllerTest extends AbstractBaseTestCase {
     @Mock
     private BookService bookService;
 
@@ -55,8 +55,7 @@ public class BookControllerTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    public void setup() throws Exception {
-        MockitoAnnotations.initMocks(this);
+    public void setUp() throws Exception {
         mockMvc = MockMvcBuilders.standaloneSetup(sut).build();
     }
 

@@ -1,5 +1,6 @@
 package com.epam.dmivapi.controller;
 
+import com.epam.dmivapi.AbstractBaseTestCase;
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
 import com.epam.dmivapi.dto.UserDto;
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-class UserControllerTest {
+class UserControllerTest extends AbstractBaseTestCase {
     @Mock
     private UserService userService;
 
@@ -40,7 +40,6 @@ class UserControllerTest {
 
     @BeforeEach
     public void setup() throws Exception {
-        MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(sut).build();
     }
 

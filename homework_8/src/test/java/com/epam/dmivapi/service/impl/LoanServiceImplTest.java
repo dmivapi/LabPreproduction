@@ -1,11 +1,10 @@
 package com.epam.dmivapi.service.impl;
 
+import com.epam.dmivapi.AbstractBaseTestCase;
 import com.epam.dmivapi.repository.LoanRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -14,17 +13,12 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 
-class LoanServiceImplTest {
+class LoanServiceImplTest extends AbstractBaseTestCase {
     @Mock
     private LoanRepository loanRepository;
 
     @InjectMocks
     private LoanServiceImpl sut;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     void countLoansByUserId() {

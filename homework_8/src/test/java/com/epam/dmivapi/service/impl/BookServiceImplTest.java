@@ -1,16 +1,15 @@
 package com.epam.dmivapi.service.impl;
 
-import com.epam.dmivapi.utils.TestBooksGenerator;
+import com.epam.dmivapi.AbstractBaseTestCase;
 import com.epam.dmivapi.model.Author;
 import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.model.Genre;
 import com.epam.dmivapi.model.Publisher;
 import com.epam.dmivapi.repository.BookRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.epam.dmivapi.utils.TestBooksGenerator;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
@@ -26,17 +25,12 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-class BookServiceImplTest {
+class BookServiceImplTest extends AbstractBaseTestCase {
     @Mock
     private BookRepository bookRepository;
 
     @InjectMocks
     private BookServiceImpl sut;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     void getBooksByTitleAndAuthor() {

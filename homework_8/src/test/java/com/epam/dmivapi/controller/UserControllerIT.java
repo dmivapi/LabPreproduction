@@ -1,6 +1,6 @@
 package com.epam.dmivapi.controller;
 
-import com.epam.dmivapi.AbstractBaseSpringTest;
+import com.epam.dmivapi.AbstractBaseSpringIT;
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.utils.TestUsersGenerator;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Log4j
-public class UserControllerIT extends AbstractBaseSpringTest {
+public class UserControllerIT extends AbstractBaseSpringIT {
     @Test
     @Transactional
     public void userCreationWorksThroughAllLayers() throws Exception {

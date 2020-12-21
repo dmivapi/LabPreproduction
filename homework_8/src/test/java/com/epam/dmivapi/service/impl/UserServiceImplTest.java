@@ -1,16 +1,15 @@
 package com.epam.dmivapi.service.impl;
 
+import com.epam.dmivapi.AbstractBaseTestCase;
 import com.epam.dmivapi.converter.UserDtoConverter;
 import com.epam.dmivapi.dto.Role;
 import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.model.User;
 import com.epam.dmivapi.repository.UserRepository;
 import com.epam.dmivapi.utils.TestUsersGenerator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
 import java.util.List;
@@ -26,7 +25,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-class UserServiceImplTest {
+class UserServiceImplTest extends AbstractBaseTestCase {
     @Mock
     private UserRepository userRepository;
 
@@ -35,11 +34,6 @@ class UserServiceImplTest {
 
     @InjectMocks
     private UserServiceImpl sut;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     void getUsersByRole() {
