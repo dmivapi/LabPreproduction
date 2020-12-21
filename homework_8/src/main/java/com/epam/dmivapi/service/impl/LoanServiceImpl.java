@@ -25,13 +25,13 @@ public class LoanServiceImpl implements LoanService {
     private final LoanDtoConverter dtoConverter;
     private final LoanDtoViewAllConverter dtoViewAllConverter;
 
-    private final int DEFAULT_TERM;
+    private final Integer DEFAULT_TERM;
 
     @Autowired
     public LoanServiceImpl(LoanRepository loanRepository,
                            LoanDtoConverter dtoConverter,
                            LoanDtoViewAllConverter dtoViewAllConverter,
-                           @Value("${library.default-loan-term-in-days:14}") int defaultTerm
+                           @Value("${library.default-loan-term-in-days:14}") Integer defaultTerm
     ) {
         this.loanRepository = loanRepository;
         this.dtoConverter = dtoConverter;

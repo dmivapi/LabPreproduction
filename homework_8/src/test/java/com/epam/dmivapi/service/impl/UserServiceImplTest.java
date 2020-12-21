@@ -8,7 +8,10 @@ import com.epam.dmivapi.repository.UserRepository;
 import com.epam.dmivapi.utils.TestUsersGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
 import java.util.List;
 
@@ -21,13 +24,17 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 class UserServiceImplTest {
-    private UserRepository userRepository = mock(UserRepository.class);
+    @Mock
+    private UserRepository userRepository;
+
+    @Spy
     private final UserDtoConverter userDtoConverter = new UserDtoConverter();
-    private final UserServiceImpl sut = new UserServiceImpl(userRepository, userDtoConverter);
+
+    @InjectMocks
+    private UserServiceImpl sut;
 
     @BeforeEach
     void setUp() {

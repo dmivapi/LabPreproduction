@@ -3,20 +3,23 @@ package com.epam.dmivapi.service.impl;
 import com.epam.dmivapi.repository.LoanRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
 class LoanServiceImplTest {
-    private LoanRepository loanRepository = mock(LoanRepository.class);
+    @Mock
+    private LoanRepository loanRepository;
 
-    private LoanServiceImpl sut = new LoanServiceImpl(loanRepository, null, null, 14);
+    @InjectMocks
+    private LoanServiceImpl sut;
 
     @BeforeEach
     void setUp() {
