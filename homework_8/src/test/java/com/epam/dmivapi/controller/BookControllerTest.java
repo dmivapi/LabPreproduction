@@ -2,19 +2,18 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
-import com.epam.dmivapi.utils.TestBooksGenerator;
 import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.model.Author;
 import com.epam.dmivapi.model.Book;
 import com.epam.dmivapi.model.Genre;
 import com.epam.dmivapi.model.Publisher;
 import com.epam.dmivapi.service.BookService;
+import com.epam.dmivapi.utils.TestBooksGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -49,9 +48,6 @@ public class BookControllerTest {
 
     @Mock
     private LocaleConfig localeConfig;
-
-    @Mock
-    private MockHttpSession session;
 
     @InjectMocks
     private BookController sut;

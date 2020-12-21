@@ -2,16 +2,14 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
-import com.epam.dmivapi.utils.TestUsersGenerator;
 import com.epam.dmivapi.dto.UserDto;
 import com.epam.dmivapi.service.UserService;
+import com.epam.dmivapi.utils.TestUsersGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -34,12 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserControllerTest {
     @Mock
     private UserService userService;
-
-    @Mock
-    private AuthenticationManager authenticationManager;
-
-    @Mock
-    private AuthenticationSuccessHandler successHandler;
 
     @InjectMocks
     UserController sut;

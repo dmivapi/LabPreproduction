@@ -2,16 +2,15 @@ package com.epam.dmivapi.controller;
 
 import com.epam.dmivapi.ContextParam;
 import com.epam.dmivapi.Path;
-import com.epam.dmivapi.utils.TestLoansGenerator;
 import com.epam.dmivapi.config.LocaleConfig;
 import com.epam.dmivapi.dto.LoanDto;
 import com.epam.dmivapi.service.LoanService;
+import com.epam.dmivapi.utils.TestLoansGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -37,9 +36,6 @@ class LoanControllerTest {
 
     @Mock
     private LocaleConfig localeConfig;
-
-    @Mock
-    private MockHttpSession session;
 
     @InjectMocks
     private LoanController sut;
