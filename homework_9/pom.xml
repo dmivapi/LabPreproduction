@@ -20,8 +20,7 @@
 	<groupId>com.epam</groupId>
 	<artifactId>spring-cloud-overview</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-cloud-overview</name>
-	<description>Demo project for Spring Cloud overview lecture</description>
+	<name>homework_9 Spring Cloud</name>
 
 	<properties>
 		<java.version>11</java.version>
