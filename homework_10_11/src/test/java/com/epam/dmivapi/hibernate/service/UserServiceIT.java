@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +25,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {HibernateConfig.class})
@@ -59,9 +64,14 @@ class UserServiceIT {
 
     @Test
     void create() {
+        //Given
         UserDto userDto = createUserDto(RandomString.make(10) + "@" + RandomString.make(10) + ".com");
+
+        //When
         UserDto createdUser = userService.create(userDto);
 
+        //Then
+        assertEquals(userDto.getEmail(), createdUser.getEmail());
         assertEquals(userDto.getLoans().size(), createdUser.getLoans().size());
     }
 
@@ -93,9 +103,27 @@ class UserServiceIT {
         return userDto;
     }
 
-    @Disabled
     @Test
     void get() {
+        //Given
+        UserDto userDto = createUserDto(RandomString.make(10) + "@" + RandomString.make(10) + ".com");
+        UserDto createdUser = userService.create(userDto);
+
+        //When
+        UserDto foundUser = userService.get(createdUser.getEmail());
+
+        //Then
+        assertEquals(createdUser.getId(), foundUser.getId());
+        assertEquals(createdUser.getEmail(), foundUser.getEmail());
+        assertEquals(createdUser.getPassword(), foundUser.getPassword());
+        assertEquals(createdUser.getFirstName(), foundUser.getFirstName());
+        assertEquals(createdUser.getLastName(), foundUser.getLastName());
+        assertEquals(createdUser.getLocaleName(), foundUser.getLocaleName());
+        assertEquals(createdUser.getUserRole(), foundUser.getUserRole());
+        assertEquals(createdUser.isBlocked(), foundUser.isBlocked());
+
+        assertThat(foundUser.getLoans().size(), is(createdUser.getLoans().size()));
+        assertThat(foundUser.getLoans(), containsInAnyOrder(createdUser.getLoans().toArray()));
     }
 
     @Disabled
@@ -103,9 +131,17 @@ class UserServiceIT {
     void update() {
     }
 
-    @Disabled
     @Test
     void delete() {
+        //Given
+        UserDto userDto = createUserDto(RandomString.make(10) + "@" + RandomString.make(10) + ".com");
+        UserDto createdUser = userService.create(userDto);
+
+        //When
+        userService.delete(createdUser.getId());
+
+        //Then
+        assertThrows(NoResultException.class, () -> userService.get(createdUser.getEmail()));
     }
 
     private UUID getBookCopyId(int bookCopyIndex) {

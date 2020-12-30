@@ -1,9 +1,13 @@
 package com.epam.dmivapi.hibernate.repository;
 
 import com.epam.dmivapi.hibernate.entity.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
+import java.util.UUID;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -21,17 +25,25 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User get(Integer userId) {
-        return null;
+    public User get(UUID userId) {
+        Session session = sessionFactory.getCurrentSession();
+        User user = session.get(User.class, userId);
+        return Objects.requireNonNull(user, "User not found by id: " + userId);
     }
 
     @Override
     public User get(String email) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        Object singleResult = session
+                .getNamedQuery("UserByEmail")
+                .setParameter("email", email)
+                .getSingleResult();
+        return (User) singleResult;
     }
 
     @Override
-    public void delete(Integer userId) {
-
+    public void delete(UUID userId) {
+        User user = get(userId);
+        sessionFactory.getCurrentSession().delete(user);
     }
 }

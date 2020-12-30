@@ -3,6 +3,8 @@ package com.epam.dmivapi.hibernate.service;
 import com.epam.dmivapi.hibernate.dto.LoanDto;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class LoanServiceImpl implements LoanService {
     @Override
@@ -11,7 +13,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public LoanDto get(Integer uuid) {
+    public LoanDto get(UUID uuid) {
         return null;
     }
 
@@ -21,7 +23,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(UUID id) {
 
     }
 }
