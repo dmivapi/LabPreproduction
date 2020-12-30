@@ -8,7 +8,6 @@ import com.epam.dmivapi.hibernate.entity.Role;
 import com.epam.dmivapi.hibernate.repository.BookCopyRepository;
 import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -71,8 +70,7 @@ class UserServiceIT {
         UserDto createdUser = userService.create(userDto);
 
         //Then
-        assertEquals(userDto.getEmail(), createdUser.getEmail());
-        assertEquals(userDto.getLoans().size(), createdUser.getLoans().size());
+        assertUser(userDto, createdUser, true);
     }
 
     private UserDto createUserDto(String email) {
@@ -113,22 +111,52 @@ class UserServiceIT {
         UserDto foundUser = userService.get(createdUser.getEmail());
 
         //Then
-        assertEquals(createdUser.getId(), foundUser.getId());
-        assertEquals(createdUser.getEmail(), foundUser.getEmail());
-        assertEquals(createdUser.getPassword(), foundUser.getPassword());
-        assertEquals(createdUser.getFirstName(), foundUser.getFirstName());
-        assertEquals(createdUser.getLastName(), foundUser.getLastName());
-        assertEquals(createdUser.getLocaleName(), foundUser.getLocaleName());
-        assertEquals(createdUser.getUserRole(), foundUser.getUserRole());
-        assertEquals(createdUser.isBlocked(), foundUser.isBlocked());
-
-        assertThat(foundUser.getLoans().size(), is(createdUser.getLoans().size()));
-        assertThat(foundUser.getLoans(), containsInAnyOrder(createdUser.getLoans().toArray()));
+        assertUser(createdUser, foundUser, false);
     }
 
-    @Disabled
+    private void assertUser(UserDto expected, UserDto actual, boolean skipId) {
+        if(!skipId) {
+            assertEquals(expected.getId(), actual.getId());
+        }
+        assertEquals(expected.getEmail(), actual.getEmail());
+        assertEquals(expected.getPassword(), actual.getPassword());
+        assertEquals(expected.getFirstName(), actual.getFirstName());
+        assertEquals(expected.getLastName(), actual.getLastName());
+        assertEquals(expected.getLocaleName(), actual.getLocaleName());
+        assertEquals(expected.getUserRole(), actual.getUserRole());
+        assertEquals(expected.isBlocked(), actual.isBlocked());
+
+        assertThat(actual.getLoans().size(), is(expected.getLoans().size()));
+        assertThat(actual.getLoans(), containsInAnyOrder(expected.getLoans().toArray()));
+    }
+
     @Test
     void update() {
+        //Given
+        UserDto userDto = createUserDto(RandomString.make(10) + "@" + RandomString.make(10) + ".com");
+        UserDto createdUser = userService.create(userDto);
+
+        createdUser.setEmail("new-email@gmail.com");
+
+        LoanDto firstLoan = createdUser.getLoans().get(0);
+        firstLoan.setDateIn(LocalDate.now());
+        firstLoan.setReadingRoom(false);
+        firstLoan.setBookCopyId(getBookCopyId(2));
+
+        createdUser.getLoans().remove(1);
+
+        LoanDto newLoan = new LoanDto();
+        newLoan.setDateOut(LocalDate.now());
+        newLoan.setReadingRoom(false);
+        newLoan.setBookCopyId(getBookCopyId(3));
+
+        createdUser.getLoans().add(newLoan);
+
+        //When
+        UserDto updatedUser = userService.update(createdUser);
+
+        //Then
+        assertUser(createdUser, updatedUser, false);
     }
 
     @Test
