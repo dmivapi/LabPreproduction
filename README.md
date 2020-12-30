@@ -8,6 +8,8 @@
 <li><a href="#hw6">homework_6 Spring AOP</a></li>
 <li><a href="#hw7">homework_7 Spring Security</a></li>
 <li><a href="#hw8">homework_8 Spring Testing</a></li>
+<li><a href="#hw9">homework_9 Spring Cloud</a></li>
+<li><a href="#hw1011">homework_10_11 Hibernate 1</a></li>
 </ol>
 
 
@@ -102,4 +104,23 @@ Rework your pet project using Spring Security.
 <li>Для каждого из выбранных контроллеров и, связанных с ними сервисов сделать покрытие unit тестами.</li>  
 <li>Для одного из выбранного контроллера сделать integration тест. </li>
 </ol>
+<p><a href="#contents">Back to contents</a></p>
+
+<h3 id="hw9">homework #9: Cloud: </h3>
+The task description is in homework_9 folder
+<p><a href="#contents">Back to contents</a></p>
+
+<h3 id="hw1011">homework #10-11: Hibernate homework: </h3>
+
+Based on example 5:
+You need to create CRUD service with Entities, DTO, Assemblers, Repositories. 
+
+1. Use your domain model.
+2. Use UUID as identifiers.
+
+3. Required relationships: 
+Bidirectional  One-To-Many (Like in Tourist <--> Journey)
+Unidirectional Many-To-One (Like in Journey <-- Country )
+
+4. There should be Integrational Tests for each operation: Create, Read, Update, Delete
 <p><a href="#contents">Back to contents</a></p>
