@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,7 +21,8 @@ import java.util.UUID;
 public class Loan {
         @Id
         @Column(length = 16)
-        private UUID id = UUID.randomUUID();
+        @GeneratedValue
+        private UUID id;
         @ManyToOne
         private User user;
         @ManyToOne

@@ -8,8 +8,13 @@ import com.epam.dmivapi.hibernate.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -56,8 +61,37 @@ public class UserServiceImpl implements UserService {
     }
 
     private void updateLoans(List<Loan> persistentLoans, List<Loan> newLoans) {
-        //persistentLoans.stream()
+        Map<UUID, Loan> stillExistingLoans = newLoans
+                .stream()
+                .filter(loan -> Objects.nonNull(loan.getId()))
+                .collect(Collectors.toMap(Loan::getId, Function.identity()));
 
+        List<Loan> loansToAdd = newLoans
+                .stream()
+                .filter(loan -> Objects.isNull(loan.getId()))
+                .collect(Collectors.toList());
+
+        Iterator<Loan> persistentIterator = persistentLoans.iterator();
+        while(persistentIterator.hasNext()) {
+            Loan persistentLoan = persistentIterator.next();
+            if (stillExistingLoans.containsKey(persistentLoan.getId())) {
+                Loan updatedLoan = stillExistingLoans.get(persistentLoan.getId());
+                updateLoan(persistentLoan, updatedLoan);
+            }
+            else {
+                persistentIterator.remove();
+                persistentLoan.setUser(null);
+            }
+        }
+        persistentLoans.addAll(loansToAdd);
+    }
+
+    private void updateLoan(Loan persistentLoan, Loan updatedLoan) {
+        persistentLoan.setDateOut(updatedLoan.getDateOut());
+        persistentLoan.setDueDate(updatedLoan.getDueDate());
+        persistentLoan.setDateIn(updatedLoan.getDateIn());
+        persistentLoan.setReadingRoom(updatedLoan.isReadingRoom());
+        persistentLoan.setBookCopy(updatedLoan.getBookCopy());
     }
 
     @Override

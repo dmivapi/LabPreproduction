@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.UUID;
@@ -18,7 +19,8 @@ import java.util.UUID;
 public class BookCopy {
         @Id
         @Column(length = 16)
-        private UUID id = UUID.randomUUID();
+        @GeneratedValue
+        private UUID id;
         private String title;
         private String authors;
         private String genre;

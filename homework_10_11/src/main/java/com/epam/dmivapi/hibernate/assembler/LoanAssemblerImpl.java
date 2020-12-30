@@ -9,7 +9,7 @@ public class LoanAssemblerImpl implements LoanAssembler {
     @Override
     public Loan assemble(LoanDto loanDto) {
         Loan loan = new Loan();
-        // TODO double check if we need this loan.setId(loanDto.getId());
+        loan.setId(loanDto.getId());
         loan.setDateOut(loanDto.getDateOut());
         loan.setDueDate(loanDto.getDueDate());
         loan.setDateIn(loanDto.getDateIn());

@@ -29,7 +29,7 @@ public class UserAssemblerImpl implements UserAssembler {
     @Override
     public User assemble(UserDto userDto) {
         User user = new User();
-        // TODO double check thisuser.setId(userDto.getId());
+        user.setId(userDto.getId());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setFirstName(userDto.getFirstName());

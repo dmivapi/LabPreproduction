@@ -70,7 +70,7 @@ class UserServiceIT {
         UserDto createdUser = userService.create(userDto);
 
         //Then
-        assertUser(userDto, createdUser, true);
+        assertUser(userDto, createdUser, false);
     }
 
     private UserDto createUserDto(String email) {
@@ -111,11 +111,11 @@ class UserServiceIT {
         UserDto foundUser = userService.get(createdUser.getEmail());
 
         //Then
-        assertUser(createdUser, foundUser, false);
+        assertUser(createdUser, foundUser, true);
     }
 
-    private void assertUser(UserDto expected, UserDto actual, boolean skipId) {
-        if(!skipId) {
+    private void assertUser(UserDto expected, UserDto actual, boolean idsAvailable) {
+        if(idsAvailable) {
             assertEquals(expected.getId(), actual.getId());
         }
         assertEquals(expected.getEmail(), actual.getEmail());
@@ -127,7 +127,9 @@ class UserServiceIT {
         assertEquals(expected.isBlocked(), actual.isBlocked());
 
         assertThat(actual.getLoans().size(), is(expected.getLoans().size()));
-        assertThat(actual.getLoans(), containsInAnyOrder(expected.getLoans().toArray()));
+        if (idsAvailable) {
+            assertThat(actual.getLoans(), containsInAnyOrder(expected.getLoans().toArray()));
+        }
     }
 
     @Test
@@ -156,7 +158,7 @@ class UserServiceIT {
         UserDto updatedUser = userService.update(createdUser);
 
         //Then
-        assertUser(createdUser, updatedUser, false);
+        assertUser(createdUser, updatedUser, true);
     }
 
     @Test
