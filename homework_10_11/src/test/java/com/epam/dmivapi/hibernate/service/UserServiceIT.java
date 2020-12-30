@@ -26,6 +26,7 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -159,6 +160,8 @@ class UserServiceIT {
 
         //Then
         assertUser(createdUser, updatedUser, true);
+        assertThat(updatedUser.getLoans().size(), is(2));
+        assertThat(updatedUser.getLoans(), contains(firstLoan, newLoan));
     }
 
     @Test
