@@ -7,7 +7,7 @@ You need to create CRUD service with Entities, DTO, Assemblers, Repositories.
 2. Use UUID as identifiers.
 
 3. Required relationships: 
-- Bidirectional  One-To-Many (Like in Tourist <--> Journey)
-- Unidirectional Many-To-One (Like in Journey <-- Country )
+    - Bidirectional  One-To-Many (Like in Tourist <--> Journey)
+    - Unidirectional Many-To-One (Like in Journey <-- Country )
 
 4. There should be Integrational Tests for each operation: Create, Read, Update, Delete
