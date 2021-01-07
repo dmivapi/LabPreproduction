@@ -6,10 +6,10 @@ import com.epam.dmivapi.singletable.domain.Buyer;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class BillingDetailsRepository {
+public class BillingDetailsSingleTableRepository {
     private EntityManager entityManager;
 
-    public BillingDetailsRepository(EntityManager entityManager) {
+    public BillingDetailsSingleTableRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

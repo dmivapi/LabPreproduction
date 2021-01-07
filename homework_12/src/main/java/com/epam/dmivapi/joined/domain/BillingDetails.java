@@ -1,8 +1,7 @@
-package com.epam.dmivapi.singletable.domain;
+package com.epam.dmivapi.joined.domain;
 
 import lombok.Data;
 
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,9 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "billing_type")
-@Table(name = "billing_details")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "billing_details_joined")
 @Data
 public abstract class BillingDetails {
     @Id

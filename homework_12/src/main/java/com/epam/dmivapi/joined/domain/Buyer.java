@@ -1,4 +1,4 @@
-package com.epam.dmivapi.singletable.domain;
+package com.epam.dmivapi.joined.domain;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name="buyer")
+@Table(name="buyer_joined")
 @Data
 public class Buyer {
     @Id
