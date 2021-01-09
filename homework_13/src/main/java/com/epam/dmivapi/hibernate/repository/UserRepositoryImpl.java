@@ -19,7 +19,6 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-//    @Transactional()
     public void save(User user) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.getTransaction();
