@@ -1,37 +1,30 @@
 version: '3.7'
 
-networks:
-  coolnet:
-    driver: bridge
+volumes:
+  data:
 
 services:
-
-  mysql_db:
+  db:
     image: mysql:8.0.22
     ports:
-      - 3307:3306
-    networks:
-      - coolnet
+      - 3306:3306
+    volumes:
+      - data:/var/lib/mysql
     container_name: cool_mysql
-    hostname: my_db
     restart: always
     environment:
       MYSQL_USER: test
       MYSQL_PASSWORD: test
       MYSQL_DATABASE: Library2
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-
-  spb_webapp:
+  web:
     build: .
     ports:
       - 8181:8080
-    networks:
-      - coolnet
     container_name: super_webapp
-    hostname: webservice
     restart: always
     depends_on:
-      - mysql_db
+      - db
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 1m29s
