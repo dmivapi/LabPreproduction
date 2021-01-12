@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data @EqualsAndHashCode(of={"id"})
+@NoArgsConstructor
 public class Author {
     private @Id @GeneratedValue Integer id;
     private String firstName;
