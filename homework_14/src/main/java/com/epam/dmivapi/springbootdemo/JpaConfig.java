@@ -14,7 +14,8 @@ public class JpaConfig {
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/Library3?serverTimezone=EST5EDT")
+//                .url("jdbc:mysql://db:3306/Library?serverTimezone=EST5EDT")
+                .url("jdbc:mysql://localhost:3308/Library?serverTimezone=EST5EDT")
                 .username("test")
                 .password("test");
 
