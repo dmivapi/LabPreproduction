@@ -15,7 +15,7 @@ services:
     environment:
       MYSQL_USER: test
       MYSQL_PASSWORD: test
-      MYSQL_DATABASE: Library2
+      MYSQL_DATABASE: Library
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
   web:
     build: .
