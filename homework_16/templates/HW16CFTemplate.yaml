@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  This template is an implementation of a homework 16 task, given by EPAM
+  This template is an implementation of a howework 16 task, given by EPAM
   Preprodaction Lab
 Parameters:
   DBName:
@@ -34,12 +34,20 @@ Metadata:
       z: 1
       parent: 052e38b7-4ec4-4b04-9831-b71c5ff467f4
       embeds:
-        - 292fe51a-a079-4d99-8d73-7893cbf76a92
         - d8003b3e-bf12-4cef-870a-faa7ebe552a7
         - b5672c8d-1df9-4c10-a16e-9939ef8828da
         - 2cc0a93a-a190-4827-9b2a-134d803cfe53
         - e6e081bb-004d-4973-a042-8a4884879c80
+        - 292fe51a-a079-4d99-8d73-7893cbf76a92
       iscontainedinside:
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
         - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
         - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
         - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
@@ -76,12 +84,20 @@ Metadata:
       z: 1
       parent: 052e38b7-4ec4-4b04-9831-b71c5ff467f4
       embeds:
-        - 007e221e-ce28-4daa-ad9a-9f910bd9ec64
         - 1bdc8db4-3a82-4c8b-aeeb-39fce733753b
         - f6d43c2f-2285-4ca1-a8ec-37120e595ffe
+        - 007e221e-ce28-4daa-ad9a-9f910bd9ec64
         - dac6f574-b943-4f93-8658-2a47feaa6d40
         - 618d54ae-8d2d-402d-b22c-19ae94d47177
       iscontainedinside:
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
+        - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
         - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
         - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
         - 052e38b7-4ec4-4b04-9831-b71c5ff467f4
@@ -194,6 +210,14 @@ Metadata:
         - b5672c8d-1df9-4c10-a16e-9939ef8828da
         - b5672c8d-1df9-4c10-a16e-9939ef8828da
         - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
+        - b5672c8d-1df9-4c10-a16e-9939ef8828da
       dependson:
         - b19c07f2-e89a-40d8-8690-58f2a024a6f0
     b19c07f2-e89a-40d8-8690-58f2a024a6f0:
@@ -236,6 +260,14 @@ Metadata:
         - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
         - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
         - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
     2cc0a93a-a190-4827-9b2a-134d803cfe53:
       size:
         width: 60
@@ -247,6 +279,14 @@ Metadata:
       parent: fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
       embeds: []
       iscontainedinside:
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
+        - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
         - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
         - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
         - fadbd3a6-e607-4b9a-8e0d-ac5223a94e89
@@ -301,6 +341,14 @@ Metadata:
       iscontainedinside:
         - 3932241f-9880-4fcd-a978-950c8d241319
         - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
     dac6f574-b943-4f93-8658-2a47feaa6d40:
       size:
         width: 60
@@ -316,35 +364,14 @@ Metadata:
       iscontainedinside:
         - 3932241f-9880-4fcd-a978-950c8d241319
         - 3932241f-9880-4fcd-a978-950c8d241319
-    cfc8d383-95b4-4c92-946b-b38e358c8eb1:
-      source:
-        id: 618d54ae-8d2d-402d-b22c-19ae94d47177
-        selector: 'g:nth-child(1) g:nth-child(4) g:nth-child(2) circle:nth-child(1)     '
-        port: >-
-          AWS::RefLink-AWS::EC2::NetworkInterface/AWS::EC2::Subnet-NetworkInterfaces
-      target:
-        id: 3932241f-9880-4fcd-a978-950c8d241319
-      z: 5
-    c38ee13a-00b4-42c1-83ea-44f18e39a200:
-      source:
-        id: 618d54ae-8d2d-402d-b22c-19ae94d47177
-        selector: 'g:nth-child(1) g:nth-child(4) g:nth-child(10) circle:nth-child(1)     '
-        port: 'AWS::ContainedInsideLink-AWS::EC2::Subnet-SubnetId'
-      target:
-        id: 3932241f-9880-4fcd-a978-950c8d241319
-      z: 5
-    547b19bd-7e3b-4ad5-a7f7-5d99018690fc:
-      source:
-        id: 618d54ae-8d2d-402d-b22c-19ae94d47177
-      target:
-        id: 007e221e-ce28-4daa-ad9a-9f910bd9ec64
-      z: 4
-    6b08b847-8fc0-460c-bb33-d9abca06db24:
-      source:
-        id: dac6f574-b943-4f93-8658-2a47feaa6d40
-      target:
-        id: 007e221e-ce28-4daa-ad9a-9f910bd9ec64
-      z: 5
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
+        - 3932241f-9880-4fcd-a978-950c8d241319
 Resources:
   HW16VPC:
     Type: 'AWS::EC2::VPC'
@@ -430,13 +457,16 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 3536e86a-06fa-4155-ad85-8e0f352fe748
-  ELBV2TargetGroup:
+  HW16TargetGroup:
     Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
-    Properties: {}
+    Properties:
+      Port: 80
+      Protocol: HTTP
+      TargetType: Instance
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 1bdc8db4-3a82-4c8b-aeeb-39fce733753b
-  HW16ELBV2:
+  HW16LoadBalancer:
     Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
     Properties:
       SubnetMappings:
@@ -468,15 +498,22 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: d8003b3e-bf12-4cef-870a-faa7ebe552a7
-  ELBV2Listener:
+  HW16Listener:
     Type: 'AWS::ElasticLoadBalancingV2::Listener'
-    Properties: null
+    Properties:
+      LoadBalancerArn: !Ref HW16LoadBalancer
+      Port: 80
+      Protocol: HTTP
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 292fe51a-a079-4d99-8d73-7893cbf76a92
   SecurityGroup2:
     Type: 'AWS::EC2::SecurityGroup'
-    Properties: {}
+    Properties:
+      IpProtocol: TCP
+      FromPort: 22
+      ToPort: 22
+      CidrIp: !Ref EC2Public
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 007e221e-ce28-4daa-ad9a-9f910bd9ec64
