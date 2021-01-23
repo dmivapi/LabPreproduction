@@ -1,0 +1,136 @@
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  'AWS::CloudFormation::Designer':
+    30e7de56-b568-4f49-9b2f-64b96bf942da:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 260
+        'y': 160
+      z: 0
+      embeds: []
+    89f1f263-cb8f-4a09-b6a6-0703547db42e:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 220
+        'y': 270
+      z: 0
+      embeds: []
+    173b9ff5-91e8-4052-9d0a-4fe2d9c52c45:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 440
+        'y': 140
+      z: 0
+      embeds: []
+    9a0cf0f5-61ac-4406-9e28-aa5992f3fd88:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 520
+        'y': 200
+      z: 0
+      embeds: []
+    32c700bb-5bb3-437b-8f91-949607ba4a41:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 430
+        'y': 260
+      z: 0
+      embeds: []
+Resources:
+  LoadBalancer:
+    Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+    Properties:
+      SubnetMappings:
+        - SubnetId: subnet-06f0a268f3c0bec3f
+        - SubnetId: subnet-0345dfc4372e3489a
+      SecurityGroups:
+        - sg-0543ea8104b63a26e
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 30e7de56-b568-4f49-9b2f-64b96bf942da
+  Listener:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 80
+      Protocol: HTTP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 89f1f263-cb8f-4a09-b6a6-0703547db42e
+  TargetGroup:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      VpcId: vpc-03862f483c2ce8f01
+      HealthCheckIntervalSeconds: 300
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 15
+      HealthyThresholdCount: 5
+      Targets:
+        - Id: !Ref EC2CRUD1
+        - Id: !Ref EC2CRUD2
+      TargetType: instance
+      Port: 80
+      Protocol: HTTP
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 173b9ff5-91e8-4052-9d0a-4fe2d9c52c45
+    DependsOn:
+      - EC2CRUD1
+      - EC2CRUD2
+  EC2CRUD1:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      UserData: !Base64
+        'Fn::Join':
+          - |+
+
+          - - '!#bin/bash'
+            - sudo apt update
+            - sudo apt install python3.8
+            - sudo apt install openjdk-8-jdk
+            - sudo apt install aws
+            - 'aws s3 cp s3://dmivapi-hw16/aws-0.0.1-SNAPSHOT.jar hw16.jar'
+            - java -jar hw16.jar
+      ImageId: ami-0502e817a62226e03
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - sg-0d8fde07161a6ffe4
+      SubnetId: subnet-06f0a268f3c0bec3f
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 9a0cf0f5-61ac-4406-9e28-aa5992f3fd88
+  EC2CRUD2:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      UserData: !Base64
+        'Fn::Join':
+          - |+
+
+          - - '!#bin/bash'
+            - sudo apt update
+            - sudo apt install python3.8
+            - sudo apt install openjdk-8-jdk
+            - sudo apt install aws
+            - 'aws s3 cp s3://dmivapi-hw16/aws-0.0.1-SNAPSHOT.jar hw16.jar'
+            - java -jar hw16.jar
+      ImageId: ami-0502e817a62226e03
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - sg-0d8fde07161a6ffe4
+      SubnetId: subnet-06f0a268f3c0bec3f
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 32c700bb-5bb3-437b-8f91-949607ba4a41
