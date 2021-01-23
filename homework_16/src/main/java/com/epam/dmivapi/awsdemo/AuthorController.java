@@ -15,26 +15,26 @@ import java.util.List;
 @RequestMapping
 @RestController
 public class AuthorController {
-    private final com.epam.dmivapi.awsdemo.AuthorRepository repository;
+    private final AuthorRepository repository;
 
-    public AuthorController(com.epam.dmivapi.awsdemo.AuthorRepository repository) {
+    public AuthorController(AuthorRepository repository) {
         this.repository = repository;
     }
 
     @GetMapping
-    List<com.epam.dmivapi.awsdemo.Author> getAll() {
+    List<Author> getAll() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    com.epam.dmivapi.awsdemo.Author getOne(@PathVariable Integer id) {
+    Author getOne(@PathVariable Integer id) {
         return repository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id));
     }
 
     @PostMapping
-    public com.epam.dmivapi.awsdemo.Author createAuthor() {
-        com.epam.dmivapi.awsdemo.Author author = new com.epam.dmivapi.awsdemo.Author(
+    public Author createAuthor() {
+        Author author = new com.epam.dmivapi.awsdemo.Author(
                 RandomStringUtils.randomAlphabetic(8),
                 RandomStringUtils.randomAlphabetic(8)
         );
@@ -44,7 +44,7 @@ public class AuthorController {
     }
 
     @PutMapping
-    public com.epam.dmivapi.awsdemo.Author updateAuthor(@RequestBody Author author) {
+    public Author updateAuthor(@RequestBody Author author) {
         repository.save(author);
         return author;
     }
