@@ -1,13 +1,12 @@
 package com.epam.dmivapi.mongo.service;
 
 import com.epam.dmivapi.mongo.Generator;
+import com.epam.dmivapi.mongo.config.MongoTestConfig;
 import com.epam.dmivapi.mongo.entity.Account;
 import com.epam.dmivapi.mongo.entity.Customer;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,8 +16,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertTrue;
 
-@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringJUnitConfig(MongoTestConfig.class)
 public class CustomerServiceIT {
 
     @Autowired

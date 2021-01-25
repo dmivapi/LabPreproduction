@@ -4,6 +4,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.bson.UuidRepresentation;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
@@ -17,6 +18,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     public MongoClient mongoClient() {
         ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/" + DB_NAME);
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                .uuidRepresentation(UuidRepresentation.JAVA_LEGACY)
                 .applyConnectionString(connectionString)
                 .build();
         return MongoClients.create(mongoClientSettings);

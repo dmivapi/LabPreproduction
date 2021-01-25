@@ -38,17 +38,18 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Configuration
-@ComponentScan(value = "ua.mykytavarenyk.mongodb")
+@ComponentScan(value = "com.epam.dmivapi.mongo")
 @EnableTransactionManagement
 public class MongoTestConfig extends AbstractMongoClientConfiguration {
+    private static final String DB_NAME = "customer-db";
     @Override
     protected String getDatabaseName() {
-        return "homework_17_testdb";
+        return DB_NAME;
     }
 
     @Override
     public MongoClient mongoClient() {
-        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/homework_17_testdb");
+        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/" + DB_NAME);
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .uuidRepresentation(UuidRepresentation.JAVA_LEGACY)
                 .applyConnectionString(connectionString)
@@ -58,6 +59,6 @@ public class MongoTestConfig extends AbstractMongoClientConfiguration {
 
     @Override
     public Collection getMappingBasePackages() {
-        return Collections.singleton("ua.mykytavarenyk.mongodb");
+        return Collections.singleton("com.epam.dmivapi.mongo");
     }
 }
