@@ -10,8 +10,8 @@ public interface CustomerService {
     void createCustomer(Customer customer);
     void updateCustomer(Customer customer);
     Customer findCustomerById(UUID id);
-    List<Customer> findCustomerByFirstNameAndByLastName(String firstName, String lastName);
-    List<Customer> findCustomerByAddressList(Address address);
+    List<Customer> findCustomerByFirstNameAndLastName(String firstName, String lastName);
+    List<Customer> findCustomerByAddresses(Address address);
     Customer findCustomerByCardNumber(String cardNumber);
     List<Customer> findCustomersWithAnyCardExpired();
 }

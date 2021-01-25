@@ -33,12 +33,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> findCustomerByFirstNameAndByLastName(String firstName, String lastName) {
+    public List<Customer> findCustomerByFirstNameAndLastName(String firstName, String lastName) {
         return repository.findCustomerByFirstNameAndLastName(firstName, lastName);
     }
 
     @Override
-    public List<Customer> findCustomerByAddressList(Address address) {
+    public List<Customer> findCustomerByAddresses(Address address) {
         return repository.findCustomerByAddresses(Collections.singletonList(address));
     }
 
