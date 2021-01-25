@@ -2,49 +2,60 @@ package com.epam.dmivapi.mongo.service;
 
 import com.epam.dmivapi.mongo.Generator;
 import com.epam.dmivapi.mongo.entity.Customer;
-import com.epam.dmivapi.mongo.repository.CustomerRepository;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 
-class CustomerServiceIT {
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+public class CustomerServiceIT {
 
     @Autowired
-    CustomerRepository repository;
+    CustomerService service;
 
     @Test
-    void createCustomer() {
+    public void createCustomer() {
         Customer customer = Generator.generateCustomer();
-        repository.save(customer);
+        service.createCustomer(customer);
 
-        Customer foundCustomer = repository.findById(customer.getId()).get();
+        Customer foundCustomer = service.findCustomerById(customer.getId());
 
         assertThat(foundCustomer.getId(), is(customer.getId()));
+        assertThat(foundCustomer.getFirstName(), is(customer.getFirstName()));
+        assertThat(foundCustomer.getLastName(), is(customer.getLastName()));
+        assertThat(foundCustomer.getAddresses().size(), is(customer.getAddresses().size()));
+        assertThat(foundCustomer.getAddresses(), contains(customer.getAddresses().toArray()));
+        assertThat(foundCustomer.getAccounts().size(), is(customer.getAccounts().size()));
+        assertThat(foundCustomer.getAccounts(), contains(customer.getAccounts().toArray()));
     }
 
     @Test
-    void updateCustomer() {
+    public void updateCustomer() {
     }
 
     @Test
-    void findCustomerById() {
+    public void findCustomerById() {
     }
 
     @Test
-    void findCustomerBy() {
+    public void findCustomerBy() {
     }
 
     @Test
-    void findCustomerByAddressList() {
+    public void findCustomerByAddressList() {
     }
 
     @Test
-    void findCustomerByCardNumber() {
+    public void findCustomerByCardNumber() {
     }
 
     @Test
-    void findCustomersWithAnyCardExpired() {
+    public void findCustomersWithAnyCardExpired() {
     }
 }

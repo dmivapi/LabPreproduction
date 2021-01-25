@@ -1,4 +1,4 @@
-package com.epam.dmivapi.mongo.service.impl;
+package com.epam.dmivapi.mongo.service;
 
 import com.epam.dmivapi.mongo.entity.Address;
 import com.epam.dmivapi.mongo.entity.Customer;
@@ -10,8 +10,8 @@ public interface CustomerService {
     void createCustomer(Customer customer);
     void updateCustomer(Customer customer);
     Customer findCustomerById(UUID id);
-    List<Customer> findCustomerBy(String firstName, String lastName);
-    List<Customer> findCustomerByAddressList(List<Address> address);
+    List<Customer> findCustomerByFirstNameAndByLastName(String firstName, String lastName);
+    List<Customer> findCustomerByAddressList(Address address);
     Customer findCustomerByCardNumber(String cardNumber);
     List<Customer> findCustomersWithAnyCardExpired();
 }
